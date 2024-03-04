@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import { Link } from '@inertiajs/react';
 const Ambulance = () => {
 
   const [modal, setModal] = useState(true)
@@ -30,12 +31,19 @@ const Ambulance = () => {
               <div className="grid place-items-center text-[18px]">
                 <h1>Ambulance Call List</h1>
               </div>
-              <button type='button' onClick={handleClose} className="bg-gray-700 p-2 text-white rounded-md flex space-x-2">
-                <div className='grid place-items-center mt-1'>
-                  <FaPlus />
-                </div>
-                <h1>Add Patients </h1>
-              </button>
+              <div className='flex space-x-3'>
+                <button type='button' onClick={handleClose} className="bg-gray-700 p-2 text-white rounded-md flex space-x-2">
+                  <div className='grid place-items-center mt-1'>
+                    <FaPlus />
+                  </div>
+                  <h1> Add Ambulance Call</h1>
+                </button>
+                <Link href='/admin/ambulance-list' type='button' className="bg-gray-700 p-2 text-white rounded-md flex space-x-2">
+
+                  <h1>  Ambulance List</h1>
+                </Link>
+              </div>
+
             </div>
           </div>
           <div className="">

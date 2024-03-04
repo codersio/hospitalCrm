@@ -7,8 +7,13 @@ use Inertia\Inertia;
 
 class ReferalController extends Controller
 {
-    public function refarel()
+    public function referral()
     {
         return Inertia::render('Admin/Referral');
+    }
+
+    public function Addreferral()
+    {
+        return Inertia::render('Admin/addreferral');
     }
 }

@@ -11,4 +11,9 @@ class AmbulanceControllr extends Controller
     {
         return Inertia::render('Admin/ambulance');
     }
+
+    public function AmbulanceList()
+    {
+        return Inertia::render('Admin/ambulancelist');
+    }
 }

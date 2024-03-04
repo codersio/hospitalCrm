@@ -3,7 +3,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { MdSwitchAccount } from "react-icons/md";
 import { FaCalendarAlt, FaAmbulance } from "react-icons/fa";
 import { TbStethoscope } from "react-icons/tb";
-import { FaProcedures } from "react-icons/fa";
+import { FaProcedures, FaUsers } from "react-icons/fa";
 import { MdLocalPharmacy } from "react-icons/md";
 import { RiFlaskFill } from "react-icons/ri";
 import { FaMicroscope, FaSitemap } from "react-icons/fa";
@@ -104,6 +104,15 @@ export default function Sidebar() {
             </li>
 
             <li className="treeview ">
+              <Link href="/admin/ambulance" className="flex space-x-2">
+                <div className="icon grid place-items-center">
+                  <FaAmbulance />
+                </div>
+                <span> Ambulance</span>
+              </Link>
+            </li>
+
+            <li className="treeview ">
               <Link href="/admin/front-office" className="flex space-x-2">
                 <div className="icon grid place-items-center">
                   <HiOutlineBuildingOffice2 />
@@ -194,6 +203,14 @@ export default function Sidebar() {
                   <FaSitemap />
                 </div>
                 <span> Human Resource</span>
+              </Link>
+            </li>
+            <li className="treeview ">
+              <Link href="/admin/referral" className="flex space-x-2">
+                <div className="icon grid place-items-center">
+                  <FaUsers />
+                </div>
+                <span> Refferral</span>
               </Link>
             </li>
             {/* Add more navigation links as needed */}

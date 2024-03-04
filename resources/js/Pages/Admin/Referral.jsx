@@ -1,10 +1,16 @@
 import Header from '@/components/Admin/partials/Header'
 import Sidebar from '@/components/Admin/partials/sidebar'
 import React, { useState } from 'react'
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaUserSecret } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-
+import { IoIosFemale } from "react-icons/io";
+import { MdBloodtype, MdEmail } from "react-icons/md";
+import { DiMaterializecss } from "react-icons/di";
+import { MdDateRange } from "react-icons/md";
+import { IoCall } from "react-icons/io5";
+import { ImLocation } from "react-icons/im";
+import { Link } from '@inertiajs/react';
 const Referral = () => {
 
     const [modal, setModal] = useState(true)
@@ -31,12 +37,18 @@ const Referral = () => {
                             <div className="grid place-items-center text-[18px]">
                                 <h1>Income List</h1>
                             </div>
-                            <button type='button' onClick={handleClose} className="bg-gray-700 p-2 text-white rounded-md flex space-x-2">
-                                <div className='grid place-items-center mt-1'>
-                                    <FaPlus />
-                                </div>
-                                <h1>Add Expense </h1>
-                            </button>
+                            <div className='flex space-x-3'>
+                                <button type='button' onClick={handleClose} className="bg-gray-700 p-2 text-white rounded-md flex space-x-2">
+                                    <div className='grid place-items-center mt-1'>
+                                        <FaPlus />
+                                    </div>
+                                    <h1> Add Referral Payment</h1>
+                                </button>
+                                <Link href='/admin/referral-person' type='button' className="bg-gray-700 p-2 text-white rounded-md flex space-x-2">
+
+                                    <h1> Referral Person</h1>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                     <div className="overflow-x-auto">
@@ -47,21 +59,23 @@ const Referral = () => {
                                         Name
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Invoice Number
+                                        Patient Name
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
+                                        Bill No
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Description
+                                        Bill Amount (IDR)
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Income  Head
+                                        Commission Percentage (%)
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Amount (IDR)
+                                        Commission Amount (IDR)
                                     </th>
-
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Action
+                                    </th>
 
                                     {/* Add more table headers here as needed */}
                                 </tr>
@@ -79,45 +93,108 @@ const Referral = () => {
                         <div className="back-model w-[60%] bg-white relative ">
                             <div className="modal-content w-full">
                                 <div className="modal-header flex justify-between   bg-[#0E99F4] p-2">
-                                    <div className="w-[80%]  px-4 mt-[0.29rem]">
-                                        <h1 className='text-white text-[1.5rem]'>Add Expense</h1>
+                                    <div className="flex items-center border w-[50%] h-9 border-gray-500 bg-white rounded-md ">
+                                        <input type="text" placeholder="Search By Patient Name" className="outline-none px-1 flex-grow  bg-transparent border-none" />
+                                        <button className=" text-black px-4 py-1 rounded-md">
+                                            <CiSearch />
+                                        </button>
                                     </div>
                                     <button onClick={handleClose} className="ml-auto text-[2rem] text-white">
                                         <RxCross1 />
                                     </button>
 
                                 </div>
-                                <div className="modal-body">
+                                <div className="modal-body flex space-x-4 px-5 ">
+                                    <div className='patients-details w-[60%] flex justify-between'>
+                                        <div className=" space-y-2">
+                                            <h1 className='text-[2rem]'>John Marshall (2)</h1>
+                                            <div className="flex space-x-2">
+                                                <div className="icon grid place-items-center">
+                                                    <FaUserSecret />
+                                                </div>
+                                                <span className='text-[#444444]'> Smith Marshall</span>
+                                            </div>
 
-                                    <form action className="w-full grid grid-cols-2 gap-5 px-6 mt-10 relative">
+                                            <div className='flex space-x-3 text-[13px] '>
+                                                <div className="flex space-x-1">
+                                                    <div className="icon grid place-items-center">
+                                                        <IoIosFemale />
+                                                    </div>
+                                                    <span className='text-[#444444]'>Male</span>
+                                                </div>
+                                                <div className="flex space-x-1">
+                                                    <div className="icon grid place-items-center">
+                                                        <MdBloodtype />
+                                                    </div>
+                                                    <span className='text-[#444444]'> B+</span>
+                                                </div>
+                                                <div className="flex space-x-1">
+                                                    <div className="icon grid place-items-center">
+                                                        <DiMaterializecss />
+                                                    </div>
+                                                    <span className='text-[#444444]'> Married</span>
+                                                </div>
+                                            </div>
+                                            <div className="flex space-x-2">
+                                                <div className="icon grid place-items-center">
+                                                    <MdDateRange />
+                                                </div>
+                                                <span className='text-[#444444]'>30 Year 4 Month 20 Days</span>
+                                            </div>
+                                            <div className="flex space-x-2">
+                                                <div className="icon grid place-items-center">
+                                                    <IoCall />
+                                                </div>
+                                                <span className='text-[#444444]'>9856475632</span>
+                                            </div>
+                                            <div className="flex space-x-2">
+                                                <div className="icon grid place-items-center">
+                                                    <MdEmail />
+                                                </div>
+                                                <span className='text-[#444444]'> john@gmail.com</span>
+                                            </div>
+                                            <div className="flex space-x-2">
+                                                <div className="icon grid place-items-center">
+                                                    <ImLocation />
+                                                </div>
+                                                <span className='text-[#444444]'>  Blackstone Park, Brooklyn North, CA</span>
+                                            </div>
+                                            <h1><strong>Any Known Allergies</strong> Fast food</h1>
+                                            <h1><strong>Remarks </strong>Left Hand Mark</h1>
+                                            <h1><strong>National Identification Number  </strong>45656345</h1>
+                                            <h1><strong>TPA ID </strong>45656345</h1>
+                                            <h1><strong>TPA Validity </strong>10/28/2021 </h1>
+                                        </div>
+
+                                        <div className="image mt-3 overflow-hidden w-[40%]">
+                                            <img src="https://demo.smart-hospital.in/uploads/patient_images/no_image.png?1709533397" alt="" />
+                                        </div>
+                                    </div>
+
+
+                                    <form action className="w-[40%] grid grid-cols-1 gap-5 px-6 mt-10 relative">
                                         <div className="form-group w-full ">
-                                            <label htmlFor>Expense Head *</label>
+                                            <label htmlFor>Patient Type *</label>
                                             <input type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
-                                            <label htmlFor> Name *</label> <br />
+                                            <label htmlFor> Bill No/Case Id *</label> <br />
                                             <input type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
-                                            <label htmlFor> Invoice Number</label> <br />
+                                            <label htmlFor>Payee *</label> <br />
                                             <input type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
-                                            <label htmlFor>Date *</label> <br />
+                                            <label htmlFor>Commission Percentage (%) *</label> <br />
                                             <input type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
-                                            <label htmlFor>Attachment </label> <br />
+                                            <label htmlFor>Commission Amount (IDR) * </label> <br />
 
                                             <div class="flex items-center justify-center w-full">
                                                 <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-[2.5rem] border-2 border-gray-300 border-dashed  cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                    <div class="flex flex-col items-center justify-center mt-4">
-                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                        </svg>
-
-                                                    </div>
-                                                    <input id="dropzone-file" type="file" class="hidden" />
+                                                    <input type="text" className="w-full border-gray-300" />
                                                 </label>
                                             </div>
 
@@ -128,10 +205,7 @@ const Referral = () => {
                                         </div>
 
                                     </form>
-                                    <div className="form-group w-full px-6 mt-3">
-                                        <label htmlFor>Note</label> <br />
-                                        <textarea type="date" className="w-full border-gray-300" ></textarea>
-                                    </div>
+
 
                                 </div>
 
@@ -149,11 +223,16 @@ const Referral = () => {
                         </div>
                     </div>
 
+                    {/* end referral payment modal */}
+
+
+
+
                 </div>
             </div>
-        </div>
+        </div >
 
     );
 }
 
-export default Income;
+export default Referral;

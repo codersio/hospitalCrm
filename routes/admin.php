@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\opdController;
 use App\Http\Controllers\Admin\PathologyController;
 use App\Http\Controllers\Admin\PharmacyController;
 use App\Http\Controllers\Admin\RadiologyController;
+use App\Http\Controllers\Admin\ReferalController;
 use App\Http\Controllers\AdminController;
 // use App\Http\Controllers\OpdController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,7 @@ Route::group([
     Route::get('pathology', [PathologyController::class, 'index'])->name('pathology');
     Route::get('radiology', [RadiologyController::class, 'index'])->name('radiology');
     Route::get('ambulance', [AmbulanceControllr::class, 'index'])->name('ambulance');
+    Route::get('ambulance-list', [AmbulanceControllr::class, 'AmbulanceList'])->name('ambulance-list');
     Route::get('front-office', [FrontOfficeControllr::class, 'index'])->name('front-office');
     Route::get('death-record', [DeathandBirthController::class, 'deathRecord'])->name('death-record');
     Route::get('birth-record', [DeathandBirthController::class, 'birthRecord'])->name('birth-record');
@@ -46,5 +48,6 @@ Route::group([
     Route::get('expenses', [FinanceController::class, 'expenses'])->name('expenses');
     Route::get('tpamanagement', [FinanceController::class, 'tpamanagement'])->name('tpamanagement');
     Route::get('human-resource', [HumanResourceController::class, 'humanResource'])->name('human-resource');
-    Route::get('refarel', [HumanResourceController::class, 'refarel'])->name('refarel');
+    Route::get('referral', [ReferalController::class, 'referral'])->name('referral');
+    Route::get('referral-person', [ReferalController::class, 'Addreferral'])->name('referral-person');
 });
