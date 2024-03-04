@@ -4,13 +4,14 @@ import { MdSwitchAccount } from "react-icons/md";
 import { FaCalendarAlt, FaAmbulance } from "react-icons/fa";
 import { TbStethoscope } from "react-icons/tb";
 import { FaProcedures, FaUsers } from "react-icons/fa";
-import { MdLocalPharmacy } from "react-icons/md";
+import { MdLocalPharmacy, MdBloodtype } from "react-icons/md";
 import { RiFlaskFill } from "react-icons/ri";
 import { FaMicroscope, FaSitemap } from "react-icons/fa";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { useState } from "react";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa6";
 import { CiMoneyBill } from "react-icons/ci";
+
 
 export default function Sidebar() {
 
@@ -27,7 +28,7 @@ export default function Sidebar() {
       <div className="bg-gray-800 text-white  flex-shrink-0">
         <div className="p-4 ">
           <h1 className="text-xl font-semibold mb-4">Dashboard</h1>
-          <ul className=" text-[13px] space-y-7 mt-9">
+          <ul className=" text-[15px] space-y-7 mt-9">
             <li>
               <Link href="/admin/dashboard" className="space-x-2">
                 <div className="flex space-x-2">
@@ -103,6 +104,14 @@ export default function Sidebar() {
               </Link>
             </li>
 
+            <li className="treeview ">
+              <Link href="/admin/blood/blood-bank" className="flex space-x-2">
+                <div className="icon grid place-items-center">
+                  <MdBloodtype />
+                </div>
+                <span> Blood Bank</span>
+              </Link>
+            </li>
             <li className="treeview ">
               <Link href="/admin/ambulance" className="flex space-x-2">
                 <div className="icon grid place-items-center">
@@ -211,6 +220,14 @@ export default function Sidebar() {
                   <FaUsers />
                 </div>
                 <span> Refferral</span>
+              </Link>
+            </li>
+            <li className="treeview ">
+              <Link href="/admin/inventory/item-stock" className="flex space-x-2">
+                <div className="icon grid place-items-center">
+                  <FaUsers />
+                </div>
+                <span> Inventory</span>
               </Link>
             </li>
             {/* Add more navigation links as needed */}

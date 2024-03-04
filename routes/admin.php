@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\AdminAuthcontroller;
 use App\Http\Controllers\Admin\AmbulanceControllr;
 use App\Http\Controllers\Admin\AppoinmentController;
 use App\Http\Controllers\Admin\BillingController;
+use App\Http\Controllers\Admin\BloodbankController;
 use App\Http\Controllers\Admin\DeathandBirthController;
 use App\Http\Controllers\Admin\FinanceController;
 use App\Http\Controllers\Admin\FrontOfficeControllr;
 use App\Http\Controllers\Admin\HumanResourceController;
+use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\IpdController;
 use App\Http\Controllers\Admin\opdController;
 use App\Http\Controllers\Admin\PathologyController;
@@ -50,4 +52,17 @@ Route::group([
     Route::get('human-resource', [HumanResourceController::class, 'humanResource'])->name('human-resource');
     Route::get('referral', [ReferalController::class, 'referral'])->name('referral');
     Route::get('referral-person', [ReferalController::class, 'Addreferral'])->name('referral-person');
+
+    Route::group(['prefix' => 'blood'], function () {
+        Route::get('blood-bank', [BloodbankController::class, 'bloodbank'])->name('blood-bank');
+        Route::get('blood-donor', [BloodbankController::class, 'blooddonor'])->name('blood-donor');
+        Route::get('blood-issue', [BloodbankController::class, 'bloodissue'])->name('blood-issue');
+        Route::get('component-issue', [BloodbankController::class, 'componentissue'])->name('component-issue');
+        Route::get('component-list', [BloodbankController::class, 'componentlist'])->name('component-list');
+    });
+    Route::group(['prefix' => 'inventory'], function () {
+        Route::get('item-stock', [InventoryController::class, 'ItemStocklist'])->name('item-stock');
+        Route::get('item-issue', [InventoryController::class, 'ItemIssuet'])->name('item-issue');
+        Route::get('item-list', [InventoryController::class, 'ItemList'])->name('item-list');
+    });
 });
