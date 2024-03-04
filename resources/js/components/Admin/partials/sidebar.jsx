@@ -6,8 +6,22 @@ import { TbStethoscope } from "react-icons/tb";
 import { FaProcedures } from "react-icons/fa";
 import { MdLocalPharmacy } from "react-icons/md";
 import { RiFlaskFill } from "react-icons/ri";
-import { FaMicroscope } from "react-icons/fa";
+import { FaMicroscope, FaSitemap } from "react-icons/fa";
+import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
+import { useState } from "react";
+import { FaAngleRight, FaAngleDown } from "react-icons/fa6";
+import { CiMoneyBill } from "react-icons/ci";
+
 export default function Sidebar() {
+
+  const [show, Setshow] = useState(false)
+  const [financeshow, SetFinanceshow] = useState(false)
+  const HandleShow = () => {
+    Setshow(!show)
+  }
+  const HandleFinanceShow = () => {
+    SetFinanceshow(!financeshow)
+  }
   return (
     <>
       <div className="bg-gray-800 text-white  flex-shrink-0">
@@ -88,12 +102,98 @@ export default function Sidebar() {
                 <span> Radiology</span>
               </Link>
             </li>
+
             <li className="treeview ">
-              <Link href="/admin/ambulance" className="flex space-x-2">
+              <Link href="/admin/front-office" className="flex space-x-2">
+                <div className="icon grid place-items-center">
+                  <HiOutlineBuildingOffice2 />
+                </div>
+                <span> Front Office</span>
+              </Link>
+            </li>
+            <li className="treeview ">
+
+              <div onClick={HandleShow} className="flex space-x-2 cursor-pointer">
+                <div className="icon grid place-items-center">
+                  <HiOutlineBuildingOffice2 />
+                </div>
+                <span> Birth & Death Record</span>
+                <div className="icon grid place-items-center">
+                  {show ? <FaAngleDown /> : <FaAngleRight />}
+
+                </div>
+              </div>
+
+              <li className={show ? "block mt-4 space-y-3 " : "hidden"}>
+                <li className="space-y-3">
+                  <Link href="/admin/birth-record" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Birth  Record</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/death-record" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">  Death Record</span>
+                  </Link>
+                </li>
+              </li>
+
+
+            </li>
+
+            <li className="treeview ">
+
+              <div onClick={HandleFinanceShow} className="flex space-x-2 cursor-pointer">
+                <div className="icon grid place-items-center">
+                  <CiMoneyBill />
+                </div>
+                <span> Finance</span>
+                <div className="icon grid place-items-center">
+                  {financeshow ? <FaAngleDown /> : <FaAngleRight />}
+
+                </div>
+              </div>
+
+              <li className={financeshow ? "block mt-4 space-y-3 " : "hidden"}>
+                <li className="space-y-3">
+                  <Link href="/admin/income" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Income</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/expenses" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Expenses</span>
+                  </Link>
+                </li>
+              </li>
+
+
+            </li>
+            <li className="treeview ">
+              <Link href="/admin/tpamanagement" className="flex space-x-2">
                 <div className="icon grid place-items-center">
                   <FaAmbulance />
                 </div>
-                <span> Ambulance</span>
+                <span> TPA Management</span>
+              </Link>
+            </li>
+            <li className="treeview ">
+              <Link href="/admin/human-resource" className="flex space-x-2">
+                <div className="icon grid place-items-center">
+                  <FaSitemap />
+                </div>
+                <span> Human Resource</span>
               </Link>
             </li>
             {/* Add more navigation links as needed */}

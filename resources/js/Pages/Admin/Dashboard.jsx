@@ -10,7 +10,7 @@ const Dashboard = () => {
     return (
         <div className="flex h-screen">
 
-            <div className="bg-gray-800 text-white w-[10%] flex-shrink-0">
+            <div className="bg-gray-800 text-white w-[11%] flex-shrink-0">
 
                 <Sidebar />
             </div>
