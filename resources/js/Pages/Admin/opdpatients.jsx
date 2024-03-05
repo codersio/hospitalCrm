@@ -1,16 +1,36 @@
 import Header from '@/components/Admin/partials/Header'
 import Sidebar from '@/components/Admin/partials/sidebar'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import PatientsModal from '@/components/Admin/patientsmodal';
 const Opdpatients = () => {
 
   const [modal, setModal] = useState(true)
+  const [Patientsmodal, setPatientsmodal] = useState(true)
+  const [Patientsdata, setPatientsdata] = useState([]);
+  // Function to fetch data from API
+  const fetchData = async () => {
+    try {
+      const response = await axios.post('/api/admin/patient-fetch');
+      setPatientsdata(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
+  // Call fetchData when the component mounts
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleClose = () => {
     // console.log('hello')
     setModal(!modal)
+  }
+  const handlePatients = () => {
+    // console.log('hello')
+    setPatientsmodal(!Patientsmodal)
   }
   return (
 
@@ -87,18 +107,26 @@ const Opdpatients = () => {
           {/* Modal backdrop */}
           {/* <div id="modalBackdrop" className="fixed inset-0 bg-gray-900 bg-opacity-50 hidden" /> */}
           {/* Modal */}
+
           <div id="exampleModal" className={modal ? "  fixed h-screen transform  bg-black shadow-md rounded-md g  top-0 bottom-0 right-0 left-0 w-full hidden" : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center"}>
             <div className="back-model w-[80%] bg-white relative ">
               <div className="modal-content w-full">
                 <div className="modal-header grid grid-cols-2  bg-[#0E99F4] p-2">
                   <div className="w-[80%] flex space-x-2 px-4 mt-[0.29rem]">
                     <select name id className="w-[100%] h-9">
-                      <option value>Select Patient</option>
-                      <option value />
+                      <option value disabled>Select Patient</option>
+                      {
+                        Patientsdata.map(Patients => (
+                          <option value >{Patients.id}</option>
+
+                        ))
+                      }
+
                     </select>
-                    <button onclick="openModal()" className="bg-gray-700 w-[40%] h-9  text-white rounded-md"> <i className="fa-solid fa-plus" />
+                    <button onClick={handlePatients} className="bg-gray-700 w-[40%] h-9  text-white rounded-md"> <i className="fa-solid fa-plus" />
                       Add Patient</button>
                   </div>
+
                   <div className="flex mt-[0.40rem]">
 
                     <button onClick={handleClose} className="ml-auto text-[2rem] text-white">
@@ -252,6 +280,7 @@ const Opdpatients = () => {
                 </div>
               </div>
             </div>
+            <PatientsModal Patientsmodal={Patientsmodal} handlePatients={handlePatients} fetchData={fetchData} />
           </div>
 
         </div>

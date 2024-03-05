@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,22 +16,14 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-
-Route::post('admin-create', [AdminController::class,"create"])->name('admin-create');
+// Route::post('admin-create', [AdminController::class,"create"])->name('admin-create');
 Route::group([
-
-    'middleware' => 'admin-api',
-    'prefix' => 'auth'
-
+    'prefix' => 'admin',
 ], function ($router) {
-
-    
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', [AdminController::class,"me"])->name('me');
-
+    Route::post('patient-store', [PatientController::class, 'store'])->name('patient-store');
+    Route::post('patient-fetch', [PatientController::class, 'patientsFetch'])->name('patient-fetch');
 });

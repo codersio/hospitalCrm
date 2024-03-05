@@ -227,7 +227,7 @@ export default function Sidebar() {
                 <div className="icon grid place-items-center">
                   <FaUsers />
                 </div>
-                <span> Inventory</span>
+                <span> inventory</span>
               </Link>
             </li>
             {/* Add more navigation links as needed */}

@@ -33,6 +33,7 @@ Route::group([
     'prefix' => 'admin',
 ], function ($router) {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
     Route::get('billing', [BillingController::class, 'Index'])->name('billing');
     Route::get('destroy', [AdminAuthcontroller::class, 'destroy'])->name('destroy');
     Route::get('appoinment', [AppoinmentController::class, 'index'])->name('appoinment');
