@@ -23,4 +23,9 @@ class Patient extends Model
 'address',
 'remarks',
 'allergies', ];
+
+    public function opdpatients()
+    {
+        return $this->hasMany(Opdpatients::class);
+    }
 }

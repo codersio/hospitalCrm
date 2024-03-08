@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
+
 use App\Http\Requests\Auth\adminlogin;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -23,11 +22,13 @@ class AdminController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return Inertia::render('Admin/Dashboard');
     }
 
-    public function login_page(){
+    public function login_page()
+    {
         return Inertia::render('Admin/Auth/login');
     }
     // public function create(Request $request){
@@ -53,10 +54,8 @@ class AdminController extends Controller
     //     return $this->respondWithToken($token);
     // }
 
-    // public function me()
-    // {
-    //     return response()->json(auth()->guard('admin-api')->user()->name);
-    // }
-
-    
+    public function me()
+    {
+        return response()->json(auth()->guard('admin-api')->user());
+    }
 }

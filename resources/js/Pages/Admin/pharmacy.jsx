@@ -1,16 +1,57 @@
 import Header from '@/components/Admin/partials/Header'
 import Sidebar from '@/components/Admin/partials/sidebar'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import PatientsModal from '@/components/Admin/patientsmodal';
 const Pharmacy = () => {
 
     const [modal, setModal] = useState(true)
+    const [Patientsmodal, setPatientsmodal] = useState(true)
+    const [Patientsdata, setPatientsdata] = useState([]);
+    const [errors, setErrors] = useState({});
+    const [formData, setformData] = useState({
+        patient_id: ''
+    })
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setformData({
+            ...formData,
+            [name]: value
+        });
+        // Clear error message when user starts typing
+        setErrors({
+            ...errors,
+            [name]: ''
+        });
+    };
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('/api/admin/patient-fetch');
+            // console.log(data)
+            setPatientsdata(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+
+    useEffect(() => {
+        fetchData();
+        // AppoinmentfetchData();
+        // DoctorfetchData();
+        // DepartmentfetchData();
+        // Fet(id);
+    }, []);
     const handleClose = () => {
         // console.log('hello')
         setModal(!modal)
+    }
+    const handlePatients = () => {
+        // console.log('hello')
+        setPatientsmodal(!Patientsmodal)
     }
     return (
 
@@ -87,21 +128,30 @@ const Pharmacy = () => {
                         <div className="back-model w-[60%] bg-white relative ">
                             <div className="modal-content w-full">
                                 <div className="modal-header grid grid-cols-2  bg-[#0E99F4] p-2">
-                                    <div className="w-[80%] flex space-x-2 px-4 mt-[0.29rem]">
-                                        <select name id className="w-[100%] h-9">
-                                            <option value>Select Patient</option>
-                                            <option value />
-                                        </select>
-                                        <button onclick="openModal()" className="bg-gray-700 w-[40%] h-9  text-white rounded-md"> <i className="fa-solid fa-plus" />
-                                            Add Patient</button>
+                                    <div className="w-[80%] ">
+
+                                        <div className="w-[80%] flex space-x-2 px-4 mt-[0.29rem]">
+                                            <select value={formData.patient_id} onChange={handleChange} name='patient_id' id className="w-[100%] h-9">
+                                                <option value disabled>Select Patient</option>
+                                                {
+                                                    Patientsdata.map(Patients => (
+                                                        <option value={Patients.id} >{Patients.name}</option>
+
+                                                    ))
+                                                }
+
+                                            </select>
+                                            <button onClick={handlePatients} className="bg-gray-700 w-[100%] h-9  text-white rounded-md"> <i className="fa-solid fa-plus" />
+                                                Add Patient</button>
+                                        </div>
+
+
+                                        {errors.patient_id && <span className='text-red-500'>{errors.patient_id}</span>}
+
+
                                     </div>
                                     <div className="flex mt-[0.40rem]">
-                                        <div className="flex items-center border w-[50%] h-9 border-gray-500 bg-white rounded-md ">
-                                            <input type="text" placeholder="Search By Patient Name" className="outline-none px-1 flex-grow  bg-transparent border-none" />
-                                            <button className=" text-black px-4 py-1 rounded-md">
-                                                <CiSearch />
-                                            </button>
-                                        </div>
+
                                         <button onClick={handleClose} className="ml-auto text-[2rem] text-white">
                                             <RxCross1 />
                                         </button>
@@ -233,6 +283,7 @@ const Pharmacy = () => {
                                 </div>
                             </div>
                         </div>
+                        <PatientsModal Patientsmodal={Patientsmodal} handlePatients={handlePatients} fetchData={fetchData} />
                     </div>
 
                 </div>

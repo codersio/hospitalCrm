@@ -31,3 +31,4 @@ require __DIR__.'/admin.php';
 Route::get('/test', function () {
     return Inertia::render('test');
 })->name('test');
+Route::put('appoinment-status-update/{id}', '\App\Http\Controllers\Admin\AppoinmentController@status');

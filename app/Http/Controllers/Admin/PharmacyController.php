@@ -11,4 +11,9 @@ class PharmacyController extends Controller
     {
         return Inertia::render('Admin/pharmacy');
     }
+
+    public function pharmacyStore()
+    {
+        return Inertia::render('Admin/pharmacy');
+    }
 }

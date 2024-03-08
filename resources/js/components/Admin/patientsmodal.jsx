@@ -17,20 +17,7 @@ const PatientsModal = ({ Patientsmodal, handlePatients, fetchData }) => {
     const [allergies, setallergies] = useState('')
     const [Patientsdata, setPatientsdata] = useState([]);
 
-    // Function to fetch data from API
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await axios.get('/api/admin/patient-fetch');
-    //         setPatientsdata(response.data);
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //     }
-    // };
 
-    // // Call fetchData when the component mounts
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
 
     const createUser = async () => {
         try {
