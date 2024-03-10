@@ -369,7 +369,7 @@ const Ipdpatients = ({ admin }) => {
                                                 </div>
                                                 <div className="form-group   w-full  ">
                                                     <label htmlFor="">Any Known Allergies</label>
-                                                    <textarea name='Allergies' onChange={handleChange} value={formData.Allergies} id rows={3} rows={3} className="px-6 w-full border-gray-300" defaultValue={""} />
+                                                    <textarea name='Allergies' onChange={handleChange} value={formData.Allergies} id rows={3}  className="px-6 w-full border-gray-300" defaultValue={""} />
                                                 </div>
                                             </div>
 

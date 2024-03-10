@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FrontOfficeControllr;
 use App\Http\Controllers\Admin\HumanResourceController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\IpdController;
+use App\Http\Controllers\Admin\MedicineController;
 use App\Http\Controllers\Admin\opdController;
 use App\Http\Controllers\Admin\PathologyController;
 use App\Http\Controllers\Admin\PharmacyController;
@@ -40,7 +41,7 @@ Route::group([
     Route::get('opd-patients', [opdController::class, 'index'])->name('opd-patients');
     Route::get('ipd-patients', [IpdController::class, 'index'])->name('ipd-patients');
     Route::get('pharmacy', [PharmacyController::class, 'index'])->name('pharmacy');
-    Route::get('pathology', [PathologyController::class, 'index'])->name('pathology');
+
     Route::get('radiology', [RadiologyController::class, 'index'])->name('radiology');
     Route::get('ambulance', [AmbulanceControllr::class, 'index'])->name('ambulance');
     Route::get('ambulance-list', [AmbulanceControllr::class, 'AmbulanceList'])->name('ambulance-list');
@@ -65,5 +66,18 @@ Route::group([
         Route::get('item-stock', [InventoryController::class, 'ItemStocklist'])->name('item-stock');
         Route::get('item-issue', [InventoryController::class, 'ItemIssuet'])->name('item-issue');
         Route::get('item-list', [InventoryController::class, 'ItemList'])->name('item-list');
+    });
+    Route::group(['prefix' => 'pharmacy'], function () {
+        Route::get('import-csv', [MedicineController::class, 'ItemStocklist'])->name('import-csv');
+        Route::get('medicine', [MedicineController::class, 'medicine'])->name('medicine');
+        Route::get('item-list', [MedicineController::class, 'ItemList'])->name('item-list');
+        Route::get('medicine-list', [MedicineController::class, 'MedicineBillList'])->name('medicine-list');
+    });
+    Route::get('pathology', [PathologyController::class, 'index'])->name('pathology');
+    Route::group(['prefix' => 'pathology'], function () {
+        Route::get('test', [PathologyController::class, 'PathologyTest'])->name('test');
+    });
+    Route::group(['prefix' => 'radiology'], function () {
+        Route::get('test', [RadiologyController::class, 'RadiologyTest'])->name('test');
     });
 });

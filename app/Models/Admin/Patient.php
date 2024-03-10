@@ -28,4 +28,9 @@ class Patient extends Model
     {
         return $this->hasMany(Opdpatients::class);
     }
+
+    public function ambulance()
+    {
+        return $this->hasOne(Ambulance::class);
+    }
 }
