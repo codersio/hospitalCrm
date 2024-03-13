@@ -15,6 +15,8 @@ return new class() extends Migration {
             $table->foreignId('admin_id')->nullable();
             $table->string('admin_type')->nullable();
             $table->string('cml_name')->nullable();
+            $table->string('cml_no')->nullable();
+            $table->string('cml_type')->nullable();
             $table->string('cml_source')->nullable();
             $table->string('cml_by')->nullable();
             $table->string('cml_phone')->nullable();

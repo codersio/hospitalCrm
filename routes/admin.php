@@ -46,6 +46,13 @@ Route::group([
     Route::get('ambulance', [AmbulanceControllr::class, 'index'])->name('ambulance');
     Route::get('ambulance-list', [AmbulanceControllr::class, 'AmbulanceList'])->name('ambulance-list');
     Route::get('front-office', [FrontOfficeControllr::class, 'index'])->name('front-office');
+
+    Route::group(['prefix' => 'front-office'], function () {
+        Route::get('complain', [FrontOfficeControllr::class, 'ComplainIndex']);
+        Route::get('phone-logs', [FrontOfficeControllr::class, 'PhoneLogsindex']);
+        Route::get('receive', [FrontOfficeControllr::class, 'Receive']);
+        Route::get('dispatch', [FrontOfficeControllr::class, 'Despatch']);
+    });
     Route::get('death-record', [DeathandBirthController::class, 'deathRecord'])->name('death-record');
     Route::get('birth-record', [DeathandBirthController::class, 'birthRecord'])->name('birth-record');
     Route::get('income', [FinanceController::class, 'income'])->name('income');

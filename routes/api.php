@@ -113,7 +113,7 @@ Route::group([
     // complain api call
 
     Route::post('complain-store', [FrontOfficeControllr::class, 'complainStore'])->name('complain-store');
-    Route::post('complain-delete/{id}', [FrontOfficeControllr::class, 'complainDelete'])->name('complain-delete');
+    Route::delete('complain-delete/{id}', [FrontOfficeControllr::class, 'complainDelete'])->name('complain-delete');
     Route::post('complain-update/{id}', [FrontOfficeControllr::class, 'complainUpdate'])->name('complain-update');
     Route::post('complain-fetch', [FrontOfficeControllr::class, 'complainFetch'])->name('complain-fetch');
 

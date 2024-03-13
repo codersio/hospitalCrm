@@ -21,5 +21,7 @@ class Complain extends Model
     'cml_assigned',
     'cml_note',
     'cml_atach_file',
+    'cml_no',
+    'cml_type',
     ];
 }
