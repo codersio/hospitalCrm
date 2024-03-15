@@ -1,16 +1,102 @@
 import Header from '@/components/Admin/partials/Header'
 import Sidebar from '@/components/Admin/partials/sidebar'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-const AddReferral = () => {
+const AddReferral = ({ admin }) => {
 
     const [modal, setModal] = useState(true)
+    const [updateModal, setupdateModal] = useState(null)
+    const [admin_type, setAdminType] = useState(admin.type)
+    const [admin_id, setId] = useState(admin.id)
+
+    const [formData, setFormdata] = useState({
+
+        'reffer_name': '',
+        'reffer_contact': '',
+        'reffer_person_name': '',
+        'reffer_person_phone': '',
+        'reffer_category': '',
+        'reffer_stander_commission': '',
+        'reffer_address': '',
+        'reffer_address': '',
+        'opd': '',
+        'ipd': '',
+        'pharmacy': '',
+        'pathology': '',
+        'radiology': '',
+        'blood_bank': '',
+        'ambulance': '',
+
+    })
+
+    const [data, setdata] = useState([])
+    const handleFormdata = (e) => {
+        const { name, value } = e.target;
+        setFormdata({
+            ...formData,
+            [name]: value
+        });
+    }
 
     const handleClose = () => {
         // console.log('hello')
         setModal(!modal)
+    }
+    const updatehandleClose = () => {
+        // console.log('hello')
+        setupdateModal(!updateModal)
+    }
+
+    const fetchData = () => {
+        axios.post('/api/admin/income-fetch')
+            .then(res => {
+                console.log(res.data)
+                setdata(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        fetchData();
+
+        // Fet(id);
+    }, []);
+    const FormSubmit = (e) => {
+        e.preventDefault();
+        const formSave = new FormData()
+        formSave.append('name', formData.name)
+        formSave.append(' admin_id', admin_id)
+        formSave.append('admin_type', admin_type)
+        formSave.append('expense_id', formData.expense_id)
+        formSave.append('description', formData.description)
+        formSave.append('amount', formData.amount)
+        formSave.append('inv_number', formData.inv_number)
+        formSave.append('atach_file', atach_file)
+        formSave.append('date', formData.date)
+
+
+
+        axios.post('/api/admin/income-store', formSave,)
+            .then(response => {
+                console.log(response)
+                fetchData();
+            })
+            .catch(error => console.log(error))
+    }
+
+    const DeleteData = (e, id) => {
+        e.preventDefault();
+
+        axios.post(`/api/admin/income-delete/${id}`)
+            .then(response => {
+                console.log(response)
+                fetchData();
+            })
+            .catch(error => console.log(error))
     }
     return (
 
@@ -102,19 +188,19 @@ const AddReferral = () => {
                                         <div className="grid grid-cols-2 gap-3">
                                             <div className="form-group w-full border-gray-300">
                                                 <label htmlFor>Referrer Name *</label> <br />
-                                                <input type="text" className="w-full border-gray-300" />
+                                                <input name='reffer_name' onChange={handleFormdata} value={reffer_name} type="text" className="w-full border-gray-300" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Referrer Contact</label> <br />
-                                                <input type="text" className="w-full border-gray-300" />
+                                                <input onChange={handleFormdata} name='reffer_contact' value={formData.reffer_contact} type="text" className="w-full border-gray-300" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Contact Person Name</label> <br />
-                                                <input type="text" className="w-full border-gray-300" />
+                                                <input name='reffer_person_name' onChange={handleFormdata} value={formData.reffer_person_name} type="text" className="w-full border-gray-300" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Contact Person Phone </label> <br />
-                                                <input type="text" className="w-full border-gray-300" />
+                                                <input onChange={handleFormdata} name='reffer_person_phone' value={formData.reffer_person_phone} type="text" className="w-full border-gray-300" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Standard Commission (%) </label> <br />

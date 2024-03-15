@@ -16,7 +16,7 @@ class FrontOfficeControllr extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/frontoffice');
+        return Inertia::render('Admin/frontoffice', ['admin' => Auth::guard('admin-api')->user()]);
     }
 
     public function FrontOfficeStore(Request $request)
@@ -46,6 +46,11 @@ class FrontOfficeControllr extends Controller
         } else {
             return response()->json(['error' => 'No file uploaded'], 400);
         }
+    }
+
+    public function FrontofficeList()
+    {
+        return Frontoffice::all();
     }
 
     public function FrontofficeDelete(Request $request, $id)

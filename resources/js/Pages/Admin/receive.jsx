@@ -184,13 +184,14 @@ const Receive = ({ admin }) => {
                                             <td className='px-6 py-3 text-left text-xs flex space-x-2'>
                                                 <a onClick={() => {
                                                     setFormdata({
-                                                        id: datas.id,
-                                                        cml_phone: datas.recv_address,
-                                                        cml_name: datas.recv_atach_file,
-                                                        cml_source: datas.recv_date,
-                                                        cml_by: datas.recv_form_title,
-                                                        cml_phone: datas.recv_note,
-                                                        cml_date: datas.recv_ref_no,
+                                                        // id: datas.id,
+                                                        recv_address: datas.recv_address,
+                                                        recv_name: datas.recv_name,
+                                                        recv_atach_file: datas.recv_atach_file,
+                                                        recv_date: datas.recv_date,
+                                                        recv_form_title: datas.recv_form_title,
+                                                        recv_note: datas.recv_note,
+                                                        recv_ref_no: datas.recv_ref_no,
 
                                                     }); setupdateModal(datas.id)
                                                 }}><CiEdit className='text-[1.3rem] cursor-pointer' /></a>

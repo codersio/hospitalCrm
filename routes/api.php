@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AmbulanceControllr;
 use App\Http\Controllers\Admin\AppoinmentController;
+use App\Http\Controllers\Admin\DeathandBirthController;
+use App\Http\Controllers\Admin\FinanceController;
 use App\Http\Controllers\Admin\FrontOfficeControllr;
 use App\Http\Controllers\Admin\IpdController;
 use App\Http\Controllers\Admin\MedicineController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\Admin\PathologyController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\PharmacyController;
 use App\Http\Controllers\Admin\RadiologyController;
+use App\Http\Controllers\Admin\ReferalController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -99,7 +102,7 @@ Route::group([
 
     // /front office api cal
     Route::post('front-office-store', [FrontOfficeControllr::class, 'FrontOfficeStore'])->name('front-office-store');
-    Route::post('front-office-fetch-bill', [FrontOfficeControllr::class, 'AmbulanceBillFetch'])->name('front-office-fetch-bill');
+    Route::post('front-office-fetch-bill', [FrontOfficeControllr::class, 'FrontofficeList'])->name('front-office-fetch-bill');
     Route::post('front-office-update', [FrontOfficeControllr::class, 'ambulanceupdate'])->name('front-office-update');
     Route::post('front-office-delete/{id}', [FrontOfficeControllr::class, 'FrontofficeDelete'])->name('front-office-delete');
     Route::post('front-office-list', [FrontOfficeControllr::class, 'AmbulancelistList']);
@@ -128,4 +131,41 @@ Route::group([
     Route::post('recive-delete/{id}', [FrontOfficeControllr::class, 'reciveDelete'])->name('recive-delete');
     Route::post('recive-update/{id}', [FrontOfficeControllr::class, 'reciveUpdate'])->name('recive-update');
     Route::post('recive-fetch', [FrontOfficeControllr::class, 'reciveFetch'])->name('recive-fetch');
+
+    // deathcertificate api call
+    Route::post('deathcertificate-store', [DeathandBirthController::class, 'deathcertificateStore'])->name('deathcertificate-store');
+    Route::post('deathcertificate-delete/{id}', [DeathandBirthController::class, 'deathcertificateDelete'])->name('deathcertificate-delete');
+    Route::post('deathcertificate-update/{id}', [DeathandBirthController::class, 'deathcertificateUpdate'])->name('deathcertificate-update');
+    Route::post('deathcertificate-fetch', [DeathandBirthController::class, 'deathcertificateFetch'])->name('deathcertificate-fetch');
+
+    // birthcerificate a[i calll
+    Route::post('birthcertificate-store', [DeathandBirthController::class, 'birthcertificateStore'])->name('birthcertificate-store');
+    Route::post('c/{id}', [DeathandBirthController::class, 'birthcertificateDelete'])->name('birthcertificate-delete');
+    Route::post('birthcertificate-update/{id}', [DeathandBirthController::class, 'birthcertificateUpdate'])->name('birthcertificate-update');
+    Route::post('birthcertificate-fetch', [DeathandBirthController::class, 'birthcertificateFetch'])->name('birthcertificate-fetch');
+
+    // tpamanagement api call
+    Route::post('tpamanagement-store', [FinanceController::class, 'tpamanagementStore'])->name('tpamanagement-store');
+    Route::post('tpamanagement-delete/{id}', [FinanceController::class, 'tpamanagementDelete'])->name('tpamanagement-delete');
+    Route::post('tpamanagement-update/{id}', [FinanceController::class, 'tpamanagementUpdate'])->name('tpamanagement-update');
+    Route::post('tpamanagement-fetch', [FinanceController::class, 'tpamanagementFetch'])->name('tpamanagement-fetch');
+
+    // expense api call
+    Route::post('expense-store', [FinanceController::class, 'expenseStore'])->name('expense-store');
+    Route::post('expense-delete/{id}', [FinanceController::class, 'expenseDelete'])->name('expense-delete');
+    Route::post('expense-update/{id}', [FinanceController::class, 'expenseUpdate'])->name('expense-update');
+    Route::post('expense-fetch', [FinanceController::class, 'expenseFetch'])->name('expense-fetch');
+
+    // income api all
+    Route::post('income-store', [FinanceController::class, 'incomeStore'])->name('income-store');
+    Route::post('income-delete/{id}', [FinanceController::class, 'incomeDelete'])->name('income-delete');
+    Route::post('income-update/{id}', [FinanceController::class, 'incomeUpdate'])->name('income-update');
+    Route::post('income-fetch', [FinanceController::class, 'incomeFetch'])->name('income-fetch');
+
+    // referral api call
+
+    Route::post('referral-store', [ReferalController::class, 'referralStore'])->name('referral-store');
+    Route::post('referral-delete/{id}', [ReferalController::class, 'referralDelete'])->name('referral-delete');
+    Route::post('referral-update/{id}', [ReferalController::class, 'referralUpdate'])->name('referral-update');
+    Route::post('referral-fetch', [ReferalController::class, 'referralFetch'])->name('referral-fetch');
 });

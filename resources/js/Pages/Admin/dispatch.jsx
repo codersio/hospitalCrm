@@ -184,13 +184,13 @@ const Dispatch = ({ admin }) => {
                                             <td className='px-6 py-3 text-left text-xs flex space-x-2'>
                                                 <a onClick={() => {
                                                     setFormdata({
-                                                        id: datas.id,
-                                                        cml_phone: datas.dis_address,
-                                                        cml_name: datas.dis_atach_file,
-                                                        cml_source: datas.dis_date,
-                                                        cml_by: datas.recv_form_title,
-                                                        cml_phone: datas.dis_note,
-                                                        cml_date: datas.dis_ref_no,
+                                                        dis_name: datas.dis_name,
+                                                        dis_address: datas.dis_address,
+                                                        dis_atach_file: datas.dis_atach_file,
+                                                        dis_date: datas.dis_date,
+                                                        recv_form_title: datas.recv_form_title,
+                                                        dis_note: datas.dis_note,
+                                                        dis_ref_no: datas.dis_ref_no,
 
                                                     }); setupdateModal(datas.id)
                                                 }}><CiEdit className='text-[1.3rem] cursor-pointer' /></a>
