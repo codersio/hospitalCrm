@@ -1,0 +1,654 @@
+{
+  "_ApplicationLogo-DXOIOLuB.js": {
+    "file": "assets/ApplicationLogo-DXOIOLuB.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_AuthenticatedLayout-BCgCJ6Cj.js": {
+    "file": "assets/AuthenticatedLayout-BCgCJ6Cj.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_ApplicationLogo-DXOIOLuB.js",
+      "_transition-CWeI8si_.js"
+    ]
+  },
+  "_GuestLayout-BA0xflwU.js": {
+    "file": "assets/GuestLayout-BA0xflwU.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "_InputError-B3Q_qBKq.js": {
+    "file": "assets/InputError-B3Q_qBKq.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_InputLabel-BRNRnWvF.js": {
+    "file": "assets/InputLabel-BRNRnWvF.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_PrimaryButton-DKem-uqT.js": {
+    "file": "assets/PrimaryButton-DKem-uqT.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_TextInput-Cb70WfPS.js": {
+    "file": "assets/TextInput-Cb70WfPS.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-B4nz579p.js": {
+    "file": "assets/index-B4nz579p.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-Uofm2pEf.js": {
+    "file": "assets/index-Uofm2pEf.js",
+    "imports": [
+      "_index-B4nz579p.js"
+    ]
+  },
+  "_patientsmodal-CLPLGMO_.js": {
+    "file": "assets/patientsmodal-CLPLGMO_.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-Uofm2pEf.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "_sidebar-DryF3hU2.js": {
+    "file": "assets/sidebar-DryF3hU2.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-B4nz579p.js"
+    ]
+  },
+  "_sweetalert2.all-Crg2-Bly.js": {
+    "file": "assets/sweetalert2.all-Crg2-Bly.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_transition-CWeI8si_.js": {
+    "file": "assets/transition-CWeI8si_.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Admin/Appoinment.jsx": {
+    "file": "assets/Appoinment-CB1Fxb16.js",
+    "src": "resources/js/Pages/Admin/Appoinment.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js",
+      "_patientsmodal-CLPLGMO_.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Auth/login.jsx": {
+    "file": "assets/login-n-HIbELD.js",
+    "src": "resources/js/Pages/Admin/Auth/login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-B4nz579p.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_TextInput-Cb70WfPS.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Billing.jsx": {
+    "file": "assets/Billing-DcAA0Kfq.js",
+    "src": "resources/js/Pages/Admin/Billing.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Bloodbank.jsx": {
+    "file": "assets/Bloodbank-BBWc0D78.js",
+    "src": "resources/js/Pages/Admin/Bloodbank.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Dashboard.jsx": {
+    "file": "assets/Dashboard-GVq-2hmT.js",
+    "src": "resources/js/Pages/Admin/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js"
+    ]
+  },
+  "resources/js/Pages/Admin/ImportCsv.jsx": {
+    "file": "assets/ImportCsv-L3BwzYbA.js",
+    "src": "resources/js/Pages/Admin/ImportCsv.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/MedicineBillList.jsx": {
+    "file": "assets/MedicineBillList-CIeODQZs.js",
+    "src": "resources/js/Pages/Admin/MedicineBillList.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js",
+      "_patientsmodal-CLPLGMO_.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Pathology.jsx": {
+    "file": "assets/Pathology-BPTobdB5.js",
+    "src": "resources/js/Pages/Admin/Pathology.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Referral.jsx": {
+    "file": "assets/Referral-DYNcPED3.js",
+    "src": "resources/js/Pages/Admin/Referral.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/addreferral.jsx": {
+    "file": "assets/addreferral-i7OFagjn.js",
+    "src": "resources/js/Pages/Admin/addreferral.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/ambulance.jsx": {
+    "file": "assets/ambulance-xWf5AjaI.js",
+    "src": "resources/js/Pages/Admin/ambulance.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/ambulancelist.jsx": {
+    "file": "assets/ambulancelist-CUsMJ_BV.js",
+    "src": "resources/js/Pages/Admin/ambulancelist.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/birthRecord.jsx": {
+    "file": "assets/birthRecord-DHm2lNIC.js",
+    "src": "resources/js/Pages/Admin/birthRecord.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/bloodDonor.jsx": {
+    "file": "assets/bloodDonor-C9fFJEem.js",
+    "src": "resources/js/Pages/Admin/bloodDonor.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/bloodissue.jsx": {
+    "file": "assets/bloodissue-DySrMpzL.js",
+    "src": "resources/js/Pages/Admin/bloodissue.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/componentissue.jsx": {
+    "file": "assets/componentissue-6goIxd0u.js",
+    "src": "resources/js/Pages/Admin/componentissue.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/componentlist.jsx": {
+    "file": "assets/componentlist-DnKTrmvA.js",
+    "src": "resources/js/Pages/Admin/componentlist.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/deathRecord.jsx": {
+    "file": "assets/deathRecord-Bd2rTw5j.js",
+    "src": "resources/js/Pages/Admin/deathRecord.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/expenses.jsx": {
+    "file": "assets/expenses-DLopbYpi.js",
+    "src": "resources/js/Pages/Admin/expenses.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/frontoffice.jsx": {
+    "file": "assets/frontoffice-Cis7mWNy.js",
+    "src": "resources/js/Pages/Admin/frontoffice.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/humanResource.jsx": {
+    "file": "assets/humanResource-DprT3VTb.js",
+    "src": "resources/js/Pages/Admin/humanResource.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/income.jsx": {
+    "file": "assets/income-DhFe3xKc.js",
+    "src": "resources/js/Pages/Admin/income.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/inventory.jsx": {
+    "file": "assets/inventory-C2ifeEV7.js",
+    "src": "resources/js/Pages/Admin/inventory.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/inventoryitemlist.jsx": {
+    "file": "assets/inventoryitemlist-C097gzTP.js",
+    "src": "resources/js/Pages/Admin/inventoryitemlist.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/ipdpatients.jsx": {
+    "file": "assets/ipdpatients-DquEruKE.js",
+    "src": "resources/js/Pages/Admin/ipdpatients.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js",
+      "_patientsmodal-CLPLGMO_.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/issueInventoryItem.jsx": {
+    "file": "assets/issueInventoryItem-eSDNXTaK.js",
+    "src": "resources/js/Pages/Admin/issueInventoryItem.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/medicine.jsx": {
+    "file": "assets/medicine-CXPz6_vG.js",
+    "src": "resources/js/Pages/Admin/medicine.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js",
+      "_patientsmodal-CLPLGMO_.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/opdpatients.jsx": {
+    "file": "assets/opdpatients-DqlTIE5S.js",
+    "src": "resources/js/Pages/Admin/opdpatients.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js",
+      "_patientsmodal-CLPLGMO_.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/pharmacy.jsx": {
+    "file": "assets/pharmacy-C0DZlF8j.js",
+    "src": "resources/js/Pages/Admin/pharmacy.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js",
+      "_patientsmodal-CLPLGMO_.js",
+      "_sweetalert2.all-Crg2-Bly.js"
+    ]
+  },
+  "resources/js/Pages/Admin/radiology.jsx": {
+    "file": "assets/radiology-DlQRwSaA.js",
+    "src": "resources/js/Pages/Admin/radiology.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Admin/tpamanagment.jsx": {
+    "file": "assets/tpamanagment-DWJ-_15v.js",
+    "src": "resources/js/Pages/Admin/tpamanagment.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_sidebar-DryF3hU2.js",
+      "_index-B4nz579p.js",
+      "_index-Uofm2pEf.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ConfirmPassword.jsx": {
+    "file": "assets/ConfirmPassword-Bpf9vv4L.js",
+    "src": "resources/js/Pages/Auth/ConfirmPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-BA0xflwU.js",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ForgotPassword.jsx": {
+    "file": "assets/ForgotPassword-Cfe0ttmM.js",
+    "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-BA0xflwU.js",
+      "_InputError-B3Q_qBKq.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.jsx": {
+    "file": "assets/Login-34kjv5Od.js",
+    "src": "resources/js/Pages/Auth/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-BA0xflwU.js",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Register.jsx": {
+    "file": "assets/Register-CodY2Bxk.js",
+    "src": "resources/js/Pages/Auth/Register.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-BA0xflwU.js",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ResetPassword.jsx": {
+    "file": "assets/ResetPassword-B5L7HH7W.js",
+    "src": "resources/js/Pages/Auth/ResetPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-BA0xflwU.js",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "resources/js/Pages/Auth/VerifyEmail.jsx": {
+    "file": "assets/VerifyEmail-8WIFksph.js",
+    "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-BA0xflwU.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_ApplicationLogo-DXOIOLuB.js"
+    ]
+  },
+  "resources/js/Pages/Dashboard.jsx": {
+    "file": "assets/Dashboard-CniJ4Foc.js",
+    "src": "resources/js/Pages/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AuthenticatedLayout-BCgCJ6Cj.js",
+      "_ApplicationLogo-DXOIOLuB.js",
+      "_transition-CWeI8si_.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Edit.jsx": {
+    "file": "assets/Edit-CvajI2lo.js",
+    "src": "resources/js/Pages/Profile/Edit.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AuthenticatedLayout-BCgCJ6Cj.js",
+      "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
+      "_ApplicationLogo-DXOIOLuB.js",
+      "_transition-CWeI8si_.js",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_TextInput-Cb70WfPS.js",
+      "_PrimaryButton-DKem-uqT.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": {
+    "file": "assets/DeleteUserForm-uhdpTYHs.js",
+    "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_transition-CWeI8si_.js",
+      "_TextInput-Cb70WfPS.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": {
+    "file": "assets/UpdatePasswordForm-RWnxfwti.js",
+    "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_transition-CWeI8si_.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": {
+    "file": "assets/UpdateProfileInformationForm-DLYjG6LG.js",
+    "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_InputError-B3Q_qBKq.js",
+      "_InputLabel-BRNRnWvF.js",
+      "_PrimaryButton-DKem-uqT.js",
+      "_TextInput-Cb70WfPS.js",
+      "_transition-CWeI8si_.js"
+    ]
+  },
+  "resources/js/Pages/Welcome.jsx": {
+    "file": "assets/Welcome-CeGrHY53.js",
+    "src": "resources/js/Pages/Welcome.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/test.jsx": {
+    "file": "assets/test-Cf9OpsXP.js",
+    "src": "resources/js/Pages/test.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-CEg9JAB6.js",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Admin/Appoinment.jsx",
+      "resources/js/Pages/Admin/Auth/login.jsx",
+      "resources/js/Pages/Admin/Billing.jsx",
+      "resources/js/Pages/Admin/Bloodbank.jsx",
+      "resources/js/Pages/Admin/Dashboard.jsx",
+      "resources/js/Pages/Admin/ImportCsv.jsx",
+      "resources/js/Pages/Admin/MedicineBillList.jsx",
+      "resources/js/Pages/Admin/Pathology.jsx",
+      "resources/js/Pages/Admin/Referral.jsx",
+      "resources/js/Pages/Admin/addreferral.jsx",
+      "resources/js/Pages/Admin/ambulance.jsx",
+      "resources/js/Pages/Admin/ambulancelist.jsx",
+      "resources/js/Pages/Admin/birthRecord.jsx",
+      "resources/js/Pages/Admin/bloodDonor.jsx",
+      "resources/js/Pages/Admin/bloodissue.jsx",
+      "resources/js/Pages/Admin/componentissue.jsx",
+      "resources/js/Pages/Admin/componentlist.jsx",
+      "resources/js/Pages/Admin/deathRecord.jsx",
+      "resources/js/Pages/Admin/expenses.jsx",
+      "resources/js/Pages/Admin/frontoffice.jsx",
+      "resources/js/Pages/Admin/humanResource.jsx",
+      "resources/js/Pages/Admin/income.jsx",
+      "resources/js/Pages/Admin/inventory.jsx",
+      "resources/js/Pages/Admin/inventoryitemlist.jsx",
+      "resources/js/Pages/Admin/ipdpatients.jsx",
+      "resources/js/Pages/Admin/issueInventoryItem.jsx",
+      "resources/js/Pages/Admin/medicine.jsx",
+      "resources/js/Pages/Admin/opdpatients.jsx",
+      "resources/js/Pages/Admin/pharmacy.jsx",
+      "resources/js/Pages/Admin/radiology.jsx",
+      "resources/js/Pages/Admin/tpamanagment.jsx",
+      "resources/js/Pages/Auth/ConfirmPassword.jsx",
+      "resources/js/Pages/Auth/ForgotPassword.jsx",
+      "resources/js/Pages/Auth/Login.jsx",
+      "resources/js/Pages/Auth/Register.jsx",
+      "resources/js/Pages/Auth/ResetPassword.jsx",
+      "resources/js/Pages/Auth/VerifyEmail.jsx",
+      "resources/js/Pages/Dashboard.jsx",
+      "resources/js/Pages/Profile/Edit.jsx",
+      "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
+      "resources/js/Pages/Welcome.jsx",
+      "resources/js/Pages/test.jsx"
+    ],
+    "css": [
+      "assets/app-BmJjn_t1.css"
+    ]
+  }
+}

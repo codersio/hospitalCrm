@@ -16,7 +16,7 @@ class ReferralPerson extends Model
     'reffer_contact',
     'reffer_person_name',
     'reffer_person_phone',
-    'reffer_category',
+    'reffer_category_id',
     'reffer_stander_commission',
     'reffer_address',
     'reffer_address',

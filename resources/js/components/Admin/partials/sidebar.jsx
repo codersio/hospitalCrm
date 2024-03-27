@@ -17,11 +17,15 @@ export default function Sidebar() {
 
   const [show, Setshow] = useState(false)
   const [financeshow, SetFinanceshow] = useState(false)
+  const [hospitalcharges, SetHospitalCharges] = useState(false)
   const HandleShow = () => {
     Setshow(!show)
   }
   const HandleFinanceShow = () => {
     SetFinanceshow(!financeshow)
+  }
+  const HandleHospital = () => {
+    SetHospitalCharges(!hospitalcharges)
   }
   return (
     <>
@@ -230,6 +234,42 @@ export default function Sidebar() {
                 <span> inventory</span>
               </Link>
             </li>
+
+            <li className="treeview ">
+
+              <div onClick={HandleHospital} className="flex space-x-2 cursor-pointer">
+                <div className="icon grid place-items-center">
+                  <CiMoneyBill />
+                </div>
+                <span> Hospital Charges</span>
+                <div className="icon grid place-items-center">
+                  {hospitalcharges ? <FaAngleDown /> : <FaAngleRight />}
+
+                </div>
+              </div>
+
+              <li className={hospitalcharges ? "block mt-4 space-y-3 " : "hidden"}>
+                <li className="space-y-3">
+                  <Link href="/admin/income" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Income</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/expenses" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Expenses</span>
+                  </Link>
+                </li>
+              </li>
+
+
+            </li>
+
             {/* Add more navigation links as needed */}
           </ul>
         </div>

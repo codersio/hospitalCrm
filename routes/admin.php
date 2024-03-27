@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PathologyController;
 use App\Http\Controllers\Admin\PharmacyController;
 use App\Http\Controllers\Admin\RadiologyController;
 use App\Http\Controllers\Admin\ReferalController;
+use App\Http\Controllers\Admin\setup\SetupController;
 use App\Http\Controllers\AdminController;
 // use App\Http\Controllers\OpdController;
 use Illuminate\Support\Facades\Route;
@@ -86,5 +87,10 @@ Route::group([
     });
     Route::group(['prefix' => 'radiology'], function () {
         Route::get('test', [RadiologyController::class, 'RadiologyTest'])->name('test');
+    });
+
+    Route::group(['prefix' => 'setup'], function () {
+        Route::get('hospital', [SetupController::class, 'HospitalchargeSetup'])->name('hospital');
+        Route::get('hospital-tax-category', [SetupController::class, 'HospitalTaxSetup'])->name('hospital-tax-category');
     });
 });

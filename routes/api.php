@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AppoinmentController;
 use App\Http\Controllers\Admin\DeathandBirthController;
 use App\Http\Controllers\Admin\FinanceController;
 use App\Http\Controllers\Admin\FrontOfficeControllr;
+use App\Http\Controllers\Admin\HumanResourceController;
+use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\IpdController;
 use App\Http\Controllers\Admin\MedicineController;
 use App\Http\Controllers\Admin\opdController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\PharmacyController;
 use App\Http\Controllers\Admin\RadiologyController;
 use App\Http\Controllers\Admin\ReferalController;
+use App\Http\Controllers\Admin\setup\SetupController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -168,4 +171,47 @@ Route::group([
     Route::post('referral-delete/{id}', [ReferalController::class, 'referralDelete'])->name('referral-delete');
     Route::post('referral-update/{id}', [ReferalController::class, 'referralUpdate'])->name('referral-update');
     Route::post('referral-fetch', [ReferalController::class, 'referralFetch'])->name('referral-fetch');
+
+    // referrablnill api call
+    Route::post('referrablnill-store', [ReferalController::class, 'referrablnillStore'])->name('referrablnill-store');
+    Route::post('referrablnill-delete/{id}', [ReferalController::class, 'referrablnillDelete'])->name('referrablnill-delete');
+    Route::post('referrablnill-update/{id}', [ReferalController::class, 'referrablnillUpdate'])->name('referrablnill-update');
+    Route::post('referrablnill-fetch', [ReferalController::class, 'referrablnillFetch'])->name('referrablnill-fetch');
+
+    // humanresource api call
+
+    Route::post('humanresource-store', [HumanResourceController::class, 'AdminStore'])->name('humanresource-store');
+    Route::post('humanresource-fetch', [HumanResourceController::class, 'humanresourceFetch'])->name('humanresource-fetch');
+    Route::get('/search', [HumanResourceController::class, 'search']);
+
+    // inventory api cal
+    Route::post('inventory-store', [InventoryController::class, 'inventoryStore'])->name('inventory-store');
+    Route::post('inventory-delete/{id}', [InventoryController::class, 'inventoryDelete'])->name('inventory-delete');
+    Route::post('inventory-update/{id}', [InventoryController::class, 'inventoryUpdate'])->name('inventory-update');
+    Route::post('inventory-fetch', [InventoryController::class, 'inventoryFetch'])->name('inventory-fetch');
+
+    // inventoryIssue
+    Route::post('inventoryIssue-store', [InventoryController::class, 'inventoryIssueStore'])->name('inventoryIssue-store');
+    Route::post('inventoryIssue-delete/{id}', [InventoryController::class, 'inventoryIssueDelete'])->name('inventoryIssue-delete');
+    Route::post('inventoryIssue-update/{id}', [InventoryController::class, 'inventoryIssueUpdate'])->name('inventoryIssue-update');
+    Route::post('inventoryIssue-fetch', [InventoryController::class, 'inventoryIssueFetch'])->name('inventoryIssue-fetch');
+    Route::post('inventoryIssue-return/{id}', [InventoryController::class, 'ClickToReturn'])->name('inventoryIssue-return');
+
+    // inventoryStockitem api
+    Route::post('inventoryStockitem-store', [InventoryController::class, 'inventoryStockitemStore'])->name('inventoryStockitem-store');
+    Route::post('inventoryStockitem-delete/{id}', [InventoryController::class, 'inventoryStockitemDelete'])->name('inventoryStockitem-delete');
+    Route::post('inventoryStockitem-update/{id}', [InventoryController::class, 'inventoryStockitemUpdate'])->name('inventoryStockitem-update');
+    Route::post('inventoryStockitem-fetch', [InventoryController::class, 'inventoryStockitemFetch'])->name('inventoryStockitem-fetch');
+
+    // /hospitalChargeUnit api call
+    Route::post('hospitalChargeUnit-store', [SetupController::class, 'hospitalChargeUnitStore'])->name('hospitalChargeUnit-store');
+    Route::post('hospitalChargeUnit-delete/{id}', [SetupController::class, 'hospitalChargeUnitDelete'])->name('hospitalChargeUnit-delete');
+    Route::post('hospitalChargeUnit-update/{id}', [SetupController::class, 'hospitalChargeUnitUpdate'])->name('hospitalChargeUnit-update');
+    Route::post('hospitalChargeUnit-fetch', [SetupController::class, 'hospitalChargeUnitFetch'])->name('hospitalChargeUnit-fetch');
+
+    // taxCategory percentage
+    Route::post('taxCategory-store', [SetupController::class, 'taxCategoryStore'])->name('taxCategory-store');
+    Route::post('taxCategory-delete/{id}', [SetupController::class, 'taxCategoryDelete'])->name('taxCategory-delete');
+    Route::post('taxCategory-update/{id}', [SetupController::class, 'taxCategoryUpdate'])->name('taxCategory-update');
+    Route::post('taxCategory-fetch', [SetupController::class, 'taxCategoryFetch'])->name('taxCategory-fetch');
 });

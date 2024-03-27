@@ -1,89 +1,62 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Test = ({ appointmentId }) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [status, setStatus] = useState('');
-  const [appoinment, setSetappoinment] = useState([]);
-  const [formData, setFormData] = useState({
-    // Initialize form data with empty values or default values
-    status: '1',
-    // description: '',
-    // Add more fields as needed
-  });
-  const [isActive, setIsActive] = useState(1);
-  const AppoinmentfetchData = async () => {
+function Test() {
+  const [allItems, setAllItems] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const fetchData = async () => {
     try {
-      const response = await axios.post('/api/admin/appoinment-fetch');
-      console.log(response.data)
-      setSetappoinment(response.data);
+      const response = await axios.post('/api/admin/humanresource-fetch');
+      setAllItems(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-
   useEffect(() => {
-
-    AppoinmentfetchData();
-
-    // Fet(id);
+    fetchData();
   }, []);
-  const handleSubmit = (e, appointmentId) => {
-    const newStatus = !isActive;
-    e.preventDefault();
-    axios.put(`appoinment-status-update/${appointmentId}`, formData)
-      .then(response => {
-        console.log(response)
-        // setIsActive(isActive);
-        // Handle success, such as showing a success message or updating state
-      })
-      .catch(error => {
-        console.error('Error updating appointment:', error);
-        // Handle error, such as displaying an error message
-      });
+
+  const handleSearch = () => {
+    try {
+      let filteredResults = allItems;
+      if (selectedOption) {
+        filteredResults = allItems.filter(item => item.name === selectedOption);
+      }
+      setSearchResults(filteredResults);
+    } catch (error) {
+      console.error('Error searching:', error);
+    }
   };
 
-
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
 
   return (
     <div>
-      <table>
-
-        <thead>
-          <tr>
-            <th>Patient id</th>
-            <th>Patient id</th>
-
-          </tr>
-        </thead>
-        <tbody>
-
-          {appoinment.map(a => (
-            <tr>
-              <td>{a.id}</td>
-              <td>
-                <form >
-                  <input type="text" name="status" value={formData.status} onChange={(e) => setIsActive(e.target.value)} placeholder="Title" />
-                  {/* <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" /> */}
-                  {/* Add more input fields for other attributes */}
-                  {/* <button type="submit">Update Appointment</button> */}
-                </form>
-                <button onClick={(e) => handleSubmit(e, a.id)} value={isActive}>
-                  sss
-                </button>
-              </td>
-
-            </tr>
-          ))}
-
-
-        </tbody>
-
-      </table>
-
+      <select value={selectedOption} onChange={handleSelectChange}>
+        <option value="">Select an option</option>
+        {allItems.map(item => (
+          <option key={item.id} value={item.name}>{item.name}</option>
+        ))}
+      </select>
+      <button onClick={handleSearch}>Search</button>
+      <ul>
+        {searchResults.length > 0 ? (
+          searchResults.map((user) => (
+            <li key={user.id}>{user.name}</li>
+          ))
+        ) : (
+          allItems.map((user) => (
+            <li key={user.id}>{user.name}</li>
+          ))
+        )}
+      </ul>
     </div>
   );
-};
+}
 
 export default Test;

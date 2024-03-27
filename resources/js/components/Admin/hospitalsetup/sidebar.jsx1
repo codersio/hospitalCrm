@@ -1,0 +1,21 @@
+import React from 'react'
+import Sidebar from '../partials/sidebar';
+import Header from '../partials/Header';
+
+
+const Sidebarsetup = () => {
+    return (
+        <div className='w-[30%]'>
+            {/* <ul>
+                <li><a href="">Charges</a></li>
+                <li><a href="">Charge Category</a></li>
+                <li><a href="">Charge Type</a></li>
+                <li><a href="">Tax Category</a></li>
+                <li><a href="">Unit Type</a></li>
+            </ul> */}
+        </div>
+
+    );
+}
+
+export default Sidebarsetup;

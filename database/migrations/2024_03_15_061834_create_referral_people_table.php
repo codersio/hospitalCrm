@@ -18,10 +18,10 @@ return new class() extends Migration {
             $table->string('reffer_contact');
             $table->string('reffer_person_name');
             $table->string('reffer_person_phone');
-            $table->foreignId('reffer_category');
+            $table->foreignId('reffer_category_id');
             $table->float('reffer_stander_commission');
             $table->string('reffer_address');
-            $table->string('reffer_address');
+            // $table->string('reffer_address');
             $table->float('opd');
             $table->float('ipd');
             $table->float('pharmacy');

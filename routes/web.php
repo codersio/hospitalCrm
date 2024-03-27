@@ -1,6 +1,8 @@
 <?php
 
 // use App\Http\Controllers\OpdController;
+
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +34,6 @@ Route::get('/test', function () {
     return Inertia::render('test');
 })->name('test');
 Route::put('appoinment-status-update/{id}', '\App\Http\Controllers\Admin\AppoinmentController@status');
+
+Route::get('/users/search', [DashboardController::class, 'searchByName']);
+Route::get('/users', [DashboardController::class, 'allSearch']);
