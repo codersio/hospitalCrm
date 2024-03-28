@@ -241,7 +241,7 @@ export default function Sidebar() {
                 <div className="icon grid place-items-center">
                   <CiMoneyBill />
                 </div>
-                <span> Hospital Charges</span>
+                <span> SetUp</span>
                 <div className="icon grid place-items-center">
                   {hospitalcharges ? <FaAngleDown /> : <FaAngleRight />}
 
@@ -250,21 +250,21 @@ export default function Sidebar() {
 
               <li className={hospitalcharges ? "block mt-4 space-y-3 " : "hidden"}>
                 <li className="space-y-3">
-                  <Link href="/admin/income" className="flex space-x-2">
+                  <Link href="/admin/setup/hospital-charge" className="flex space-x-2">
                     <div className="icon grid place-items-center">
                       <FaAngleRight />
                     </div>
-                    <span className="text-[12px]"> Income</span>
+                    <span className="text-[12px]"> Hospital Charge</span>
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/admin/expenses" className="flex space-x-2">
                     <div className="icon grid place-items-center">
                       <FaAngleRight />
                     </div>
                     <span className="text-[12px]"> Expenses</span>
                   </Link>
-                </li>
+                </li> */}
               </li>
 
 

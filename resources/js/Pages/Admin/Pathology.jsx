@@ -336,7 +336,7 @@ const Pathology = ({ admin, doctor }) => {
                   <form action className="w-full grid grid-cols-5 gap-3 px-6 mt-10 relative">
                     <div className="form-group w-full ">
                       <label htmlFor>Test Name *</label>
-                      <select name id className="w-full border-gray-300">
+                      <select name id className="w-full border-gray-300" required>
                         <option value>Select Patient</option>
                         <option value />
                       </select>

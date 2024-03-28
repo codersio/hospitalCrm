@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Doctor;
 use App\Models\Admin\Patient;
 use App\Models\Admin\Radiology;
+use App\Models\Admin\radiologyCategory;
+use App\Models\Admin\radiologyParameters;
 use App\Models\Admin\radiologytest;
+use App\Models\Admin\RadiologyUnits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -53,8 +56,8 @@ class RadiologyController extends Controller
                'net_amount' => $request->net_amount,
                'payment_mode' => $request->payment_mode,
                'date' => $request->date,
-               'case_id' => $request->case_id,
-               'bill_no' => 'RADIO'.str_pad($id, 2, '0', STR_PAD_LEFT),
+               'case_id' => 'ADR',
+               'bill_no' => 'RADIO',
            ]);
         if ($pathologybill) {
             return response()->json(['message' => 'File uploaded successfully',  $pathologybill]);
@@ -81,5 +84,155 @@ class RadiologyController extends Controller
     public function RadiologyTestList()
     {
         return radiologytest::all();
+    }
+
+    // pathology category setup
+    public function radiologyCategory()
+    {
+        return Inertia::render('Admin/radiologysetup/radiologyCategory', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function radiologycategoryStore(Request $request)
+    {
+        $radiologyCategory = radiologyCategory::create($request->all());
+        if ($radiologyCategory) {
+            return response()->json(['message' => 'File uploaded successfully',  $radiologyCategory]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function radiologycategoryFetch()
+    {
+        return radiologyCategory::all();
+    }
+
+    public function radiologycategoryEdit($id)
+    {
+        return radiologyCategory::find($id);
+    }
+
+    public function radiologycategoryUpdate(Request $request, $id)
+    {
+        $radiologyCategory = radiologyCategory::find($id);
+        $radiologyCategory->update($request->all());
+        if ($radiologyCategory) {
+            return response()->json(['message' => 'File uploaded successfully',  $radiologyCategory]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function radiologycategoryDelete($id)
+    {
+        $radiologyCategory = radiologyCategory::find($id);
+        $radiologyCategory->delete();
+        if ($radiologyCategory) {
+            return response()->json(['message' => 'File uploaded successfully',  $radiologyCategory]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    // pathology units
+
+    public function radiologyUnit()
+    {
+        return Inertia::render('Admin/radiologysetup/radiologyUnit', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function radiologyUnitStore(Request $request)
+    {
+        $pathologyUnit = RadiologyUnits::create($request->all());
+        if ($pathologyUnit) {
+            return response()->json(['message' => 'File uploaded successfully',  $pathologyUnit]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function radiologyUnitFetch()
+    {
+        return RadiologyUnits::all();
+    }
+
+    public function pathologyUnitEdit($id)
+    {
+        return RadiologyUnits::find($id);
+    }
+
+    public function radiologyUnitUpdate(Request $request, $id)
+    {
+        $pathologyUnit = RadiologyUnits::find($id);
+        $pathologyUnit->update($request->all());
+        if ($pathologyUnit) {
+            return response()->json(['message' => 'File uploaded successfully',  $pathologyUnit]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function radiologyUnitDelete($id)
+    {
+        $pathologyUnit = RadiologyUnits::find($id);
+        $pathologyUnit->delete();
+        if ($pathologyUnit) {
+            return response()->json(['message' => 'File uploaded successfully',  $pathologyUnit]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    // radiologyParameters
+    public function radiologyParameter()
+    {
+        return Inertia::render('Admin/radiologysetup/radiologyParameter',
+            [
+               'admin' => Auth::guard('admin-api')->user(),
+               'units' => RadiologyUnits::all(),
+            ]
+        );
+    }
+
+    public function radiologyParametersStore(Request $request)
+    {
+        $radiologyParameters = radiologyParameters::create($request->all());
+        if ($radiologyParameters) {
+            return response()->json(['message' => 'File uploaded successfully',  $radiologyParameters]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function radiologyParametersFetch()
+    {
+        return radiologyParameters::all();
+    }
+
+    public function radiologyParametersEdit($id)
+    {
+        return radiologyParameters::find($id);
+    }
+
+    public function radiologyParametersUpdate(Request $request, $id)
+    {
+        $radiologyParameters = radiologyParameters::find($id);
+        $radiologyParameters->update($request->all());
+        if ($radiologyParameters) {
+            return response()->json(['message' => 'File uploaded successfully',  $radiologyParameters]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function radiologyParametersDelete($id)
+    {
+        $radiologyParameters = radiologyParameters::find($id);
+        $radiologyParameters->delete();
+        if ($radiologyParameters) {
+            return response()->json(['message' => 'File uploaded successfully',  $radiologyParameters]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
     }
 }

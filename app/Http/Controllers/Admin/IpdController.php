@@ -53,9 +53,9 @@ class IpdController extends Controller
             'Amount' => $request->Amount,
             'Payment_Mode' => $request->Payment_Mode,
             'Paid_Amount' => $request->Paid_Amount,
-            'Live_Consultation' => $request->Live_Consultation,
+            // 'Live_Consultation' => $request->Live_Consultation,
             'bed_number' => $request->bed_number,
-            'bed_group' => $request->bed_number,
+            // 'bed_group' => $request->bed_number,
             'Credit_Limit' => $request->Credit_Limit,
         ]);
 

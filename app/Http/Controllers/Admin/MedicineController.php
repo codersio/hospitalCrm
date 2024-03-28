@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\HospitalchargeUnit;
 use App\Models\Admin\Medicine;
 use App\Models\Admin\MedicineBill;
 use App\Models\Admin\MedicineCategory;
+use App\Models\Admin\MedicineDose;
+use App\Models\Admin\MedicineDoseDuration;
+use App\Models\Admin\MedicineDoseInterVal;
+use App\Models\Admin\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -160,5 +165,235 @@ class MedicineController extends Controller
          'medicineCategories' => MedicineCategory::all(),
          'medicinebill' => MedicineBill::all(),
         ]);
+    }
+
+    public function MedicinecategoryIndex()
+    {
+        return Inertia::render('Admin/medicinesetup/medicinecategory', [
+            'admin' => Auth::guard('admin-api')->user(),
+           'medicineCategories' => MedicineCategory::all(),
+        ]);
+    }
+
+    public function MedicineCategory(Request $request)
+    {
+        $medicine_category = MedicineCategory::create($request->all());
+        if ($medicine_category) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicine_category]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function MedicineCategoryUpdate(Request $request, $id)
+    {
+        $medicine_category = MedicineCategory::find($id);
+        $medicine_category->update($request->all());
+        if ($medicine_category) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicine_category]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function MedicineCategoryDelete(Request $request, $id)
+    {
+        $medicine_category = MedicineCategory::find($id);
+        $medicine_category->delete();
+        if ($medicine_category) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicine_category]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicinecategoryFetch()
+    {
+        return MedicineCategory::all();
+    }
+
+    public function SuppliIndex()
+    {
+        return Inertia::render('Admin/medicinesetup/supplier', [
+            'admin' => Auth::guard('admin-api')->user(),
+           'suppliers' => Supplier::all(),
+        ]);
+    }
+
+    public function medicinesupplierStore(Request $request)
+    {
+        $supplier = Supplier::create($request->all());
+        if ($supplier) {
+            return response()->json(['message' => 'File uploaded successfully',  $supplier]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicinesupplierUpdate(Request $request, $id)
+    {
+        $supplier = Supplier::find($id);
+        $supplier->update($request->all());
+        if ($supplier) {
+            return response()->json(['message' => 'File uploaded successfully',  $supplier]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicinesupplierDelete(Request $request, $id)
+    {
+        $supplier = Supplier::find($id);
+        $supplier->delete();
+        if ($supplier) {
+            return response()->json(['message' => 'File uploaded successfully',  $supplier]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicinesupplierFetch()
+    {
+        return Supplier::all();
+    }
+
+    public function medicineDos()
+    {
+        return Inertia::render('Admin/medicinesetup/medicineDos', [
+            'admin' => Auth::guard('admin-api')->user(),
+           'category' => MedicineCategory::all(),
+           'units' => HospitalchargeUnit::all(),
+        ]);
+    }
+
+    public function medicineDoseStore(Request $request)
+    {
+        $medicineDose = MedicineDose::create($request->all());
+        if ($medicineDose) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineDose]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineDoseUpdate(Request $request, $id)
+    {
+        $medicineDose = MedicineDose::find($id);
+        $medicineDose->update($request->all());
+        if ($medicineDose) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineDose]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineDoseDelete(Request $request, $id)
+    {
+        $medicineDose = MedicineDose::find($id);
+        $medicineDose->delete();
+        if ($medicineDose) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineDose]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineDoseFetch()
+    {
+        return MedicineDose::all();
+    }
+
+    // medicine interval
+
+    public function MedicineInteervalIndex()
+    {
+        return Inertia::render('Admin/medicinesetup/medicineinterval', [
+            'admin' => Auth::guard('admin-api')->user(),
+        //    'medicineIntervals' => Medicine::all(),
+        ]);
+    }
+
+    public function medicineIntervalStore(Request $request)
+    {
+        $medicineInterval = MedicineDoseInterVal::create($request->all());
+        if ($medicineInterval) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineInterval]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineIntervalUpdate(Request $request, $id)
+    {
+        $medicineInterval = MedicineDoseInterVal::find($id);
+        $medicineInterval->update($request->all());
+        if ($medicineInterval) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineInterval]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineIntervalDelete(Request $request, $id)
+    {
+        $medicineInterval = MedicineDoseInterVal::find($id);
+        $medicineInterval->delete();
+        if ($medicineInterval) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineInterval]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineIntervalFetch()
+    {
+        return MedicineDoseInterVal::all();
+    }
+
+    // medicine duration
+
+    public function MedicineDurationIndex()
+    {
+        return Inertia::render('Admin/medicinesetup/medicineduration', [
+            'admin' => Auth::guard('admin-api')->user(),
+        //    'medicineIntervals' => Medicine::all(),
+        ]);
+    }
+
+    public function medicineDurationStore(Request $request)
+    {
+        $medicineDuration = MedicineDoseDuration::create($request->all());
+        if ($medicineDuration) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineDuration]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineDurationUpdate(Request $request, $id)
+    {
+        $medicineDuration = MedicineDoseDuration::find($id);
+        $medicineDuration->update($request->all());
+        if ($medicineDuration) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineDuration]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineDurationDelete(Request $request, $id)
+    {
+        $medicineDuration = MedicineDoseDuration::find($id);
+        $medicineDuration->delete();
+        if ($medicineDuration) {
+            return response()->json(['message' => 'File uploaded successfully',  $medicineDuration]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function medicineDurationFetch()
+    {
+        return MedicineDoseDuration::all();
     }
 }

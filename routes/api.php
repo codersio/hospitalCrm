@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AmbulanceControllr;
 use App\Http\Controllers\Admin\AppoinmentController;
+use App\Http\Controllers\Admin\BloodbankController;
 use App\Http\Controllers\Admin\DeathandBirthController;
 use App\Http\Controllers\Admin\FinanceController;
 use App\Http\Controllers\Admin\FrontOfficeControllr;
@@ -81,6 +82,11 @@ Route::group([
     Route::post('medicine-delete', [MedicineController::class, 'medicinedelete'])->name('medicine-delete');
     Route::post('medicine-status-update/{id}', [MedicineController::class, 'medicinestatus']);
     Route::post('medicine-bill-store', [MedicineController::class, 'MedicineBill']);
+    Route::post('medicine-bill-store', [MedicineController::class, 'MedicineBill']);
+    Route::post('medicine-category-store', [MedicineController::class, 'MedicineCategory']);
+    Route::post('medicine-category-fetch', [MedicineController::class, 'medicinecategoryFetch']);
+    Route::post('medicine-category-update/{id}', [MedicineController::class, 'MedicineCategoryUpdate']);
+    Route::post('medicine-category-delete/{id}', [MedicineController::class, 'MedicineCategoryDelete']);
 
     // pathology api call
 
@@ -214,4 +220,167 @@ Route::group([
     Route::post('taxCategory-delete/{id}', [SetupController::class, 'taxCategoryDelete'])->name('taxCategory-delete');
     Route::post('taxCategory-update/{id}', [SetupController::class, 'taxCategoryUpdate'])->name('taxCategory-update');
     Route::post('taxCategory-fetch', [SetupController::class, 'taxCategoryFetch'])->name('taxCategory-fetch');
+
+    // hospitalchargetype api call
+    Route::post('hospitalchargetype-store', [SetupController::class, 'hospitalchargetypeStore'])->name('hospitalchargetype-store');
+    Route::post('hospitalchargetype-delete/{id}', [SetupController::class, 'hospitalchargetypeDelete'])->name('hospitalchargetype-delete');
+    Route::post('hospitalchargetype-update/{id}', [SetupController::class, 'hospitalchargetypeUpdate'])->name('hospitalchargetype-update');
+    Route::post('hospitalchargetype-fetch', [SetupController::class, 'hospitalchargetypeFetch'])->name('hospitalchargetype-fetch');
+
+    // hospitalchargeCategory api call
+    Route::post('hospitalchargeCategory-store', [SetupController::class, 'hospitalchargeCategoryStore'])->name('hospitalchargeCategory-store');
+    Route::post('hospitalchargeCategory-delete/{id}', [SetupController::class, 'hospitalchargeCategoryDelete'])->name('hospitalchargeCategory-delete');
+    Route::post('hospitalchargeCategory-update/{id}', [SetupController::class, 'hospitalchargeCategoryUpdate'])->name('hospitalchargeCategory-update');
+    Route::post('hospitalchargeCategory-fetch', [SetupController::class, 'hospitalchargeCategoryFetch'])->name('hospitalchargeCategory-fetch');
+    Route::post('hospitalchargeCategory/{id}', [SetupController::class, 'hospitalchargeCategoryId'])->name('hospitalchargeCategory-fetch');
+
+    // hospitalcharge api call
+    Route::post('hospitalcharge-store', [SetupController::class, 'hospitalchargeStore'])->name('hospitalcharge-store');
+    Route::post('hospitalcharge-delete/{id}', [SetupController::class, 'hospitalchargeDelete'])->name('hospitalcharge-delete');
+    Route::post('hospitalcharge-update/{id}', [SetupController::class, 'hospitalchargeUpdate'])->name('hospitalcharge-update');
+    Route::post('hospitalcharge-fetch', [SetupController::class, 'hospitalchargeFetch'])->name('hospitalcharge-fetch');
+    Route::post('hospitalcharge/{id}', [SetupController::class, 'hospitalchargeId'])->name('hospitalcharge-fetch');
+
+    // hospital api call
+    Route::post('hospital-store', [SetupController::class, 'hospitalStore'])->name('hospital-store');
+
+    // medicinesupplier api call
+    Route::post('medicinesupplier-store', [MedicineController::class, 'medicinesupplierStore'])->name('medicinesupplier-store');
+    Route::post('medicinesupplier-delete/{id}', [MedicineController::class, 'medicinesupplierDelete'])->name('medicinesupplier-delete');
+    Route::post('medicinesupplier-update/{id}', [MedicineController::class, 'medicinesupplierUpdate'])->name('medicinesupplier-update');
+    Route::post('medicinesupplier-fetch', [MedicineController::class, 'medicinesupplierFetch'])->name('medicinesupplier-fetch');
+    Route::post('medicinesupplier/{id}', [MedicineController::class, 'medicinesupplierId'])->name('medicinesupplier-fetch');
+
+    // medicineDose api call
+    Route::post('medicineDose-store', [MedicineController::class, 'medicineDoseStore'])->name('medicineDose-store');
+    Route::post('medicineDose-delete/{id}', [MedicineController::class, 'medicineDoseDelete'])->name('medicineDose-delete');
+    Route::post('medicineDose-update/{id}', [MedicineController::class, 'medicineDoseUpdate'])->name('medicineDose-update');
+    Route::post('medicineDose-fetch', [MedicineController::class, 'medicineDoseFetch'])->name('medicineDose-fetch');
+    Route::post('medicineDose/{id}', [MedicineController::class, 'medicineDoseId'])->name('medicineDose-fetch');
+
+    // medicineInterval api call
+    Route::post('medicineInterval-store', [MedicineController::class, 'medicineIntervalStore'])->name('medicineInterval-store');
+    Route::post('medicineInterval-delete/{id}', [MedicineController::class, 'medicineIntervalDelete'])->name('medicineInterval-delete');
+    Route::post('medicineInterval-update/{id}', [MedicineController::class, 'medicineIntervalUpdate'])->name('medicineInterval-update');
+    Route::post('medicineInterval-fetch', [MedicineController::class, 'medicineIntervalFetch'])->name('medicineInterval-fetch');
+    Route::post('medicineInterval/{id}', [MedicineController::class, 'medicineIntervalId'])->name('medicineInterval-fetch');
+
+    // medicineDuration api call
+    Route::post('medicineDuration-store', [MedicineController::class, 'medicineDurationStore'])->name('medicineDuration-store');
+    Route::post('medicineDuration-delete/{id}', [MedicineController::class, 'medicineDurationDelete'])->name('medicineDuration-delete');
+    Route::post('medicineDuration-update/{id}', [MedicineController::class, 'medicineDurationUpdate'])->name('medicineDuration-update');
+    Route::post('medicineDuration-fetch', [MedicineController::class, 'medicineDurationFetch'])->name('medicineDuration-fetch');
+    Route::post('medicineDuration/{id}', [MedicineController::class, 'medicineDurationId'])->name('medicineDuration-fetch');
+
+    // pathologycategory api call
+    Route::post('pathologycategory-store', [PathologyController::class, 'pathologycategoryStore'])->name('pathologycategory-store');
+    Route::post('pathologycategory-delete/{id}', [PathologyController::class, 'pathologycategoryDelete'])->name('pathologycategory-delete');
+    Route::post('pathologycategory-update/{id}', [PathologyController::class, 'pathologycategoryUpdate'])->name('pathologycategory-update');
+    Route::post('pathologycategory-fetch', [PathologyController::class, 'pathologycategoryFetch'])->name('pathologycategory-fetch');
+    Route::post('pathologycategory/{id}', [PathologyController::class, 'pathologycategoryId'])->name('pathologycategory-fetch');
+
+    // / pathologyUnit api call
+    Route::post('pathologyUnit-store', [PathologyController::class, 'pathologyUnitStore'])->name('pathologyUnit-store');
+    Route::post('pathologyUnit-delete/{id}', [PathologyController::class, 'pathologyUnitDelete'])->name('pathologyUnit-delete');
+    Route::post('pathologyUnit-update/{id}', [PathologyController::class, 'pathologyUnitUpdate'])->name('pathologyUnit-update');
+    Route::post('pathologyUnit-fetch', [PathologyController::class, 'pathologyUnitFetch'])->name('pathologyUnit-fetch');
+    Route::post('pathologyUnit/{id}', [PathologyController::class, 'pathologyUnitId'])->name('pathologyUnit-fetch');
+
+    // pathologyparameter api call
+    Route::post('pathologyparameter-store', [PathologyController::class, 'pathologyparameterStore'])->name('pathologyparameter-store');
+    Route::post('pathologyparameter-delete/{id}', [PathologyController::class, 'pathologyparameterDelete'])->name('pathologyparameter-delete');
+    Route::post('pathologyparameter-update/{id}', [PathologyController::class, 'pathologyparameterUpdate'])->name('pathologyparameter-update');
+    Route::post('pathologyparameter-fetch', [PathologyController::class, 'pathologyparameterFetch'])->name('pathologyparameter-fetch');
+    Route::post('pathologyparameter/{id}', [PathologyController::class, 'pathologyparameterId'])->name('pathologyparameter-fetch');
+
+    // radiologycategory api call
+    Route::post('radiologycategory-store', [RadiologyController::class, 'radiologycategoryStore'])->name('radiologycategory-store');
+    Route::post('radiologycategory-delete/{id}', [RadiologyController::class, 'radiologycategoryDelete'])->name('radiologycategory-delete');
+    Route::post('radiologycategory-update/{id}', [RadiologyController::class, 'radiologycategoryUpdate'])->name('radiologycategory-update');
+    Route::post('radiologycategory-fetch', [RadiologyController::class, 'radiologycategoryFetch'])->name('radiologycategory-fetch');
+    Route::post('radiologycategory/{id}', [RadiologyController::class, 'radiologycategoryId'])->name('radiologycategory-fetch');
+
+    // / radiologyParameters api call
+    Route::post('radiologyParameters-store', [RadiologyController::class, 'radiologyParametersStore'])->name('radiologyParameters-store');
+    Route::post('radiologyParameters-delete/{id}', [RadiologyController::class, 'radiologyParametersDelete'])->name('radiologyParameters-delete');
+    Route::post('radiologyParameters-update/{id}', [RadiologyController::class, 'radiologyParametersUpdate'])->name('radiologyParameters-update');
+    Route::post('radiologyParameters-fetch', [RadiologyController::class, 'radiologyParametersFetch'])->name('radiologyParameters-fetch');
+    Route::post('radiologyParameters/{id}', [RadiologyController::class, 'radiologyParametersId'])->name('radiologyParameters-fetch');
+
+    // radiologyUnit api call
+    Route::post('radiologyUnit-store', [RadiologyController::class, 'radiologyUnitStore'])->name('radiologyUnit-store');
+    Route::post('radiologyUnit-delete/{id}', [RadiologyController::class, 'radiologyUnitDelete'])->name('radiologyUnit-delete');
+    Route::post('radiologyUnit-update/{id}', [RadiologyController::class, 'radiologyUnitUpdate'])->name('radiologyUnit-update');
+    Route::post('radiologyUnit-fetch', [RadiologyController::class, 'radiologyUnitFetch'])->name('radiologyUnit-fetch');
+    Route::post('radiologyUnit/{id}', [RadiologyController::class, 'radiologyUnitId'])->name('radiologyUnit-fetch');
+
+    // bloodbankProduct api call
+    Route::post('bloodbankProduct-store', [BloodbankController::class, 'bloodbankProductStore'])->name('bloodbankProduct-store');
+    Route::post('bloodbankProduct-delete/{id}', [BloodbankController::class, 'bloodbankProductDelete'])->name('bloodbankProduct-delete');
+    Route::post('bloodbankProduct-update/{id}', [BloodbankController::class, 'bloodbankProductUpdate'])->name('bloodbankProduct-update');
+    Route::post('bloodbankProduct-fetch', [BloodbankController::class, 'bloodbankProductFetch'])->name('bloodbankProduct-fetch');
+    Route::post('bloodbankProduct/{id}', [BloodbankController::class, 'bloodbankProductId'])->name('bloodbankProduct-fetch');
+
+    // bloodbankType api call
+    Route::post('bloodbankType-store', [BloodbankController::class, 'bloodbankTypeStore'])->name('bloodbankType-store');
+    Route::post('bloodbankType-delete/{id}', [BloodbankController::class, 'bloodbankTypeDelete'])->name('bloodbankType-delete');
+    Route::post('bloodbankType-update/{id}', [BloodbankController::class, 'bloodbankTypeUpdate'])->name('bloodbankType-update');
+    Route::post('bloodbankType-fetch', [BloodbankController::class, 'bloodbankTypeFetch'])->name('bloodbankType-fetch');
+    Route::post('bloodbankType/{id}', [BloodbankController::class, 'bloodbankTypeId'])->name('bloodbankType-fetch');
+
+    // appoinmentPriority api call
+    Route::post('appoinmentPriority-store', [FrontOfficeControllr::class, 'appoinmentPriorityStore'])->name('appoinmentPriority-store');
+    Route::post('appoinmentPriority-delete/{id}', [FrontOfficeControllr::class, 'appoinmentPriorityDelete'])->name('appoinmentPriority-delete');
+    Route::post('appoinmentPriority-update/{id}', [FrontOfficeControllr::class, 'appoinmentPriorityUpdate'])->name('appoinmentPriority-update');
+    Route::post('appoinmentPriority-fetch', [FrontOfficeControllr::class, 'appoinmentPriorityFetch'])->name('appoinmentPriority-fetch');
+    Route::post('appoinmentPriority/{id}', [FrontOfficeControllr::class, 'appoinmentPriorityId'])->name('appoinmentPriority-fetch');
+
+    // frontOfficeSource api call
+    Route::post('frontOfficeSource-store', [FrontOfficeControllr::class, 'frontOfficeSourceStore'])->name('frontOfficeSource-store');
+    Route::post('frontOfficeSource-delete/{id}', [FrontOfficeControllr::class, 'frontOfficeSourceDelete'])->name('frontOfficeSource-delete');
+    Route::post('frontOfficeSource-update/{id}', [FrontOfficeControllr::class, 'frontOfficeSourceUpdate'])->name('frontOfficeSource-update');
+    Route::post('frontOfficeSource-fetch', [FrontOfficeControllr::class, 'frontOfficeSourceFetch'])->name('frontOfficeSource-fetch');
+    Route::post('frontOfficeSource/{id}', [FrontOfficeControllr::class, 'frontOfficeSourceId'])->name('frontOfficeSource-fetch');
+
+    // complainType api call
+    Route::post('complainType-store', [FrontOfficeControllr::class, 'complainTypeStore'])->name('complainType-store');
+    Route::post('complainType-delete/{id}', [FrontOfficeControllr::class, 'complainTypeDelete'])->name('complainType-delete');
+    Route::post('complainType-update/{id}', [FrontOfficeControllr::class, 'complainTypeUpdate'])->name('complainType-update');
+    Route::post('complainType-fetch', [FrontOfficeControllr::class, 'complainTypeFetch'])->name('complainType-fetch');
+    Route::post('complainType/{id}', [FrontOfficeControllr::class, 'complainTypeId'])->name('complainType-fetch');
+
+    // purpose api call
+    Route::post('purpose-store', [FrontOfficeControllr::class, 'purposeStore'])->name('purpose-store');
+    Route::post('purpose-delete/{id}', [FrontOfficeControllr::class, 'purposeDelete'])->name('purpose-delete');
+    Route::post('purpose-update/{id}', [FrontOfficeControllr::class, 'purposeUpdate'])->name('purpose-update');
+    Route::post('purpose-fetch', [FrontOfficeControllr::class, 'purposeFetch'])->name('purpose-fetch');
+    Route::post('purpose/{id}', [FrontOfficeControllr::class, 'purposeId'])->name('purpose-fetch');
+
+    // floor
+    Route::post('floor-store', [FrontOfficeControllr::class, 'floorStore'])->name('floor-store');
+    Route::post('floor-delete/{id}', [FrontOfficeControllr::class, 'floorDelete'])->name('floor-delete');
+    Route::post('floor-update/{id}', [FrontOfficeControllr::class, 'floorUpdate'])->name('floor-update');
+    Route::post('floor-fetch', [FrontOfficeControllr::class, 'floorFetch'])->name('floor-fetch');
+    Route::post('floor/{id}', [FrontOfficeControllr::class, 'floorId'])->name('floor-fetch');
+
+    // bed
+    Route::post('bed-store', [FrontOfficeControllr::class, 'bedStore'])->name('bed-store');
+    Route::post('bed-delete/{id}', [FrontOfficeControllr::class, 'bedDelete'])->name('bed-delete');
+    Route::post('bed-update/{id}', [FrontOfficeControllr::class, 'bedUpdate'])->name('bed-update');
+    Route::post('bed-fetch', [FrontOfficeControllr::class, 'bedFetch'])->name('bed-fetch');
+    Route::post('bed/{id}', [FrontOfficeControllr::class, 'bedId'])->name('bed-fetch');
+
+    // bedtype
+    Route::post('bedtype-store', [FrontOfficeControllr::class, 'bedtypeStore'])->name('bedtype-store');
+    Route::post('bedtype-delete/{id}', [FrontOfficeControllr::class, 'bedtypeDelete'])->name('bedtype-delete');
+    Route::post('bedtype-update/{id}', [FrontOfficeControllr::class, 'bedtypeUpdate'])->name('bedtype-update');
+    Route::post('bedtype-fetch', [FrontOfficeControllr::class, 'bedtypeFetch'])->name('bedtype-fetch');
+    Route::post('bedtype/{id}', [FrontOfficeControllr::class, 'bedtypeId'])->name('bedtype-fetch');
+
+    // bedlist api call
+    Route::post('bedlist-store', [FrontOfficeControllr::class, 'bedlistStore'])->name('bedlist-store');
+    Route::post('bedlist-delete/{id}', [FrontOfficeControllr::class, 'bedlistDelete'])->name('bedlist-delete');
+    Route::post('bedlist-update/{id}', [FrontOfficeControllr::class, 'bedlistUpdate'])->name('bedlist-update');
+    Route::post('bedlist-fetch', [FrontOfficeControllr::class, 'bedlistFetch'])->name('bedlist-fetch');
+    Route::post('bedlist/{id}', [FrontOfficeControllr::class, 'bedlistId'])->name('bedlist-fetch');
 });

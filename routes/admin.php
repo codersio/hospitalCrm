@@ -92,5 +92,30 @@ Route::group([
     Route::group(['prefix' => 'setup'], function () {
         Route::get('hospital', [SetupController::class, 'HospitalchargeSetup'])->name('hospital');
         Route::get('hospital-tax-category', [SetupController::class, 'HospitalTaxSetup'])->name('hospital-tax-category');
+        Route::get('hospital-charge-type', [SetupController::class, 'HospitalchargeTypeSetup'])->name('hospital-charge-type');
+        Route::get('hospital-charge-category', [SetupController::class, 'hospitalcategoryInex'])->name('hospital-charge-category');
+        Route::get('hospital-charge', [SetupController::class, 'HospitalCharge'])->name('hospital-charge');
+        Route::get('medicine-category', [MedicineController::class, 'MedicinecategoryIndex'])->name('medicine-category');
+        Route::get('medicine-suplier', [MedicineController::class, 'SuppliIndex'])->name('medicine-suplier');
+        Route::get('medicine-dose', [MedicineController::class, 'medicineDos'])->name('medicine-dose');
+        Route::get('medicine-dose-interval', [MedicineController::class, 'MedicineInteervalIndex']);
+        Route::get('medicine-dose-duration', [MedicineController::class, 'MedicineDurationIndex']);
+        Route::get('pathology-category', [PathologyController::class, 'pathologyCategory']);
+        Route::get('pathology-units', [PathologyController::class, 'pathologyUnit']);
+        Route::get('pathology-parameters', [PathologyController::class, 'pathologyParameter']);
+
+        Route::get('radiology-category', [RadiologyController::class, 'radiologyCategory']);
+        Route::get('radiology-units', [RadiologyController::class, 'radiologyUnit']);
+        Route::get('radiology-parameters', [RadiologyController::class, 'radiologyParameter']);
+        Route::get('bloodbank-product', [BloodbankController::class, 'bloodBanksetup']);
+        Route::get('bloodbank-type', [BloodbankController::class, 'bloobType']);
+        Route::get('appoinment-pririty', [FrontOfficeControllr::class, 'appointmentprioRity']);
+        Route::get('frontoffice-source', [FrontOfficeControllr::class, 'frontofficeSource']);
+        Route::get('complain-type', [FrontOfficeControllr::class, 'complaintype']);
+        Route::get('purpose-type', [FrontOfficeControllr::class, 'purposeIndex']);
+        Route::get('floor-type', [FrontOfficeControllr::class, 'Floor']);
+        Route::get('bed-group', [FrontOfficeControllr::class, 'bedGroup']);
+        Route::get('bed-type', [FrontOfficeControllr::class, 'bedType']);
+        Route::get('bed', [FrontOfficeControllr::class, 'bedlist']);
     });
 });

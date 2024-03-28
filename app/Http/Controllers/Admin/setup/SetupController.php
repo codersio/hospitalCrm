@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\setup;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\HospitalchargeCategory;
+use App\Models\Admin\HospitalCharges;
+use App\Models\Admin\HospitalChargeType;
 use App\Models\Admin\HospitalchargeUnit;
 use App\Models\Admin\HospitalTaxCategory;
 use Illuminate\Http\Request;
@@ -89,5 +92,140 @@ class SetupController extends Controller
     public function taxCategoryFetch(Request $request)
     {
         return HospitalTaxCategory::all();
+    }
+
+    public function HospitalchargeTypeSetup()
+    {
+        return Inertia::render('Admin/hospitalsetup/hopitalChargeType', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function hospitalchargetypeStore(Request $request)
+    {
+        $type = HospitalChargeType::create($request->all());
+        if ($type) {
+            return response()->json(['message' => 'File uploaded successfully',  $type]);
+        }
+    }
+
+    public function hospitalchargetypeUpdate(Request $request, $id)
+    {
+        $type = HospitalChargeType::find($id)->update($request->all());
+        if ($type) {
+            return response()->json(['message' => 'File uploaded successfully',  $type]);
+        }
+    }
+
+    public function hospitalchargetypeDelete(Request $request, $id)
+    {
+        $type = HospitalChargeType::find($id)->delete();
+        if ($type) {
+            return response()->json(['message' => 'File uploaded successfully',  $type]);
+        }
+    }
+
+    public function hospitalchargetypeFetch(Request $request)
+    {
+        return HospitalChargeType::all();
+    }
+
+    public function hospitalcategoryInex()
+    {
+        return Inertia::render('Admin/hospitalsetup/hospitalChargeCategory', ['admin' => Auth::guard('admin-api')->user(),
+    'chargetype' => HospitalChargeType::all(),
+    ]);
+    }
+
+    public function hospitalchargeCategoryStore(Request $request)
+    {
+        $category = HospitalchargeCategory::create($request->all());
+        if ($category) {
+            return response()->json(['message' => 'File uploaded successfully',  $category]);
+        }
+    }
+
+    public function hospitalchargeCategoryUpdate(Request $request, $id)
+    {
+        $category = HospitalchargeCategory::find($id)->update($request->all());
+        if ($category) {
+            return response()->json(['message' => 'File uploaded successfully',  $category]);
+        }
+    }
+
+    public function hospitalchargeCategoryDelete(Request $request, $id)
+    {
+        $category = HospitalchargeCategory::find($id)->delete();
+        if ($category) {
+            return response()->json(['message' => 'File uploaded successfully',  $category]);
+        }
+    }
+
+    public function hospitalchargeCategoryFetch(Request $request)
+    {
+        return HospitalchargeCategory::all();
+    }
+
+    public function HospitalCharge()
+    {
+        return Inertia::render('Admin/hospitalsetup/hospitalcharge', ['admin' => Auth::guard('admin-api')->user(), 'chargetype' => HospitalChargeType::all()]);
+    }
+
+    public function hospitalchargeCategoryId(Request $request, $id)
+    {
+        $category = HospitalchargeCategory::where('type_id', $id)->get();
+
+        return response()->json($category);
+    }
+
+    public function hospitalchargeStore(Request $request)
+    {
+        $hospitalCharge = new HospitalCharges();
+
+        $hospitalCharge->admin_id = $request->admin_id;
+        $hospitalCharge->admin_type = $request->admin_type;
+        $hospitalCharge->charge_type_id = $request->charge_type_id;
+        $hospitalCharge->charge_category_id = $request->charge_category_id;
+        $hospitalCharge->unit_id = $request->unit_id;
+        $hospitalCharge->charge_name = $request->charge_name;
+        $hospitalCharge->charge_tax_id = $request->charge_tax_id;
+        $hospitalCharge->tax = $request->tax;
+        $hospitalCharge->stander_charge = $request->stander_charge;
+        $hospitalCharge->description = $request->description;
+
+        $hospitalCharge->save();
+
+        return $hospitalCharge;
+    }
+
+    public function hospitalchargeUpdate(Request $request, $id)
+    {
+        $hospitalCharge = HospitalCharges::find($id);
+
+        $hospitalCharge->admin_id = $request->admin_id;
+        $hospitalCharge->admin_type = $request->admin_type;
+        $hospitalCharge->charge_type_id = $request->charge_type_id;
+        $hospitalCharge->charge_category_id = $request->charge_category_id;
+        $hospitalCharge->unit_id = $request->unit_id;
+        $hospitalCharge->charge_name = $request->charge_name;
+        $hospitalCharge->charge_tax_id = $request->charge_tax_id;
+        $hospitalCharge->tax = $request->tax;
+        $hospitalCharge->stander_charge = $request->stander_charge;
+        $hospitalCharge->description = $request->description;
+
+        $hospitalCharge->save();
+
+        return $hospitalCharge;
+    }
+
+    public function hospitalchargeDelete(Request $request, $id)
+    {
+        $hospitalCharge = HospitalCharges::find($id);
+        $hospitalCharge->delete();
+
+        return $hospitalCharge;
+    }
+
+    public function hospitalchargeFetch(Request $request)
+    {
+        return HospitalCharges::all();
     }
 }

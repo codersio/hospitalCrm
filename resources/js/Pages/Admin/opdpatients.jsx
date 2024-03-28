@@ -239,7 +239,7 @@ const Opdpatients = ({ admin }) => {
 
                     <div className="w-[80%] flex space-x-2 px-4 mt-[0.29rem]">
                       <select value={formData.patient_id} onChange={handleChange} name='patient_id' id className="w-[100%] h-9">
-                        <option value disabled>Select Patient</option>
+                        <option value="">Select Patient</option>
                         {
                           Patientsdata.map(Patients => (
                             <option value={Patients.id} >{Patients.name}</option>

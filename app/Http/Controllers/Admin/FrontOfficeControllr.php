@@ -3,13 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\AppointmetPriority;
+use App\Models\Admin\Bed;
+use App\Models\Admin\BedGroup;
+use App\Models\Admin\Bedtype;
 use App\Models\Admin\Complain;
+use App\Models\Admin\ComplainType;
 use App\Models\Admin\Dispatch;
+use App\Models\Admin\Floor;
 use App\Models\Admin\Frontoffice;
+use App\Models\Admin\FrontOfficeSource;
 use App\Models\Admin\Phonelog;
+use App\Models\Admin\PurposeType;
 use App\Models\Admin\Recivedf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class FrontOfficeControllr extends Controller
@@ -294,5 +303,289 @@ class FrontOfficeControllr extends Controller
     public function reciveDelete(Request $request, $id)
     {
         return Recivedf::where('id', $id)->delete();
+    }
+
+    // appointment priority
+
+    public function appointmentprioRity()
+    {
+        return Inertia::render('Admin/frontoffice/appointmentprioRity', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function appoinmentPriorityStore(Request $request)
+    {
+        $appo = AppointmetPriority::create($request->all());
+
+        return response()->json($appo);
+    }
+
+    public function appoinmentPriorityUpdate(Request $request, $id)
+    {
+        $appo = AppointmetPriority::where('id', $id)->update($request->all());
+
+        return response()->json($appo);
+    }
+
+    public function appoinmentPriorityDelete(Request $request, $id)
+    {
+        $appo = AppointmetPriority::where('id', $id)->delete();
+
+        return response()->json($appo);
+    }
+
+    public function appoinmentPriorityFetch()
+    {
+        $appo = AppointmetPriority::all();
+
+        return response()->json($appo);
+    }
+
+    // frontoffice
+
+    public function frontofficeSource()
+    {
+        return Inertia::render('Admin/frontoffice/frontofficeSource', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function frontOfficeSourceStore(Request $request)
+    {
+        $source = FrontOfficeSource::create($request->all());
+
+        return response()->json($source);
+    }
+
+    public function frontOfficeSourceUpdate(Request $request, $id)
+    {
+        $source = FrontOfficeSource::where('id', $id)->update($request->all());
+
+        return response()->json($source);
+    }
+
+    public function frontOfficeSourceDelete(Request $request, $id)
+    {
+        $source = FrontOfficeSource::where('id', $id)->delete();
+
+        return response()->json($source);
+    }
+
+    public function frontOfficeSourceFetch()
+    {
+        $source = FrontOfficeSource::all();
+
+        return response()->json($source);
+    }
+
+    public function complaintype()
+    {
+        return Inertia::render('Admin/frontoffice/complainType', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function complainTypeStore(Request $request)
+    {
+        $complaintype = ComplainType::create($request->all());
+
+        return response()->json($complaintype);
+    }
+
+    public function complainTypeUpdate(Request $request, $id)
+    {
+        $complaintype = ComplainType::where('id', $id)->update($request->all());
+
+        return response()->json($complaintype);
+    }
+
+    public function complainTypeDelete(Request $request, $id)
+    {
+        $complaintype = ComplainType::where('id', $id)->delete();
+
+        return response()->json($complaintype);
+    }
+
+    public function complainTypeFetch()
+    {
+        $complaintype = ComplainType::all();
+
+        return response()->json($complaintype);
+    }
+
+    public function purposeIndex()
+    {
+        return Inertia::render('Admin/frontoffice/purposeType', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function purposeStore(Request $request)
+    {
+        $purpose = PurposeType::create($request->all());
+
+        return $purpose;
+    }
+
+    public function purposeUpdate(Request $request, $id)
+    {
+        $purpose = PurposeType::where('id', $id)->update($request->all());
+
+        return response()->json($purpose);
+    }
+
+    public function purposeDelete(Request $request, $id)
+    {
+        $purpose = PurposeType::where('id', $id)->delete();
+
+        return response()->json($purpose);
+    }
+
+    public function purposeFetch()
+    {
+        $purpose = PurposeType::all();
+
+        return response()->json($purpose);
+    }
+
+    public function Floor()
+    {
+        return Inertia::render('Admin/bedsetup/floor', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function floorStore(Request $request)
+    {
+        $floor = Floor::create($request->all());
+
+        return $floor;
+    }
+
+    public function floorUpdate(Request $request, $id)
+    {
+        $floor = Floor::where('id', $id)->update($request->all());
+
+        return response()->json($floor);
+    }
+
+    public function floorDelete(Request $request, $id)
+    {
+        $floor = Floor::where('id', $id)->delete();
+
+        return response()->json($floor);
+    }
+
+    public function floorFetch()
+    {
+        $floor = Floor::all();
+
+        return response()->json($floor);
+    }
+
+    public function bedGroup()
+    {
+        return Inertia::render('Admin/bedsetup/bedgroup', [
+            'admin' => Auth::guard('admin-api')->user(),
+            'floor' => Floor::all(),
+        ]);
+    }
+
+    public function bedStore(Request $request)
+    {
+        $bed = BedGroup::create($request->all());
+
+        return $bed;
+    }
+
+    public function bedUpdate(Request $request, $id)
+    {
+        $bed = BedGroup::where('id', $id)->update($request->all());
+
+        return response()->json($bed);
+    }
+
+    public function bedDelete(Request $request, $id)
+    {
+        $bed = BedGroup::where('id', $id)->delete();
+
+        return response()->json($bed);
+    }
+
+    public function bedFetch()
+    {
+        $bed = BedGroup::all();
+
+        return response()->json($bed);
+    }
+
+    public function bedType()
+    {
+        return Inertia::render('Admin/bedsetup/bedtype', [
+            'admin' => Auth::guard('admin-api')->user(),
+            'floor' => Floor::all(),
+            'bedgroup' => BedGroup::all(),
+        ]);
+    }
+
+    public function bedtypeStore(Request $request)
+    {
+        $bedtype = Bedtype::create($request->all());
+
+        return $bedtype;
+    }
+
+    public function bedtypeUpdate(Request $request, $id)
+    {
+        $bedtype = Bedtype::where('id', $id)->update($request->all());
+
+        return response()->json($bedtype);
+    }
+
+    public function bedtypeDelete(Request $request, $id)
+    {
+        $bedtype = Bedtype::where('id', $id)->delete();
+
+        return response()->json($bedtype);
+    }
+
+    public function bedtypeFetch()
+    {
+        $bedtype = Bedtype::all();
+
+        return response()->json($bedtype);
+    }
+
+    public function bedlist()
+    {
+        return Inertia::render('Admin/bedsetup/bedall', [
+            'admin' => Auth::guard('admin-api')->user(),
+            'floor' => Floor::all(),
+            'bedgroup' => BedGroup::all(),
+            'bedtype' => Bedtype::all(),
+        ]);
+    }
+
+    public function bedlistStore(Request $request)
+    {
+        $bedlist = Bed::create($request->all());
+
+        return $bedlist;
+    }
+
+    public function bedlistUpdate(Request $request, $id)
+    {
+        $bedlist = Bed::where('id', $id)->update($request->all());
+
+        return response()->json($bedlist);
+    }
+
+    public function bedlistDelete(Request $request, $id)
+    {
+        $bedlist = Bed::where('id', $id)->delete();
+
+        return response()->json($bedlist);
+    }
+
+    public function bedlistFetch()
+    {
+        $bedlist = DB::table('beds')
+                ->select('beds.status', 'beds.id', 'beds.bed_name', 'bed_groups.group_name', 'bedtypes.bed_type_name')
+                ->join('bed_groups', 'beds.bed_group_id', '=', 'bed_groups.id')
+                ->join('bedtypes', 'beds.bed_type_id', '=', 'bedtypes.id')
+                ->get();
+
+        return response()->json($bedlist);
     }
 }
