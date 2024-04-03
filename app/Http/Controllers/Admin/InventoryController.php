@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Inventory;
+use App\Models\Admin\Inventorycategory;
 use App\Models\Admin\InventoryIssue;
 use App\Models\Admin\InventoryStockitem;
+use App\Models\Admin\InventoryStore;
+use App\Models\Admin\InventorySupplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -227,5 +230,137 @@ class InventoryController extends Controller
     public function inventoryStockitemFetch()
     {
         return InventoryStockitem::all();
+    }
+
+    public function InventoryCategory()
+    {
+        return Inertia::render('Admin/inventorysetup/category', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function inventorycategoryStore(Request $request)
+    {
+        $inventoryCategory = new Inventorycategory();
+        $inventoryCategory->admin_id = $request->admin_id;
+        $inventoryCategory->admin_type = $request->admin_type;
+        $inventoryCategory->invencat_name = $request->invencat_name;
+        $inventoryCategory->save();
+        if ($inventoryCategory) {
+            return response()->json(['message' => 'File uploaded successfully',  $inventoryCategory]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function inventorycategoryUpdate(Request $request, $id)
+    {
+        $inventoryCategory = Inventorycategory::findOrFail($id);
+        $inventoryCategory->admin_id = $request->admin_id;
+        $inventoryCategory->admin_type = $request->admin_type;
+        $inventoryCategory->invencat_name = $request->invencat_name;
+        $inventoryCategory->save();
+        if ($inventoryCategory) {
+            return response()->json(['message' => 'Admin and associated records created successfully']);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function inventorycategoryDelete(Request $request, $id)
+    {
+        $inventoryCategory = Inventorycategory::where('id', $id)->delete();
+        if ($inventoryCategory) {
+            return response()->json(['message' => 'File uploaded successfully',  $inventoryCategory]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function inventorycategoryFetch()
+    {
+        return Inventorycategory::all();
+    }
+
+    public function Itemstore()
+    {
+        return Inertia::render('Admin/inventorysetup/store', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function inventoryStoreStore(Request $request)
+    {
+        $item = InventoryStore::create($request->all());
+        if ($item) {
+            return response()->json(['message' => 'File uploaded successfully',  $item]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function inventoryStoreUpdate(Request $request, $id)
+    {
+        $item = InventoryStore::findOrFail($id);
+        $item->update($request->all());
+
+        if ($item) {
+            return response()->json(['message' => 'Admin and associated records created successfully']);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function inventoryStoreDelete(Request $request, $id)
+    {
+        $item = InventoryStore::where('id', $id)->delete();
+        if ($item) {
+            return response()->json(['message' => 'File uploaded successfully',  $item]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function inventoryStoreFetch()
+    {
+        return InventoryStore::all();
+    }
+
+    public function supplierInventory()
+    {
+        return Inertia::render('Admin/inventorysetup/suplier', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function InventorySupplierStore(Request $request)
+    {
+        $supplier = InventorySupplier::create($request->all());
+        if ($supplier) {
+            return response()->json(['message' => 'File uploaded successfully',  $supplier]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function InventorySupplierUpdate(Request $request, $id)
+    {
+        $supplier = InventorySupplier::findOrFail($id);
+        $supplier->update($request->all());
+
+        if ($supplier) {
+            return response()->json(['message' => 'Admin and associated records created successfully']);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function InventorySupplierDelete(Request $request, $id)
+    {
+        $supplier = InventorySupplier::where('id', $id)->delete();
+        if ($supplier) {
+            return response()->json(['message' => 'File uploaded successfully',  $supplier]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function InventorySupplierFetch()
+    {
+        return InventorySupplier::all();
     }
 }

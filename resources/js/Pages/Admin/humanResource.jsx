@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { FaMinus } from "react-icons/fa";
-const HumanResource = () => {
+const HumanResource = ({ desgnation, department }) => {
 
     const [modal, setModal] = useState(true)
     const [moreDetails, setmoreDetail] = useState(false)
@@ -308,6 +308,9 @@ const HumanResource = () => {
                                             <label htmlFor> Designation *</label> <br />
                                             <select value={formData.designation_id} onChange={handleFormdata} name='designation_id' className="w-full border-gray-300">
                                                 <option value="">Select</option>
+                                                {desgnation.map(des => (
+                                                    <option value={des.id}>{des.degnation_name}</option>
+                                                ))}
 
                                             </select>
                                         </div>
@@ -315,7 +318,10 @@ const HumanResource = () => {
                                             <label htmlFor> Department *</label> <br />
                                             <select value={formData.department_id} onChange={handleFormdata} name='department_id' className="w-full border-gray-300">
                                                 <option value="">Select</option>
+                                                {department.map(dep => (
 
+                                                    <option value={dep.id}>{dep.department_name}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="form-group w-full">

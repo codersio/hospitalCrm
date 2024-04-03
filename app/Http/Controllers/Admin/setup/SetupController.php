@@ -8,6 +8,8 @@ use App\Models\Admin\HospitalCharges;
 use App\Models\Admin\HospitalChargeType;
 use App\Models\Admin\HospitalchargeUnit;
 use App\Models\Admin\HospitalTaxCategory;
+use App\Models\Admin\Symtoms;
+use App\Models\Admin\Symtomshead;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -227,5 +229,73 @@ class SetupController extends Controller
     public function hospitalchargeFetch(Request $request)
     {
         return HospitalCharges::all();
+    }
+
+    public function symtoms()
+    {
+        return Inertia::render('Admin/symtoms/symtome', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function symtomsStore(Request $request)
+    {
+        $symtoms = Symtoms::create($request->all());
+
+        return $symtoms;
+    }
+
+    public function symtomsUpdate(Request $request, $id)
+    {
+        $symtoms = Symtoms::find($id)->update($request->all());
+
+        return $symtoms;
+    }
+
+    public function symtomsDelete(Request $request, $id)
+    {
+        $symtoms = Symtoms::find($id)->delete();
+
+        return $symtoms;
+    }
+
+    public function symtomsFetch(Request $request)
+    {
+        return Symtoms::all();
+    }
+
+    public function symtomsHead()
+    {
+        return Inertia::render('Admin/symtoms/symtomhead',
+            [
+                'admin' => Auth::guard('admin-api')->user(),
+               'symtoms' => Symtoms::all(),
+            ]
+        );
+        // return Inertia::render('Admin/symtoms/symtomhead', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function symtomsHeadStore(Request $request)
+    {
+        $symtomsHead = Symtomshead::create($request->all());
+
+        return $symtomsHead;
+    }
+
+    public function symtomsHeadUpdate(Request $request, $id)
+    {
+        $symtomsHead = Symtomshead::find($id)->update($request->all());
+
+        return $symtomsHead;
+    }
+
+    public function symtomsHeadDelete(Request $request, $id)
+    {
+        $symtomsHead = Symtomshead::find($id)->delete();
+
+        return $symtomsHead;
+    }
+
+    public function symtomsHeadFetch(Request $request)
+    {
+        return Symtomshead::all();
     }
 }

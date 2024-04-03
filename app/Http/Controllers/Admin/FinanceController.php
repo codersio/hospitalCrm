@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Expensefinaence;
+use App\Models\Admin\ExpenseHead;
+use App\Models\Admin\IncomeHead;
 use App\Models\Admin\TpaManagment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -198,5 +200,75 @@ class FinanceController extends Controller
     public function incomeFetch(Request $request)
     {
         return Expensefinaence::all();
+    }
+
+    public function FinaenceInsomceHead()
+    {
+        return Inertia::render('Admin/finance/FinaenceInsomceHead', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function financeincomeHeadStore(Request $request)
+    {
+        $data = IncomeHead::create($request->all());
+        if ($data) {
+            return response()->json(['message' => 'File uploaded successfully',  $data]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function financeincomeHeadUpdate(Request $request, $id)
+    {
+        $data = IncomeHead::where('id', $id)->update($request->all());
+        if ($data) {
+            return response()->json(['message' => 'File uploaded successfully',  $data]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function financeincomeHeadDelete(Request $request, $id)
+    {
+        return IncomeHead::find($id)->delete();
+    }
+
+    public function financeincomeHeadFetch(Request $request)
+    {
+        return IncomeHead::all();
+    }
+
+    public function FinaenceExpenseHead()
+    {
+        return Inertia::render('Admin/finance/FinaenceExpenseHead', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function financeExpenceHeadStore(Request $request)
+    {
+        $data = ExpenseHead::create($request->all());
+        if ($data) {
+            return response()->json(['message' => 'File uploaded successfully',  $data]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function financeExpenceHeadUpdate(Request $request, $id)
+    {
+        $data = ExpenseHead::where('id', $id)->update($request->all());
+        if ($data) {
+            return response()->json(['message' => 'File uploaded successfully',  $data]);
+        } else {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+    }
+
+    public function financeExpenceHeadDelete(Request $request, $id)
+    {
+        return ExpenseHead::find($id)->delete();
+    }
+
+    public function financeExpenceHeadFetch(Request $request)
+    {
+        return ExpenseHead::all();
     }
 }

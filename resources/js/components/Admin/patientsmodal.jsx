@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { RxCross1 } from "react-icons/rx";
 import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const PatientsModal = ({ Patientsmodal, handlePatients, fetchData }) => {
     const [name, setname] = useState('')
     const [guardian_name, setguardian_name] = useState('')
@@ -28,34 +30,28 @@ const PatientsModal = ({ Patientsmodal, handlePatients, fetchData }) => {
                 }
             });
 
-            setname('');
-            setguardian_name('');
-            setgender('');
-            setdate_of_birth('');
-            setage('');
-            setblood_group('');
-            setmarital_status('');
-            setpatient_photo('');
-            setphone('');
-            setemail('');
-            setaddress('');
-            setremarks('');
-            setallergies('');
-            fetchData();
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Form submitted successfully!',
-            });
+            // setname('');
+            // setguardian_name('');
+            // setgender('');
+            // setdate_of_birth('');
+            // setage('');
+            // setblood_group('');
+            // setmarital_status('');
+            // setpatient_photo('');
+            // setphone('');
+            // setemail('');
+            // setaddress('');
+            // setremarks('');
+            // setallergies('');
+            // fetchData();
+            toast.success("Data stored successfully");
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please Fill carefully!',
-                // text: 'Form submitted successfully!',
-            });
+            toast.error("Failed to store data");
         }
     };
-
+    const Toast = () => {
+        toast("Data stored successfully");
+    }
     return (
         <div id="exampleModal" className={Patientsmodal ? "  fixed h-screen transform  bg-black shadow-md rounded-md g  top-0 bottom-0 right-0 left-0 w-full hidden" : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center"}>
             <div className="back-model w-[60%] bg-white relative ">
@@ -63,6 +59,10 @@ const PatientsModal = ({ Patientsmodal, handlePatients, fetchData }) => {
                     <div className="modal-header grid grid-cols-2  bg-[#0E99F4] p-2">
                         <h1 className='text-white text-[1.5rem]'> Add Patients</h1>
                         <div className="flex mt-[0.40rem]">
+                            <ToastContainer />
+                            <button onClick={Toast} className="ml-auto text-[2rem] text-white">
+                                ss
+                            </button>
 
                             <button onClick={handlePatients} className="ml-auto text-[2rem] text-white">
                                 <RxCross1 />

@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Admin;
+use App\Models\Admin\Desingnation;
+use App\Models\Admin\hrDepartMent;
+use App\Models\Admin\LeaveType;
+use App\Models\Admin\specilist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -16,7 +21,10 @@ class HumanResourceController extends Controller
 {
     public function humanResource()
     {
-        return Inertia::render('Admin/humanResource');
+        return Inertia::render('Admin/humanResource', [
+            'desgnation' => Desingnation::all(),
+            'department' => hrDepartMent::all(),
+        ]);
     }
 
     public function AdminStore(Request $request)
@@ -171,5 +179,152 @@ class HumanResourceController extends Controller
         // dd($admins);
 
         return response()->json($admins);
+    }
+
+    // /humanresourceleave
+
+    public function humanresourceleavesetup()
+    {
+        return Inertia::render('Admin/hrsetup/leavetype', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function humanresourceLeavessetupStore(Request $request)
+    {
+        $leavetype = LeaveType::create($request->all());
+
+        return response()->json($leavetype);
+    }
+
+    public function humanresourceLeavessetupUpdate(Request $request, $id)
+    {
+        $leavetype = LeaveType::find($id);
+        $leavetype->update($request->all());
+
+        return response()->json($leavetype);
+    }
+
+    public function humanresourceLeavessetupDelete(Request $request, $id)
+    {
+        $leavetype = LeaveType::find($id);
+        $leavetype->delete();
+
+        return response()->json($leavetype);
+    }
+
+    public function humanresourceLeavessetupFetch()
+    {
+        $leavetype = LeaveType::all();
+
+        return response()->json($leavetype);
+    }
+
+    public function humanresourceDepartment()
+    {
+        return Inertia::render('Admin/hrsetup/department', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function humanRecourceDepartmentStore(Request $request)
+    {
+        $department = hrDepartMent::create($request->all());
+
+        return response()->json($department);
+    }
+
+    public function humanRecourceDepartmentUpdate(Request $request, $id)
+    {
+        $department = hrDepartMent::find($id);
+        $department->update($request->all());
+
+        return response()->json($department);
+    }
+
+    public function humanRecourceDepartmentDelete(Request $request, $id)
+    {
+        $department = hrDepartMent::find($id);
+        $department->delete();
+
+        return response()->json($department);
+    }
+
+    public function humanRecourceDepartmentFetch()
+    {
+        $department = hrDepartMent::all();
+
+        return response()->json($department);
+    }
+
+    public function desingation()
+    {
+        return Inertia::render('Admin/hrsetup/desingNation', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function humanResourceDesingationStore(Request $request)
+    {
+        $desingation = Desingnation::create($request->all());
+
+        return response()->json($desingation);
+    }
+
+    public function humanResourceDesingationUpdate(Request $request, $id)
+    {
+        $desingation = Desingnation::find($id);
+        $desingation->update($request->all());
+
+        return response()->json($desingation);
+    }
+
+    public function humanResourceDesingationDelete(Request $request, $id)
+    {
+        $desingation = Desingnation::find($id);
+        $desingation->delete();
+
+        return response()->json($desingation);
+    }
+
+    public function humanResourceDesingationFetch()
+    {
+        $desingation = Desingnation::all();
+
+        return response()->json($desingation);
+    }
+
+    public function humanResourceDesignation()
+    {
+        return Inertia::render('Admin/hrsetup/designation', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function Specalist()
+    {
+        return Inertia::render('Admin/hrsetup/specialist', ['admin' => Auth::guard('admin-api')->user()]);
+    }
+
+    public function humanrecourceSpecilistStore(Request $request)
+    {
+        $specialist = specilist::create($request->all());
+
+        return response()->json($specialist);
+    }
+
+    public function humanrecourceSpecilistUpdate(Request $request, $id)
+    {
+        $specialist = specilist::find($id);
+        $specialist->update($request->all());
+
+        return response()->json($specialist);
+    }
+
+    public function humanrecourceSpecilistDelete(Request $request, $id)
+    {
+        $specialist = specilist::find($id);
+        $specialist->delete();
+
+        return response()->json($specialist);
+    }
+
+    public function humanrecourceSpecilistFetch()
+    {
+        $specialist = specilist::all();
+
+        return response()->json($specialist);
     }
 }

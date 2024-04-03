@@ -383,4 +383,102 @@ Route::group([
     Route::post('bedlist-update/{id}', [FrontOfficeControllr::class, 'bedlistUpdate'])->name('bedlist-update');
     Route::post('bedlist-fetch', [FrontOfficeControllr::class, 'bedlistFetch'])->name('bedlist-fetch');
     Route::post('bedlist/{id}', [FrontOfficeControllr::class, 'bedlistId'])->name('bedlist-fetch');
+
+    // financeincomeHead
+    Route::post('financeincomeHead-store', [FinanceController::class, 'financeincomeHeadStore'])->name('financeincomeHead-store');
+    Route::post('financeincomeHead-delete/{id}', [FinanceController::class, 'financeincomeHeadDelete'])->name('financeincomeHead-delete');
+    Route::post('financeincomeHead-update/{id}', [FinanceController::class, 'financeincomeHeadUpdate'])->name('financeincomeHead-update');
+    Route::post('financeincomeHead-fetch', [FinanceController::class, 'financeincomeHeadFetch'])->name('financeincomeHead-fetch');
+    Route::post('financeincomeHead/{id}', [FinanceController::class, 'financeincomeHeadId'])->name('financeincomeHead-fetch');
+
+    // financeExpenceHead
+    Route::post('financeExpenceHead-store', [FinanceController::class, 'financeExpenceHeadStore'])->name('financeExpenceHead-store');
+    Route::post('financeExpenceHead-delete/{id}', [FinanceController::class, 'financeExpenceHeadDelete'])->name('financeExpenceHead-delete');
+    Route::post('financeExpenceHead-update/{id}', [FinanceController::class, 'financeExpenceHeadUpdate'])->name('financeExpenceHead-update');
+    Route::post('financeExpenceHead-fetch', [FinanceController::class, 'financeExpenceHeadFetch'])->name('financeExpenceHead-fetch');
+    Route::post('financeExpenceHead/{id}', [FinanceController::class, 'financeExpenceHeadId'])->name('financeExpenceHead-fetch');
+
+    // symtoms api call
+    Route::post('symtoms-store', [SetupController::class, 'symtomsStore'])->name('symtoms-store');
+    Route::post('symtoms-delete/{id}', [SetupController::class, 'symtomsDelete'])->name('symtoms-delete');
+    Route::post('symtoms-update/{id}', [SetupController::class, 'symtomsUpdate'])->name('symtoms-update');
+    Route::post('symtoms-fetch', [SetupController::class, 'symtomsFetch'])->name('symtoms-fetch');
+    Route::post('symtoms/{id}', [SetupController::class, 'symtomsId'])->name('symtoms-fetch');
+
+    // symtomsHead
+    Route::post('symtomsHead-store', [SetupController::class, 'symtomsHeadStore'])->name('symtomsHead-store');
+    Route::post('symtomsHead-delete/{id}', [SetupController::class, 'symtomsHeadDelete'])->name('symtomsHead-delete');
+    Route::post('symtomsHead-update/{id}', [SetupController::class, 'symtomsHeadUpdate'])->name('symtomsHead-update');
+    Route::post('symtomsHead-fetch', [SetupController::class, 'symtomsHeadFetch'])->name('symtomsHead-fetch');
+    Route::post('symtomsHead/{id}', [SetupController::class, 'symtomsHeadId'])->name('symtomsHead-fetch');
+
+    // humanresourceLeavessetup api call
+    Route::post('humanresourceLeavessetup-store', [HumanResourceController::class, 'humanresourceLeavessetupStore'])->name('humanresourceLeavessetup-store');
+    Route::post('humanresourceLeavessetup-delete/{id}', [HumanResourceController::class, 'humanresourceLeavessetupDelete'])->name('humanresourceLeavessetup-delete');
+    Route::post('humanresourceLeavessetup-update/{id}', [HumanResourceController::class, 'humanresourceLeavessetupUpdate'])->name('humanresourceLeavessetup-update');
+    Route::post('humanresourceLeavessetup-fetch', [HumanResourceController::class, 'humanresourceLeavessetupFetch'])->name('humanresourceLeavessetup-fetch');
+    Route::post('humanresourceLeavessetup/{id}', [HumanResourceController::class, 'humanresourceLeavessetupId'])->name('humanresourceLeavessetup-fetch');
+
+    // humanRecourceDepartment api call
+    Route::post('humanRecourceDepartment-store', [HumanResourceController::class, 'humanRecourceDepartmentStore'])->name('humanRecourceDepartment-store');
+    Route::post('humanRecourceDepartment-delete/{id}', [HumanResourceController::class, 'humanRecourceDepartmentDelete'])->name('humanRecourceDepartment-delete');
+    Route::post('humanRecourceDepartment-update/{id}', [HumanResourceController::class, 'humanRecourceDepartmentUpdate'])->name('humanRecourceDepartment-update');
+    Route::post('humanRecourceDepartment-fetch', [HumanResourceController::class, 'humanRecourceDepartmentFetch'])->name('humanRecourceDepartment-fetch');
+    Route::post('humanRecourceDepartment/{id}', [HumanResourceController::class, 'humanRecourceDepartmentId'])->name('humanRecourceDepartment-fetch');
+
+    // humanResourceDesingation
+    Route::post('humanResourceDesingation-store', [HumanResourceController::class, 'humanResourceDesingationStore'])->name('humanResourceDesingation-store');
+    Route::post('humanResourceDesingation-delete/{id}', [HumanResourceController::class, 'humanResourceDesingationDelete'])->name('humanResourceDesingation-delete');
+    Route::post('humanResourceDesingation-update/{id}', [HumanResourceController::class, 'humanResourceDesingationUpdate'])->name('humanResourceDesingation-update');
+    Route::post('humanResourceDesingation-fetch', [HumanResourceController::class, 'humanResourceDesingationFetch'])->name('humanResourceDesingation-fetch');
+    Route::post('humanResourceDesingation/{id}', [HumanResourceController::class, 'humanResourceDesingationId'])->name('humanResourceDesingation-fetch');
+
+    // humanrecourceSpecilist
+    Route::post('humanrecourceSpecilist-store', [HumanResourceController::class, 'humanrecourceSpecilistStore'])->name('humanrecourceSpecilist-store');
+    Route::post('humanrecourceSpecilist-delete/{id}', [HumanResourceController::class, 'humanrecourceSpecilistDelete'])->name('humanrecourceSpecilist-delete');
+    Route::post('humanrecourceSpecilist-update/{id}', [HumanResourceController::class, 'humanrecourceSpecilistUpdate'])->name('humanrecourceSpecilist-update');
+    Route::post('humanrecourceSpecilist-fetch', [HumanResourceController::class, 'humanrecourceSpecilistFetch'])->name('humanrecourceSpecilist-fetch');
+
+    // inventorycategory
+    Route::post('inventorycategory-store', [InventoryController::class, 'inventorycategoryStore'])->name('inventorycategory-store');
+    Route::post('inventorycategory-delete/{id}', [InventoryController::class, 'inventorycategoryDelete'])->name('inventorycategory-delete');
+    Route::post('inventorycategory-update/{id}', [InventoryController::class, 'inventorycategoryUpdate'])->name('inventorycategory-update');
+    Route::post('inventorycategory-fetch', [InventoryController::class, 'inventorycategoryFetch'])->name('inventorycategory-fetch');
+    Route::post('inventorycategory/{id}', [InventoryController::class, 'inventorycategoryId'])->name('inventorycategory-fetch');
+
+    // inventoryStore
+    Route::post('inventoryStore-store', [InventoryController::class, 'inventoryStoreStore'])->name('inventoryStore-store');
+    Route::post('inventoryStore-delete/{id}', [InventoryController::class, 'inventoryStoreDelete'])->name('inventoryStore-delete');
+    Route::post('inventoryStore-update/{id}', [InventoryController::class, 'inventoryStoreUpdate'])->name('inventoryStore-update');
+    Route::post('inventoryStore-fetch', [InventoryController::class, 'inventoryStoreFetch'])->name('inventoryStore-fetch');
+    Route::post('inventoryStore/{id}', [InventoryController::class, 'inventoryStoreId'])->name('inventoryStore-fetch');
+
+    // InventorySupplier
+    Route::post('InventorySupplier-store', [InventoryController::class, 'InventorySupplierStore'])->name('InventorySupplier-store');
+    Route::post('InventorySupplier-delete/{id}', [InventoryController::class, 'InventorySupplierDelete'])->name('InventorySupplier-delete');
+    Route::post('InventorySupplier-update/{id}', [InventoryController::class, 'InventorySupplierUpdate'])->name('InventorySupplier-update');
+    Route::post('InventorySupplier-fetch', [InventoryController::class, 'InventorySupplierFetch'])->name('InventorySupplier-fetch');
+    Route::post('InventorySupplier/{id}', [InventoryController::class, 'InventorySupplierId'])->name('InventorySupplier-fetch');
+
+    // ReferralCategory
+    Route::post('ReferralCategory-store', [ReferalController::class, 'ReferralCategoryStore'])->name('ReferralCategory-store');
+    Route::post('ReferralCategory-delete/{id}', [ReferalController::class, 'ReferralCategoryDelete'])->name('ReferralCategory-delete');
+    Route::post('ReferralCategory-update/{id}', [ReferalController::class, 'ReferralCategoryUpdate'])->name('ReferralCategory-update');
+    Route::post('ReferralCategory-fetch', [ReferalController::class, 'ReferralCategoryFetch'])->name('ReferralCategory-fetch');
+    Route::post('ReferralCategory/{id}', [ReferalController::class, 'ReferralCategoryId'])->name('ReferralCategory-fetch');
+
+    // referralCommissioon
+    Route::post('referralcommission-store', [ReferalController::class, 'referralCommissionStore'])->name('referralcommission-store');
+    Route::post('referralCommission-delete/{id}', [ReferalController::class, 'referralCommissionDelete'])->name('referralCommission-delete');
+    Route::post('referralCommission-update/{id}', [ReferalController::class, 'referralCommissionUpdate'])->name('referralCommission-update');
+    Route::post('referralCommission-fetch', [ReferalController::class, 'referralCommissionFetch'])->name('referralCommission-fetch');
+    Route::post('referralCommission/{id}', [ReferalController::class, 'referralCommissionId'])->name('referralCommission-fetch');
+    Route::post('patient-import', [PatientController::class, 'importpatient'])->name('referralCommission-fetch');
+
+    // appoinmentGlobalStaff api call
+    Route::post('appoinmentGlobalStaff-store', [AppoinmentController::class, 'appoinmentGlobalStaffStore'])->name('appoinmentGlobalStaff-store');
+    Route::post('appoinmentGlobalStaff-delete/{id}', [AppoinmentController::class, 'appoinmentGlobalStaffDelete'])->name('appoinmentGlobalStaff-delete');
+    Route::post('appoinmentGlobalStaff-update/{id}', [AppoinmentController::class, 'appoinmentGlobalStaffUpdate'])->name('appoinmentGlobalStaff-update');
+    Route::post('appoinmentGlobalStaff-fetch', [AppoinmentController::class, 'appoinmentGlobalStaffFetch'])->name('appoinmentGlobalStaff-fetch');
+    Route::post('appoinmentGlobalStaff/{id}', [AppoinmentController::class, 'appoinmentGlobalStaffId'])->name('appoinmentGlobalStaff-fetch');
 });

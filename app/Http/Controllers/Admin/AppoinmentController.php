@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Appoinment;
 use App\Models\Admin\Department;
 use App\Models\Admin\Doctor;
+use App\Models\Admin\GlobalShift;
 use App\Models\Admin\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class AppoinmentController extends Controller
     {
         $admin = Auth::guard('admin-api')->user();
 
-        return Inertia::render('Admin/Appoinment', ['admin' => $admin]);
+        return Inertia::render('Admin/Appoinment', ['admin' => $admin,
+    ]);
     }
 
     public function Store(Request $request)
@@ -104,5 +106,40 @@ class AppoinmentController extends Controller
         }
 
         return response()->json(['fees' => $doctor->fees]);
+    }
+
+    public function GlobalShift()
+    {
+        $admin = Auth::guard('admin-api')->user();
+
+        return Inertia::render('Admin/appoinmentsetp/shiftsetup', ['admin' => $admin]);
+    }
+
+    public function appoinmentGlobalStaffStore(Request $request)
+    {
+        $appoinmentGlobalStaff = GlobalShift::create($request->all());
+
+        return response()->json($appoinmentGlobalStaff);
+    }
+
+    public function appoinmentGlobalStaffUpdate(Request $request, $id)
+    {
+        $appoinmentGlobalStaff = GlobalShift::find($id);
+        $appoinmentGlobalStaff->update($request->all());
+
+        return response()->json($appoinmentGlobalStaff);
+    }
+
+    public function appoinmentGlobalStaffDelete(Request $request, $id)
+    {
+        $appoinmentGlobalStaff = GlobalShift::find($id);
+        $appoinmentGlobalStaff->delete();
+
+        return response()->json($appoinmentGlobalStaff);
+    }
+
+    public function appoinmentGlobalStaffFetch()
+    {
+        return GlobalShift::all();
     }
 }

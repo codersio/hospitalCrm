@@ -250,11 +250,107 @@ export default function Sidebar() {
 
               <li className={hospitalcharges ? "block mt-4 space-y-3 " : "hidden"}>
                 <li className="space-y-3">
+                  <Link href="/admin/setup/patients-list" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Patients</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
                   <Link href="/admin/setup/hospital-charge" className="flex space-x-2">
                     <div className="icon grid place-items-center">
                       <FaAngleRight />
                     </div>
                     <span className="text-[12px]"> Hospital Charge</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/bed" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Bed</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/frontoffice-source" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]"> Front Office</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/medicine-category" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Pharmacy</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/pathology-category" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Phathology</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/radiology-category" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Radiology</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/symtoms-type" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Symtoms</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/bloodbank-product" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Blood Bank</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/incomehead" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Finance</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/leave-type" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Human Resource</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/referal-category" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Referral</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
+                  <Link href="/admin/setup/inventory-category" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Inventory</span>
                   </Link>
                 </li>
                 {/* <li>
