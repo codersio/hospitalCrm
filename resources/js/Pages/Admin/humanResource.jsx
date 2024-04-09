@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { FaMinus } from "react-icons/fa";
-const HumanResource = ({ desgnation, department }) => {
+const HumanResource = ({ desgnation, department, specilist }) => {
 
     const [modal, setModal] = useState(true)
     const [moreDetails, setmoreDetail] = useState(false)
@@ -301,6 +301,13 @@ const HumanResource = ({ desgnation, department }) => {
                                             <label htmlFor> Role *</label> <br />
                                             <select value={formData.type} onChange={handleFormdata} name='type' name="" id="" className="w-full border-gray-300">
                                                 <option value="">Select</option>
+                                                {
+                                                    desgnation.map(
+                                                        des => (
+                                                            <option value={des.id}>{des.degnation_name}</option>
+                                                        )
+                                                    )
+                                                }
 
                                             </select>
                                         </div>
@@ -328,6 +335,10 @@ const HumanResource = ({ desgnation, department }) => {
                                             <label htmlFor> Specialist *</label> <br />
                                             <select value={formData.specialist_id} onChange={handleFormdata} name='specialist_id' className="w-full border-gray-300">
                                                 <option value="">Select</option>
+                                                {specilist.map(spe => (
+
+                                                    <option value={spe.id}>{spe.spe_name}</option>
+                                                ))}
 
                                             </select>
                                         </div>
@@ -351,6 +362,8 @@ const HumanResource = ({ desgnation, department }) => {
                                             <label htmlFor> Gender *</label> <br />
                                             <select value={formData.gender} onChange={handleFormdata} name='gender' className="w-full border-gray-300">
                                                 <option value="">Select</option>
+                                                <option value="male">male</option>
+                                                <option value="female">Female</option>
 
                                             </select>
                                         </div>
@@ -358,6 +371,9 @@ const HumanResource = ({ desgnation, department }) => {
                                             <label htmlFor>Marital Status</label> <br />
                                             <select value={formData.marital_status} onChange={handleFormdata} name='marital_status' className="w-full border-gray-300">
                                                 <option value="">Select</option>
+                                                <option value="unmariad">Unmarriad</option>
+                                                <option value="marriad">Marriad</option>
+
 
                                             </select>
                                         </div>
@@ -365,7 +381,7 @@ const HumanResource = ({ desgnation, department }) => {
                                             <label htmlFor>Blood Group</label> <br />
                                             <select value={formData.blood} onChange={handleFormdata} name='blood' className="w-full border-gray-300">
                                                 <option value="">Select</option>
-
+                                                <option value="o+">O+</option>
                                             </select>
                                         </div>
                                         <div className="form-group w-full">

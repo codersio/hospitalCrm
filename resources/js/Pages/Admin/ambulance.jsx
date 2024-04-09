@@ -6,6 +6,8 @@ import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from '@inertiajs/react';
 import PatientsModal from '@/components/Admin/patientsmodal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Ambulance = ({ admin, ambulanceLId }) => {
 
   const [modal, setModal] = useState(true)
@@ -97,12 +99,9 @@ const Ambulance = ({ admin, ambulanceLId }) => {
         'bill_no': '',
         'case_id': '',
       });
-      setPharmacyBill();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: 'Form submitted successfully!',
-      });
+      fetchData();
+      AmbulanceBilldata();
+      toast('Data successfully stored')
     } catch (error) {
       console.log(error)
 
@@ -131,6 +130,7 @@ const Ambulance = ({ admin, ambulanceLId }) => {
 
 
       <div className="flex-grow bg-gray-100 ">
+        <ToastContainer />
         <Header />
         <div className="relative">
           <div className="card mt-2">
@@ -200,14 +200,14 @@ const Ambulance = ({ admin, ambulanceLId }) => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {phamacybill.map(phm =>
                   <tr>
-                    <td>{phm.bill_no}</td>
+                    <td>{phm.vehicle_model_id}</td>
                     <td></td>
-                    <td>{phm.name}</td>
+                    <td>{phm.driver_name}</td>
                     <td>{phm.vehicle_no}</td>
-                    <td>{phm.vehicle_model}</td>
+                    <td>{phm.date}</td>
                     <td>{phm.d_name}</td>
-                    <td>{phm.d_contact}</td>
-                    <td>{phm.d_contact}</td>
+                    <td>{phm.charge_name}</td>
+                    <td>{phm.note}</td>
                     <td>{phm.date}</td>
                     <td>{phm.amount}</td>
                   </tr>

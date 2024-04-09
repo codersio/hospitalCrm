@@ -9,26 +9,24 @@ import { CiEdit } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import SidebarSetup from './sidebar';
 import { ToastContainer, toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const ShiftSetup = ({ admin }) => {
-
+const ShiftSetup = ({ admin, shift, doctor }) => {
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [modal, setModal] = useState(true)
     const [admin_type, setAdmin_type] = useState(admin.type);
     const [admin_id, setAdminId] = useState(admin.id);
-    const [data, setData] = useState([])
+    const [datas, setData] = useState([])
     const [updateModal, setupdateModal] = useState(null)
+    const [formData, setFormData] = useState(null)
 
-    const [formData, setFormData] = useState({
-        shift_name: '',
-        shift_time_to: '',
-        shift_time_from: '',
-    });
+    // const [id, setId] = useState(null); // Initialize id state
 
 
     const fetchData = () => {
-        axios.post('/api/admin/appoinmentGlobalStaff-fetch').then(res => {
+        axios.post('/api/admin/appoinmentDoctorShift-fetch').then(res => {
             console.log(res)
             setData(res.data)
         }).catch(error => console.log(error))
@@ -42,58 +40,62 @@ const ShiftSetup = ({ admin }) => {
         // console.log('hello')
         setModal(!modal)
     }
-    const updatehandleClose = () => {
-        // console.log('hello')
-        setupdateModal(!updateModal)
-    }
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    const updatehandleClose = (data) => {
+        setFormData(data); // Set form data
+        setupdateModal(data.id);
+        setValue('shift_id', data.shift_id); // Populate form fields
+        setValue('doctor_id', data.doctor_id);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formSave = new FormData();
-        formSave.append('shift_name', formData.shift_name)
-        formSave.append('admin_id', admin_id)
-        formSave.append('admin_type', admin_type)
-        formSave.append('shift_time_to', formData.shift_time_to)
-        formSave.append('shift_time_from', formData.shift_time_from)
+    }
 
 
 
-
-
-
-
-
+    const onSubmit = async (data) => {
         try {
-            const response = await axios.post('/api/admin/appoinmentGlobalStaff-store', formSave);
-            toast("Data successfully stored!")
-            fetchData();
+            if (formData && formData.id) {
+                // If formData.id exists, it means we're updating existing data
+                const updatedData = {
+                    shift_id: data.shift_id,
+                    doctor_id: data.doctor_id
+                };
+
+                const response = await axios.post(`/api/admin/appoinmentDoctorShift-update/${formData.id}`, updatedData);
+                console.log(response.data); // Log the response
+                toast('Data updated')
+
+            } else {
+                // Otherwise, we're creating new data
+                const response = await axios.post('/api/admin/appoinmentDoctorShift-store', data);
+                console.log(response.data); // Log the response
+                toast('Data store successfull')
+
+            }
+
+            fetchData(); // Fetch updated data or refresh data list
+            // reset(); // Clear form inputs after successful submission
         } catch (error) {
-            toast("Please try again!")
             console.error('Error:', error);
         }
     };
 
-    const Updatedata = (e, id) => {
-        e.preventDefault();
-        const formSave = new FormData();
-        formSave.append('shift_name', formData.shift_name)
-        formSave.append('admin_id', admin_id)
-        formSave.append('admin_type', admin_type)
-        formSave.append('shift_time_to', formData.shift_time_to)
-        formSave.append('shift_time_from', formData.shift_time_from)
 
-        axios.post(`/api/admin/appoinmentGlobalStaff-update/${id}`, formSave).then(res => {
-            toast("Data successfully updated!")
-            fetchData()
-        }).catch(error => console.log(error))
-    }
+
+
+    // const onUpdate = (id, data) => {
+    //     if (id) { // Make sure id is not null before updating
+    //         Updatedata(data);
+    //     } else {
+    //         console.error("ID is not set");
+    //     }
+    // };
     const DeleteData = (e, id) => {
         e.preventDefault();
 
-        axios.post(`/api/admin/appoinmentGlobalStaff-delete/${id}`)
+        axios.post(`/api/admin/appoinmentDoctorShift-delete/${id}`)
             .then(response => {
                 toast("Data successfully Deleted!")
                 fetchData();
@@ -129,6 +131,71 @@ const ShiftSetup = ({ admin }) => {
                                         </div>
                                         <h1> Add  Item </h1>
                                     </button>
+                                    <div id="exampleModal" className={modal ? "  fixed h-screen transform  bg-black shadow-md rounded-md g  top-0 bottom-0 right-0 left-0 w-full hidden" : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center"}>
+                                        <div className="back-model w-[60%] bg-white relative ">
+                                            <div className="modal-content w-full">
+                                                <div className="modal-header flex justify-between   bg-[#0E99F4] p-2">
+                                                    <div className="w-[80%]  px-4 mt-[0.29rem]">
+                                                        <h1 className='text-white text-[1.5rem]'>Add Item</h1>
+                                                    </div>
+                                                    <button onClick={handleClose} className="ml-auto text-[2rem] text-white">
+                                                        <RxCross1 />
+                                                    </button>
+
+                                                </div>
+                                                <div className="modal-body">
+
+                                                    <form onSubmit={handleSubmit(onSubmit)} className="w-full grid grid-cols-1 gap-5 px-6 mt-10 relative">
+
+                                                        <div className="form-group">
+                                                            <label htmlFor> Doctor</label> <br />
+                                                            <input type="text"    {...register('admin_id')} defaultValue={admin_id} />
+                                                            <input type="text"    {...register('admin_type')} defaultValue={admin_type} />
+                                                            <select
+                                                                {...register('doctor_id', { required: 'Doctor name is required' })}
+                                                                className="w-full border-gray-300"
+                                                            >
+                                                                <option value="">Select</option>
+                                                                {
+                                                                    doctor.map(doctors =>
+                                                                        <option key={doctors.id} value={doctors.id}>{doctors.name}</option>)
+                                                                }
+                                                            </select>
+                                                            {errors.doctor_id && <p>{errors.doctor_id.message}</p>}
+                                                        </div>
+
+                                                        <div className="form-group w-full">
+                                                            <label htmlFor> Shift *</label> <br />
+                                                            <select  {...register('shift_id', { required: 'Shift  is required' })} id="" className="w-full border-gray-300">
+                                                                <option value="">Select</option>
+                                                                {
+                                                                    shift.map(shifts => (
+                                                                        <option value={shifts.id}>{shifts.shift_name}</option>
+                                                                    ))
+                                                                }
+                                                            </select>
+                                                            {errors.shift_id && <p>{errors.shift_id.message}</p>}
+                                                        </div>
+
+
+                                                        <div className="form-group   bottom-0  left-0 right-0 mt-10 py-4">
+                                                            <div className="flex justify-end px-5 p-3 space-x-3 w-full">
+
+                                                                <button className="bg-gray-800 p-2 text-white w-[12%] ">
+                                                                    Save
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="overflow-x-auto w-full">
@@ -136,17 +203,18 @@ const ShiftSetup = ({ admin }) => {
                                     <thead className="bg-gray-50">
                                         <tr className='text-[#333] text-[14px] font-bold'>
                                             <th className="px-6 py-3 text-left  tracking-wider">
-                                                Category name
+
+                                                Doctor Name
                                             </th>
                                             <th className="px-6 py-3 text-left  tracking-wider">
-                                                Time From
+                                                Shift
                                             </th>
-                                            <th className="px-6 py-3 text-left  tracking-wider">
+                                            {/* <th className="px-6 py-3 text-left  tracking-wider">
                                                 Time To
                                             </th>
                                             <th className="px-6 py-3  tracking-wider text-end">
                                                 Action
-                                            </th>
+                                            </th> */}
 
 
 
@@ -156,91 +224,92 @@ const ShiftSetup = ({ admin }) => {
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
                                         {
-                                            data.map((datas, idx) => (
+                                            datas.map((datas, idx) => (
                                                 <tr>
+                                                    <td className='px-6 py-3 text-left text-xs'>{datas.name}</td>
                                                     <td className='px-6 py-3 text-left text-xs'>{datas.shift_name}</td>
-                                                    <td className='px-6 py-3 text-left text-xs'>{datas.shift_time_to}</td>
-                                                    <td className='px-6 py-3 text-left text-xs'>{datas.shift_time_from}</td>
-
-
-
-                                                    <td td className='px-6 py-3  text-xs flex space-x-2 text-end justify-end' >
-                                                        <a onClick={() => {
-                                                            setFormData({
-
-                                                                shift_name: datas.shift_name,
-                                                                shift_time_to: datas.shift_time_to,
-                                                                shift_time_from: datas.shift_time_from,
-                                                                // admin_id: datas.admin_id,
-                                                                // admin_type: datas.admin_type,
+                                                    {/* <td className='px-6 py-3 text-left text-xs'>{datas.shift_time_from}</td> */}
 
 
 
 
-
-
-
-                                                            }); setupdateModal(datas.id)
-                                                        }}><CiEdit className='text-[1.3rem] cursor-pointer' /></a>
+                                                    <td className='px-6 py-3  text-xs flex space-x-2 text-end justify-end' >
+                                                        <a onClick={() => updatehandleClose(datas)}
+                                                        ><CiEdit className='text-[1.3rem] cursor-pointer' /></a>
                                                         <a onClick={(e) =>
 
                                                             DeleteData(e, datas.id)
                                                         }><FaRegTrashAlt className='text-[1.1rem] cursor-pointer' /></a>
+                                                        {
+                                                            updateModal &&
 
+                                                            <div className="fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center ">
+                                                                <div className="back-model w-[60%] bg-white relative ">
+                                                                    <div className="modal-content w-full">
+                                                                        <div className="modal-header flex justify-between   bg-[#0E99F4] p-2">
+                                                                            <div className="w-[80%]  px-4 mt-[0.29rem]">
+                                                                                <h1 className='text-white text-[2rem]'>update Receive </h1>
+                                                                            </div>
+                                                                            <button onClick={updatehandleClose} className="ml-auto text-[2rem] text-white">
+                                                                                <RxCross1 />
+                                                                            </button>
 
-                                                    </td>
-
-                                                    {/* update model data  */}
-                                                    <td div key={datas.id} id={`exampleModal-${datas.id}`} className={updateModal === datas.id ? "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center " : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full hidden place-items-center"}>
-                                                        <div className="back-model w-[60%] bg-white relative ">
-                                                            <div className="modal-content w-full">
-                                                                <div className="modal-header flex justify-between   bg-[#0E99F4] p-2">
-                                                                    <div className="w-[80%]  px-4 mt-[0.29rem]">
-                                                                        <h1 className='text-white text-[2rem]'>update Receive {datas.id}</h1>
-                                                                    </div>
-                                                                    <button onClick={updatehandleClose} className="ml-auto text-[2rem] text-white">
-                                                                        <RxCross1 />
-                                                                    </button>
-
-                                                                </div>
-                                                                <div className="modal-body">
-
-                                                                    <form action className="w-full grid grid-cols-1 gap-5 px-6 mt-10 relative">
-
-
-                                                                        <div className="form-group w-full">
-                                                                            <label htmlFor> Name *</label> <br />
-                                                                            <input onChange={handleChange} name='shift_name' value={formData.shift_name} type="text" className="w-full border-gray-300" />
                                                                         </div>
-                                                                        <div className="form-group w-full">
-                                                                            <label htmlFor>Time From *</label> <br />
-                                                                            <input onChange={handleChange} name='shift_time_to' value={formData.shift_time_to} type="time" className="w-full border-gray-300" />
+                                                                        <div className="modal-body">
+                                                                            <form onSubmit={handleSubmit(onSubmit)} className="w-full grid grid-cols-1 gap-5 px-6 mt-10 relative">
+
+                                                                                <div className="form-group">
+                                                                                    <label htmlFor> Doctor</label> <br />
+                                                                                    {/* <input type="text"   {...register('admin_id')} />
+                                                                                    <input type="text"   {...register('admin_type')} /> */}
+                                                                                    <select
+                                                                                        {...register('doctor_id', { required: 'Doctor name is required' })}
+                                                                                        className="w-full border-gray-300"
+                                                                                    >
+                                                                                        {/* <option value="">Select</option> */}
+                                                                                        <option value="">Select</option>
+                                                                                        {
+                                                                                            doctor.map(doctors =>
+                                                                                                <option key={doctors.id} value={doctors.id}>{doctors.name}</option>)
+                                                                                        }
+                                                                                    </select>
+                                                                                    {errors.doctor_id && <p>{errors.doctor_id.message}</p>}
+                                                                                </div>
+
+                                                                                <div className="form-group w-full">
+                                                                                    <label htmlFor> Shift *</label> <br />
+                                                                                    <select  {...register('shift_id', { required: 'Shift  is required' })} id="" className="w-full border-gray-300">
+                                                                                        <option value="">Select</option>
+                                                                                        {
+                                                                                            shift.map(shifts => (
+                                                                                                <option value={shifts.id}>{shifts.shift_name}</option>
+                                                                                            ))
+                                                                                        }
+
+                                                                                    </select>
+                                                                                    {errors.shift_id && <p>{errors.shift_id.message}</p>}
+                                                                                </div>
+
+
+                                                                                <div className="form-group   bottom-0  left-0 right-0 mt-10 py-4">
+                                                                                    <div className="flex justify-end px-5 p-3 space-x-3 w-full">
+
+                                                                                        <button className="bg-gray-800 p-2 text-white w-[12%] ">
+                                                                                            Save
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+
                                                                         </div>
-                                                                        <div className="form-group w-full">
-                                                                            <label htmlFor>Time To *</label> <br />
-                                                                            <input onChange={handleChange} name='shift_time_from' value={formData.shift_time_from} type="time" className="w-full border-gray-300" />
-                                                                        </div>
-
-
-                                                                    </form>
-
-
-
-                                                                </div>
-
-                                                                <div className="form-group   bottom-0  left-0 right-0 mt-10 py-4">
-                                                                    <div className="flex justify-end px-5 p-3 space-x-3 w-full">
-                                                                        {/* <button className="bg-gray-800 p-2 text-white w-[10%] ">
-                                            Save &amp; print
-                                        </button> */}
-                                                                        <button onClick={(e) => Updatedata(e, datas.id)} className="bg-gray-800 p-2 text-white w-[12%] ">
-                                                                            Save
-                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        }
                                                     </td>
+
+                                                    {/* update model data  */}
+
                                                 </tr>
                                             ))
                                         }
@@ -251,59 +320,7 @@ const ShiftSetup = ({ admin }) => {
                             {/* Modal backdrop */}
                             {/* <div id="modalBackdrop" className="fixed inset-0 bg-gray-900 bg-opacity-50 hidden" /> */}
                             {/* Modal */}
-                            <div id="exampleModal" className={modal ? "  fixed h-screen transform  bg-black shadow-md rounded-md g  top-0 bottom-0 right-0 left-0 w-full hidden" : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center"}>
-                                <div className="back-model w-[60%] bg-white relative ">
-                                    <div className="modal-content w-full">
-                                        <div className="modal-header flex justify-between   bg-[#0E99F4] p-2">
-                                            <div className="w-[80%]  px-4 mt-[0.29rem]">
-                                                <h1 className='text-white text-[1.5rem]'>Add Item</h1>
-                                            </div>
-                                            <button onClick={handleClose} className="ml-auto text-[2rem] text-white">
-                                                <RxCross1 />
-                                            </button>
 
-                                        </div>
-                                        <div className="modal-body">
-
-                                            <form action className="w-full grid grid-cols-1 gap-5 px-6 mt-10 relative">
-
-
-                                                <div className="form-group w-full">
-                                                    <label htmlFor> Name *</label> <br />
-                                                    <select name="doctor_id" id="" className="w-full border-gray-300">
-                                                        <option value="">Select</option>
-                                                        <option value="0">Anup Singh</option>
-                                                    </select>
-                                                </div>
-                                                <div className="form-group w-full">
-                                                    <label htmlFor>Time From *</label> <br />
-                                                    <input onChange={handleChange} name='shift_time_to' value={formData.shift_time_to} type="time" className="w-full border-gray-300" />
-                                                </div>
-                                                <div className="form-group w-full">
-                                                    <label htmlFor>Time To *</label> <br />
-                                                    <input onChange={handleChange} name='shift_time_from' value={formData.shift_time_from} type="time" className="w-full border-gray-300" />
-                                                </div>
-
-
-                                            </form>
-
-
-
-                                        </div>
-
-                                        <div className="form-group   bottom-0  left-0 right-0 mt-10 py-4">
-                                            <div className="flex justify-end px-5 p-3 space-x-3 w-full">
-                                                {/* <button className="bg-gray-800 p-2 text-white w-[10%] ">
-                                            Save &amp; print
-                                        </button> */}
-                                                <button onClick={handleSubmit} className="bg-gray-800 p-2 text-white w-[12%] ">
-                                                    Save
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>

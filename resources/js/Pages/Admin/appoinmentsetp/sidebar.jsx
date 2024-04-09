@@ -6,13 +6,12 @@ const SidebarSetup = () => {
     return (
         <div className='w-[100%]'>
             <ul className='text-[13px]'>
-                <li className='border p-2'><Link href="/admin/setup/symtoms-type">Symptoms Type</Link></li>
-                <li className='border p-2'><Link href="/admin/setup/symtoms-head">Symptoms Head</Link></li>
-                {/* <li className='border p-2'><Link href="/admin/setup/medicine-dose">Medicine Dosage</Link></li> */}
-                {/* <li className='border p-2'><Link href="/admin/setup/radiology-parameters">Radiology Parameter</Link></li> */}
-                {/* <li className='border p-2'><Link href="/admin/setup/medicine-dose-duration">Dose Duration</Link></li> */}
+                <li className='border p-2'><Link href="/admin/setup/doctor-slots">  Slots</Link></li>
+                <li className='border p-2'><Link href="/admin/setup/doctor-global-staff">Doctor Shift</Link></li>
+                <li className='border p-2'><Link href="/admin/setup/global-staff">Shift</Link></li>
+
             </ul>
-        </div >
+        </div>
     );
 }
 

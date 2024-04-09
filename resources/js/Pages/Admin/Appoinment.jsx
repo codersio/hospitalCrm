@@ -8,7 +8,7 @@ import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import PatientsModal from '@/components/Admin/patientsmodal';
 import Swal from 'sweetalert2';
-const Appoinment = ({ admin, id }) => {
+const Appoinment = ({ admin, doctor }) => {
 
   const [modal, setModal] = useState(true)
   const [Patientsmodal, setPatientsmodal] = useState(true)
@@ -350,8 +350,8 @@ const Appoinment = ({ admin, id }) => {
 
                       <select name='doctor' onChange={handleChange} value={formData.doctor} className=" border-gray-300 w-full">
                         <option value="">Select doctor</option>
-                        {doctorlist.map(doctors => (
-                          <option value={doctors.name}>	{doctors.name}</option>
+                        {doctor.map(doctors => (
+                          <option value={doctors.id}>	{doctors.name}</option>
 
                         ))}
 

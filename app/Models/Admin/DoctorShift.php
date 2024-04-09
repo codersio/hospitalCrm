@@ -13,6 +13,7 @@ class DoctorShift extends Model
 
     'admin_type',
     'admin_type',
-    'global_shift',
+    'shift_id',
+    'admin_id',
     ];
 }

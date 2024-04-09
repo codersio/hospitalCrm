@@ -481,4 +481,17 @@ Route::group([
     Route::post('appoinmentGlobalStaff-update/{id}', [AppoinmentController::class, 'appoinmentGlobalStaffUpdate'])->name('appoinmentGlobalStaff-update');
     Route::post('appoinmentGlobalStaff-fetch', [AppoinmentController::class, 'appoinmentGlobalStaffFetch'])->name('appoinmentGlobalStaff-fetch');
     Route::post('appoinmentGlobalStaff/{id}', [AppoinmentController::class, 'appoinmentGlobalStaffId'])->name('appoinmentGlobalStaff-fetch');
+
+    // appoinmentDoctorShift api call
+    Route::post('appoinmentDoctorShift-store', [AppoinmentController::class, 'appoinmentDoctorShiftStore'])->name('appoinmentDoctorShift-store');
+    Route::post('appoinmentDoctorShift-delete/{id}', [AppoinmentController::class, 'appoinmentDoctorShiftDelete'])->name('appoinmentDoctorShift-delete');
+    Route::post('appoinmentDoctorShift-update/{id}', [AppoinmentController::class, 'appoinmentDoctorShiftUpdate'])->name('appoinmentDoctorShift-update');
+    Route::post('appoinmentDoctorShift-fetch', [AppoinmentController::class, 'appoinmentDoctorShiftFetch'])->name('appoinmentDoctorShift-fetch');
+
+    //appoinmentSlots api all 
+    Route::post('appoinmentSlots-store', [AppoinmentController::class, 'appoinmentSlotsStore'])->name('appoinmentSlots-store');
+    Route::post('appoinmentSlots-delete/{id}', [AppoinmentController::class, 'appoinmentSlotsDelete'])->name('appoinmentSlots-delete');
+    Route::post('appoinmentSlots-update/{id}', [AppoinmentController::class, 'appoinmentSlotsUpdate'])->name('appoinmentSlots-update');
+    Route::post('appoinmentSlots-fetch', [AppoinmentController::class, 'appoinmentSlotsFetch'])->name('appoinmentSlots-fetch');
+    Route::post('appoinmentSlots/{id}', [AppoinmentController::class, 'appoinmentSlotsId'])->name('appoinmentSlots-fetch');
 });

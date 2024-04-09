@@ -134,5 +134,7 @@ Route::group([
         Route::get('patients-list', [PatientController::class, 'PatientsList']);
         Route::get('patients-import', [PatientController::class, 'Import']);
         Route::get('global-staff', [AppoinmentController::class, 'GlobalShift']);
+        Route::get('doctor-global-staff', [AppoinmentController::class, 'DoctorShift']);
+        Route::get('doctor-slots', [AppoinmentController::class, 'appoinmentStols']);
     });
 });

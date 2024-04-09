@@ -15,7 +15,7 @@ return new class() extends Migration {
             $table->foreignId('doctor_id');
             $table->foreignId('shift_id');
             $table->string('admin_type');
-            $table->string('admin_type');
+
             $table->integer('global_shift');
 
             $table->timestamps();

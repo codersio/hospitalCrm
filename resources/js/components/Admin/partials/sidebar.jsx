@@ -346,6 +346,14 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li className="space-y-3">
+                  <Link href="/admin/setup/global-staff" className="flex space-x-2">
+                    <div className="icon grid place-items-center">
+                      <FaAngleRight />
+                    </div>
+                    <span className="text-[12px]">Appointment</span>
+                  </Link>
+                </li>
+                <li className="space-y-3">
                   <Link href="/admin/setup/inventory-category" className="flex space-x-2">
                     <div className="icon grid place-items-center">
                       <FaAngleRight />

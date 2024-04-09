@@ -5,13 +5,17 @@ import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from '@inertiajs/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Ambulancelist = ({ admin }) => {
 
     const [modal, setModal] = useState(true)
     const [ambulance, setAmbulance] = useState([])
+    const [admin_id, st, setadmin_id] = useState(admin.id)
+    const [admin_type, setadmin_type] = useState(admin.type)
     const [formData, setFormdata] = useState({
-        'admin_type': admin.type,
-        'admin_id': admin.id,
+        // 'admin_type': admin.type,
+        // 'admin_id': admin.id,
         'vehicle_no': '',
         'vehicle_model': '',
         'year': '',
@@ -46,37 +50,33 @@ const Ambulancelist = ({ admin }) => {
             [name]: value
         });
         // Clear error message when user starts typing
-        setErrors({
-            ...errors,
-            [name]: ''
-        });
+        // setErrors({
+        //     ...errors,
+        //     [name]: ''
+        // });
     };
     const createOpd = async (e) => {
         e.preventDefault();
+        const formSave = new FormData()
+        formSave.append('admin_type', admin_type)
+        formSave.append('admin_id', admin_id)
+        formSave.append('vehicle_no', formData.vehicle_no)
+        formSave.append('vehicle_model', formData.vehicle_model)
+        formSave.append('year', formData.year)
+        formSave.append('d_name', formData.d_name)
+        formSave.append('d_license', formData.d_license)
+        formSave.append('d_contact', formData.d_contact)
+        formSave.append('vehicle_type', formData.vehicle_type)
+        formSave.append('note', formData.note)
+
         try {
 
 
-            await axios.post('/api/admin/ambulance-list-store', formData);
+            await axios.post('/api/admin/ambulance-list-store', formSave);
             fetchData()
-            setFormdata({
+            toast('Data succesfully stored')
+            fetchData()
 
-
-                'vehicle_no': '',
-                'vehicle_model': '',
-                'year': '',
-                'd_name': '',
-                'd_license': '',
-                'd_contact': '',
-                'vehicle_type': '',
-                'note': '',
-            });
-            setAmbulance()
-            // PharmacyBillfetchData();
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Form submitted successfully!',
-            });
         } catch (error) {
             console.log(error)
 
@@ -99,6 +99,7 @@ const Ambulancelist = ({ admin }) => {
 
 
             <div className="flex-grow bg-gray-100 ">
+                <ToastContainer />
                 <Header />
                 <div className="relative">
                     <div className="card mt-2">
@@ -209,8 +210,8 @@ const Ambulancelist = ({ admin }) => {
                                     </div>
                                 </div>
                                 <div className="modal-body">
-                                    <input name="admin_type" value={formData.admin_type} onChange={handleChange} type="hidden" className=" border-gray-300 w-full" />
-                                    <input name="admin_id" value={formData.admin_id} onChange={handleChange} type="hidden" className=" border-gray-300 w-full" />
+                                    {/* <input name="admin_type" value={formData.admin_type} onChange={handleChange} type="hidden" className=" border-gray-300 w-full" /> */}
+                                    {/* <input name="admin_id" value={formData.admin_id} onChange={handleChange} type="hidden" className=" border-gray-300 w-full" /> */}
                                     <form action className="w-full grid grid-cols-3 gap-3 px-6 mt-10 relative">
                                         <div className="form-group w-full ">
                                             <label htmlFor>Vehicle Number *</label>

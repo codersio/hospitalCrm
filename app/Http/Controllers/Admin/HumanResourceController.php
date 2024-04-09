@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -24,6 +23,7 @@ class HumanResourceController extends Controller
         return Inertia::render('Admin/humanResource', [
             'desgnation' => Desingnation::all(),
             'department' => hrDepartMent::all(),
+            'specilist' => specilist::all(),
         ]);
     }
 
@@ -44,7 +44,7 @@ class HumanResourceController extends Controller
                 [
         'name' => $request->name,
         'email' => $request->email,
-        'password' => Hash::make($request),
+        'password' => '1234578',
         'staff_id' => $request->staff_id,
         'designation_id' => $request->designation_id,
         'department_id' => $request->department_id,
@@ -72,16 +72,16 @@ class HumanResourceController extends Controller
                 ]
             );
             // dd($admin);
-            if ($admin) {
-                // Send email with the new password
-                Mail::raw("Your new password: $newPassword", function ($message) use ($admin) {
-                    $message->to($admin->email)->subject('Welcome to Your Application');
-                });
+            // if ($admin) {
+            //     // Send email with the new password
+            //     Mail::raw("Your new password: $newPassword", function ($message) use ($admin) {
+            //         $message->to($admin->email)->subject('Welcome to Your Application');
+            //     });
 
-                return 'Admin created successfully. Check your email for the new password.';
-            } else {
-                return 'Failed to create admin.';
-            }
+            //     return 'Admin created successfully. Check your email for the new password.';
+            // } else {
+            //     return 'Failed to create admin.';
+            // }
             // Create a payroll record associated with the Admin
             $payroll = $admin->payrolls()->create([
                 'admin_id' => $admin->id,
@@ -120,7 +120,7 @@ class HumanResourceController extends Controller
             // Return a success response
             return response()->json(['message' => 'Admin and associated records created successfully']);
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
             // If an error occurs, rollback the transaction
             DB::rollBack();
 
@@ -327,4 +327,6 @@ class HumanResourceController extends Controller
 
         return response()->json($specialist);
     }
+
+    //  public function 
 }

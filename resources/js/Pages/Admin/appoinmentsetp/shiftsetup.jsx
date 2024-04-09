@@ -191,7 +191,7 @@ const ShiftSetup = ({ admin }) => {
                                                     </td>
 
                                                     {/* update model data  */}
-                                                    <td div key={datas.id} id={`exampleModal-${datas.id}`} className={updateModal === datas.id ? "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center " : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full hidden place-items-center"}>
+                                                    <td ><div key={datas.id} id={`exampleModal-${datas.id}`} className={updateModal === datas.id ? "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full grid place-items-center " : "fixed h-screen transform  bg-black bg-opacity-85 shadow-md rounded-md   top-0 bottom-0 right-0 left-0 w-full hidden place-items-center"}>
                                                         <div className="back-model w-[60%] bg-white relative ">
                                                             <div className="modal-content w-full">
                                                                 <div className="modal-header flex justify-between   bg-[#0E99F4] p-2">
@@ -240,6 +240,7 @@ const ShiftSetup = ({ admin }) => {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
                                                     </td>
                                                 </tr>
                                             ))
