@@ -6,7 +6,9 @@ import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import PatientsModal from '@/components/Admin/patientsmodal';
 import Swal from 'sweetalert2';
-const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const MedicinePurchase = ({ admin, medicineCategories, medicinebill, suppliers }) => {
 
     const [modal, setModal] = useState(true)
     const [Patientsmodal, setPatientsmodal] = useState(true)
@@ -19,22 +21,24 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
     const [medicine_id, setmedicine_id] = useState('');
     const [Batch_No, setBatch_No] = useState('');
     const [Expiry_Date, setExpiry_Date] = useState('');
-    const [Quantity, setQuantity] = useState('');
+    const [Quantity, setQuantity] = useState(0);
     const [Sale_Price, setSale_Price] = useState('');
-    const [Tax, setTax] = useState('');
+    const [Tax, setTax] = useState(0);
     const [bill_No, setbill_No] = useState('');
     const [Amount, setAmount] = useState('');
     const [paid_amount, setpaid_amount] = useState('');
     const [balance_amount, setbalance_amount] = useState('');
     const [Total, setTotal] = useState('');
     const [Payment_Amount, setPayment_Amount] = useState('');
-    const [Discount, setDiscount] = useState('');
+    const [Discount, setDiscount] = useState(0);
     const [Payment_mode, setPayment_mode] = useState('');
     const [paking_quantity, setpaking_quantity] = useState('');
-    const [mrp, setmrp] = useState('');
+    const [mrp, setmrp] = useState(0);
     const [purchase_amount, setpurchase_amount] = useState('');
     const [files_attach, setfiles_attach] = useState('');
-
+    const [medicinename, setMedinicename] = useState([])
+    const [med, setmed] = useState([])
+    // const [totalAmount, setTotalAmount] = useState(0);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,11 +61,105 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
             console.error('Error fetching data:', error);
         }
     };
+    const MedicinefetchData = async () => {
+        try {
+            const response = await axios.post('/api/admin/medicine-bill-all');
+            // console.log(data)
+            setmed(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const handleMedicineCategory = (event) => {
+        const chargeTid = event.target.value
+        setcategory_id(chargeTid)
+        axios.post(`/api/admin/medicine-categoryid-name/${chargeTid}`)
+            // .then(response => response.json())
+            .then(res => {
+
+                setMedinicename(res.data); // Set the tax value
+
+                console.log(res.data); // Log the tax value
+            })
+            .catch(error => console.error('Error fetching product types:', error));
+
+    }
+    const handleMedicinename = (event) => {
+        setmedicine_id(event.target.value)
+
+    }
+
+    const HandelQty = (event) => {
+        const newQty = parseInt(event.target.value)
+        setQuantity(newQty, purchase_amount)
+        calculateTotalAmount(newQty, mrp);
+    }
+
+    const handelPurchase = (e) => {
+        const newPrice = parseFloat(e.target.value);
+        console.log(newPrice)
+        setmrp(newPrice)
+        console.log('MRP', mrp)
+        calculateTotalAmount(Quantity, newPrice, Tax);
+
+    }
+    const handleTaxChange = (event) => {
+        const newTax = parseFloat(event.target.value);
+        setTax(newTax);
+        calculateTotalAmount(Quantity, mrp, newTax);
+    }
+    const handleDiscountChange = (event) => {
+        const newDiscount = parseFloat(event.target.value);
+        setDiscount(newDiscount); // Update the discount state
+        calculateTotalAmount(Quantity, mrp, Tax, newDiscount); // Call calculateTotalAmount with updated discount value
+    };
+
+    const calculateTotalAmount = (qty, mrp, tax, discount) => {
+        const subtotal = qty * mrp;
+
+        // Initialize discount and tax amounts to 0
+        let discountAmount = 0;
+        let taxAmount = 0;
+
+        // Calculate discount amount if discount is provided and not 0
+        if (discount && discount !== 0) {
+            discountAmount = subtotal * (discount / 100);
+        }
+
+        // Calculate total before tax
+        let totalBeforeTax = subtotal - discountAmount;
+
+        // Calculate tax amount if tax is provided and not 0
+        if (tax && tax !== 0) {
+            taxAmount = totalBeforeTax * (tax / 100);
+        }
+
+        // Calculate total amount after tax
+        let total = totalBeforeTax + taxAmount;
+
+        // Round the total amounts to two decimal places
+        let totalp = parseFloat((subtotal + taxAmount).toFixed(2));
+        total = parseFloat(total.toFixed(2));
+
+        // Check if total is NaN, if so, set it to 0
+        if (isNaN(total)) {
+            total = 0;
+        }
+
+        // Update state variables
+        setpurchase_amount(totalp);
+        setpaid_amount(totalp);
+        setPayment_Amount(total);
+    };
+
+
+
 
 
     useEffect(() => {
         fetchData();
-        // AppoinmentfetchData();
+        MedicinefetchData()
         // DoctorfetchData();
         // DepartmentfetchData();
         // Fet(id);
@@ -106,7 +204,7 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
 
                 admin_type,
                 admin_id,
-                // patient_id,
+                supplier_id,
                 category_id,
                 medicine_id,
                 Batch_No,
@@ -128,7 +226,7 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            });
+            }).then(rres => { MedicinefetchData(), toast('Form submitted successfully!') });
 
             // setformData({
 
@@ -151,12 +249,12 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
             //     'Payment_mode': '',
             //     'Payment_Amount': '',
             // });
-            AppoinmentfetchData();
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Form submitted successfully!',
-            });
+            MedicinefetchData();
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Success!',
+            //     text: 'Form submitted successfully!',
+            // });
         } catch (error) {
             console.log(error)
 
@@ -184,6 +282,7 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
 
 
             <div className="flex-grow bg-gray-100 ">
+                <ToastContainer />
                 <Header />
                 <div className="relative">
                     <div className="card mt-2">
@@ -235,15 +334,16 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {
-                                    medicinebill.map(md => (
+                                    med.map(md => (
                                         <tr>
                                             <td className='px-6 py-3 text-left'>{md.bill_no}</td>
-                                            <td className='px-6 py-3 text-left'>{md.Batch_No}</td>
-                                            <td className='px-6 py-3 text-left'>{md.supplier_id}</td>
+                                            <td className='px-6 py-3 text-left'>{md.Expiry_Date}</td>
+                                            <td className='px-6 py-3 text-left'>{md.supp_name}</td>
                                             <td className='px-6 py-3 text-left'>{md.Total}</td>
-                                            <td className='px-6 py-3 text-left'>{md.Tax}</td>
-                                            <td className='px-6 py-3 text-left'>{md.Discount}</td>
-                                            <td className='px-6 py-3 text-left'>{md.Amount}</td>
+                                            <td className='px-6 py-3 text-left'>{md.paid_amount}</td>
+                                            <td className='px-6 py-3 text-left'>{md.Tax}%</td>
+                                            <td className='px-6 py-3 text-left'>{md.Discount}%</td>
+                                            <td className='px-6 py-3 text-left'>{md.Payment_Amount}</td>
                                         </tr>
 
                                     ))
@@ -265,8 +365,8 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                                             <select value={supplier_id} onChange={(e) => setsupplier_id(e.target.value)} name='supplier_id' id className="w-[100%] h-9">
                                                 <option value="">Select Supplier</option>
                                                 {
-                                                    Patientsdata.map(Patients => (
-                                                        <option value={Patients.id} >{Patients.name}</option>
+                                                    suppliers.map(suppliers => (
+                                                        <option value={suppliers.id} >{suppliers.supp_name}</option>
 
                                                     ))
                                                 }
@@ -306,7 +406,7 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                                     <div className="w-full grid grid-cols-4 gap-3 px-6 mt-10 relative">
                                         <div className="form-group w-full ">
                                             <label htmlFor> Medicine Category *</label>
-                                            <select value={category_id} onChange={(e) => setcategory_id(e.target.value)} name='category_id' id className="w-full border-gray-300">
+                                            <select value={category_id} onChange={handleMedicineCategory} name='category_id' id className="w-full border-gray-300">
                                                 <option value="">Select Medicine Category</option>
                                                 {medicineCategories.map(categories => (
 
@@ -321,29 +421,30 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                                         <input name="admin_id" value={admin_id} onChange={(e) => setadmin_id(e.target.value)} type="hidden" className=" border-gray-300 w-full" />
                                         <div className="form-group w-full ">
                                             <label htmlFor> 	Medicine Name *</label>
-                                            <select value={medicine_id} onChange={(e) => setmedicine_id(e.target.value)} name='medicine_id' className="w-full border-gray-300">
+                                            <select value={medicine_id} onChange={handleMedicinename} name='medicine_id' className="w-full border-gray-300">
                                                 <option value="">Select Medicine Name</option>
-                                                <option value="Alprovite">Alprovite</option>
+                                                {
+                                                    medicinename.map(medicines => (
+
+                                                        <option value={medicines.id}>{medicines.name}</option>
+                                                    ))
+                                                }
 
                                             </select>
                                             {errors.Medicine_Name && <span className='text-red-500'>{errors.Medicine_Name}</span>}
                                         </div>
                                         <div className="form-group w-full ">
                                             <label htmlFor>	Batch No *</label>
-                                            <select value={Batch_No} onChange={(e) => setBatch_No(e.target.value)} name='Batch_No' id className="w-full border-gray-300">
-                                                <option value>Select Batch No</option>
-                                                <option value="">34578</option>
-
-                                            </select>
+                                            <input type="text" value={Batch_No} onChange={(e) => setBatch_No(e.target.value)} name='Batch_No' id className="w-full border-gray-300" />
                                             {/* {errors.Batch_No && <span className='text-red-500'>{errors.Batch_No}</span>} */}
                                         </div>
                                         <div className="form-group w-full">
                                             <label htmlFor>	Expiry Date *</label> <br />
-                                            <input value={Expiry_Date} onChange={(e) => setExpiry_Date(e.target.value)} name='Expiry_Date' type="text" className="w-full border-gray-300" />
+                                            <input value={Expiry_Date} onChange={(e) => setExpiry_Date(e.target.value)} name='Expiry_Date' type="date" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
                                             <label htmlFor> Quantity * | Available Qty	</label> <br />
-                                            <input value={Quantity} onChange={(e) => setQuantity(e.target.value)} name='Quantity' type="text" className="w-full border-gray-300" />
+                                            <input value={Quantity} onChange={HandelQty} name='Quantity' type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
                                             <label htmlFor>Sale Price (IDR) *	</label> <br />
@@ -355,31 +456,31 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                                         </div> */}
                                         <div className="form-group w-full">
                                             <label htmlFor>Tax	Amount (IDR) * </label> <br />
-                                            <input value={Tax} onChange={(e) => setTax(e.target.value)} type="text" className="w-full border-gray-300" />
+                                            <input value={Tax} onChange={handleTaxChange} type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full border-gray-300">
                                             <label htmlFor> Bill no</label> <br />
                                             <input value={bill_No} onChange={(e) => setbill_No(e.target.value)} name='bill_no' type="text" className="w-full border-gray-300" />
                                         </div>
-                                        <div className="form-group w-full">
+                                        {/* <div className="form-group w-full">
                                             <label htmlFor>Amount</label> <br />
                                             <input value={Amount} onChange={(e) => setAmount(e.target.value)} name='Amount' type="text" className="w-full border-gray-300" />
-                                        </div>
+                                        </div> */}
                                         <div className="form-group w-full">
-                                            <label htmlFor>Amount</label> <br />
-                                            <input value={paid_amount} onChange={(e) => setpaid_amount(e.target.value)} name='paid_amount' type="text" className="w-full border-gray-300" />
+                                            {/* <label htmlFor>Amount</label> <br /> */}
+                                            <input value={paid_amount} onChange={(e) => setpaid_amount(e.target.value)} name='paid_amount' type="hidden" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
                                             <label htmlFor>MRP</label> <br />
-                                            <input value={mrp} onChange={(e) => setmrp(e.target.value)} name='mrp' type="text" className="w-full border-gray-300" />
+                                            <input value={mrp} onChange={handelPurchase} name='mrp' type="text" className="w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
                                             <label htmlFor>Purchase Amount</label> <br />
-                                            <input value={purchase_amount} onChange={(e) => setpurchase_amount(e.target.value)} name='purchase_amount' type="text" className="w-full border-gray-300" />
+                                            <input disabled value={purchase_amount} name='purchase_amount' type="text" className=" bg-[#EEEEEE] w-full border-gray-300" />
                                         </div>
                                         <div className="form-group w-full">
                                             <label htmlFor>Packageing Qty</label> <br />
-                                            <input value={paking_quantity} onChange={(e) => setpaking_quantity} name='paking_quantity' type="text" className="w-full border-gray-300" />
+                                            <input value={paking_quantity} onChange={handelPurchase} name='paking_quantity' type="text" className="w-full border-gray-300" />
                                         </div>
                                         {/* <div className="form-group w-full">
                                             <label htmlFor>Purchase Amount</label> <br />
@@ -414,26 +515,26 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
 
                                     </div>
                                     <div className="content mt-4">
-                                        <div className="flex justify-between">
+                                        {/* <div className="flex justify-between">
                                             <h1>
                                                 Total (Rs.)</h1>
-                                            <input value={Total} onChange={handleChange} name='Total' type="text" defaultValue={2000.00} className="border-t-0 border-l-0 border-r-0 border-gray-300" />
-                                        </div>
+                                            <input disabled value={Total} onChange={handleChange} name='Total' type="text" defaultValue={2000.00} className="border-t-0 border-l-0 border-r-0 border-gray-300" />
+                                        </div> */}
                                         <div className="flex justify-between">
                                             <h1>
                                                 Discount (Rs.)</h1>
-                                            <input value={Discount} onChange={handleChange} name='Discount' type="text" defaultValue={2000.00} className="border-t-0 border-l-0 border-r-0 border-gray-300" />
+                                            <input value={Discount} onChange={handleDiscountChange} name='Discount' type="text" defaultValue={2000.00} className="border-t-0 border-l-0 border-r-0 border-gray-300" />
                                         </div>
                                         <div className="flex justify-between">
                                             <h1>
                                                 Tax (Rs.) </h1>
-                                            <input value={Tax} onChange={handleChange} name='Tax' type="text" defaultValue={2000.00} className="border-t-0 border-l-0 border-r-0 border-gray-300" />
+                                            <input disabled value={Tax} onChange={handleChange} name='Tax' type="text" defaultValue={2000.00} className="bg-[#EEEEEE] border-t-0 border-l-0 border-r-0 border-gray-300" />
                                         </div>
-                                        <div className="flex justify-between">
+                                        {/* <div className="flex justify-between">
                                             <h1>
                                                 Net Amount (Rs.)</h1>
                                             <input value={Amount} onChange={handleChange} name='Batch_No' type="text" defaultValue={2000.00} className="border-t-0 border-l-0 border-r-0 border-gray-300" />
-                                        </div>
+                                        </div> */}
                                         <div className="grid grid-cols-2 gap-3">
                                             <div className="form-group w-full border-gray-300 mt-6">
                                                 <select name='Payment_mode' onChange={(e) => setPayment_mode(e.target.value)} value={Payment_mode} className=" border-gray-300 w-full">
@@ -445,7 +546,7 @@ const MedicinePurchase = ({ admin, medicineCategories, medicinebill }) => {
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Amount (Rs.) *</label> <br />
-                                                <input value={Payment_Amount} onChange={(e) => setPayment_Amount(e.target.value)} name='Payment_Amount' type="text" className="w-full border-gray-300" />
+                                                <input value={Payment_Amount} onChange={calculateTotalAmount} name='Payment_Amount' type="text" className="w-full border-gray-300" />
                                             </div>
                                         </div>
                                     </div>

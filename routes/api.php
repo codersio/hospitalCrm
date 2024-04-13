@@ -87,6 +87,10 @@ Route::group([
     Route::post('medicine-category-fetch', [MedicineController::class, 'medicinecategoryFetch']);
     Route::post('medicine-category-update/{id}', [MedicineController::class, 'MedicineCategoryUpdate']);
     Route::post('medicine-category-delete/{id}', [MedicineController::class, 'MedicineCategoryDelete']);
+    Route::post('medicine-categoryid-name/{id}', [MedicineController::class, 'medicinecategoryId']);
+    Route::post('medicine-bill-all', [MedicineController::class, 'medicineBillidfetch']);
+    Route::post('medicine-bill-pharma/{id}', [PharmacyController::class, 'MedicineBillidcaten']);
+    Route::post('medicine-batch-w/{id}', [PharmacyController::class, 'BatchNo']);
 
     // pathology api call
 
@@ -488,10 +492,18 @@ Route::group([
     Route::post('appoinmentDoctorShift-update/{id}', [AppoinmentController::class, 'appoinmentDoctorShiftUpdate'])->name('appoinmentDoctorShift-update');
     Route::post('appoinmentDoctorShift-fetch', [AppoinmentController::class, 'appoinmentDoctorShiftFetch'])->name('appoinmentDoctorShift-fetch');
 
-    //appoinmentSlots api all 
+    // appoinmentSlots api all
     Route::post('appoinmentSlots-store', [AppoinmentController::class, 'appoinmentSlotsStore'])->name('appoinmentSlots-store');
     Route::post('appoinmentSlots-delete/{id}', [AppoinmentController::class, 'appoinmentSlotsDelete'])->name('appoinmentSlots-delete');
     Route::post('appoinmentSlots-update/{id}', [AppoinmentController::class, 'appoinmentSlotsUpdate'])->name('appoinmentSlots-update');
     Route::post('appoinmentSlots-fetch', [AppoinmentController::class, 'appoinmentSlotsFetch'])->name('appoinmentSlots-fetch');
     Route::post('appoinmentSlots/{id}', [AppoinmentController::class, 'appoinmentSlotsId'])->name('appoinmentSlots-fetch');
+
+    // test
+    Route::post('test', [opdController::class, 'test'])->name('test');
+    Route::post('chargecategeoryidfetch/{id}', [opdController::class, 'ChargeCategeoryID']);
+    Route::post('chargeid/{id}', [opdController::class, 'ChargeID']);
+    Route::post('symtomsid/{id}', [opdController::class, 'SymtomscatId']);
+    Route::post('symtomsheadid/{id}', [opdController::class, 'SymtomsHeadID']);
+    Route::post('bedgroup-bed/{id}', [IpdController::class, 'bedGroup']);
 });

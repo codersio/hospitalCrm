@@ -225,7 +225,8 @@ class AppoinmentController extends Controller
     {
         return Slot::join('admins', 'admins.id', '=', 'slots.doctor_id')
         ->join('global_shifts', 'global_shifts.id', '=', 'slots.shift_id')
-        ->join('hospitalcharge_categories', 'hospitalcharge_categories.id', '=', 'slots.chrage_id')
-        ->select('admins.name', 'global_shifts.shift_name', 'hospitalcharge_categories.charge_name', 'slots.id', 'slots.doctor_id', 'slots.shift_id', 'slots.chrage_id', 'slots.amount', 'slots.ci_duration');
+        ->join('hospitalcharge_categories', 'hospitalcharge_categories.id', '=', 'slots.charge_id')
+        ->select('admins.name as doctorname', 'global_shifts.shift_name', 'hospitalcharge_categories.name as categoriesname', 'slots.id', 'slots.doctor_id', 'slots.shift_id', 'slots.charge_id', 'slots.amount', 'slots.cl_duration')
+        ->get();
     }
 }

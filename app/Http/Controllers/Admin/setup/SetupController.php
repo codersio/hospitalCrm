@@ -168,7 +168,11 @@ class SetupController extends Controller
 
     public function HospitalCharge()
     {
-        return Inertia::render('Admin/hospitalsetup/hospitalcharge', ['admin' => Auth::guard('admin-api')->user(), 'chargetype' => HospitalChargeType::all()]);
+        return Inertia::render('Admin/hospitalsetup/hospitalcharge',
+            ['admin' => Auth::guard('admin-api')->user(),
+             'chargetype' => HospitalChargeType::all(),
+             'taxcat' => HospitalTaxCategory::all(),
+        ]);
     }
 
     public function hospitalchargeCategoryId(Request $request, $id)

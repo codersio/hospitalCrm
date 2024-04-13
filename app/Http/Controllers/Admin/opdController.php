@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Admin;
+use App\Models\Admin\HospitalchargeCategory;
+use App\Models\Admin\HospitalCharges;
 use App\Models\Admin\Opdpatients;
 use App\Models\Admin\Patient;
+use App\Models\Admin\Symtoms;
+use App\Models\Admin\Symtomshead;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -16,7 +21,12 @@ class opdController extends Controller
         $admin = Auth::guard('admin-api')->user();
         // dd($admin);
 
-        return Inertia::render('Admin/opdpatients', ['admin' => $admin]);
+        return Inertia::render('Admin/opdpatients', ['admin' => $admin,
+        'doctor' => Admin::where('type', 'Doctor')->get(),
+        'charge' => HospitalchargeCategory::join('hospital_charge_types', 'hospital_charge_types.id', '=', 'hospitalcharge_categories.type_id')
+        ->select('hospitalcharge_categories.name', 'hospital_charge_types.type_name', 'hospitalcharge_categories.id')->where('type_name', 'OPD')->get(),
+        'symtoms' => Symtoms::all(),
+    ]);
     }
 
     public function opdStore(Request $request)
@@ -70,5 +80,31 @@ class opdController extends Controller
     public function me()
     {
         return Auth::guard('admin-api')->user();
+    }
+
+    public function test()
+    {
+        return HospitalchargeCategory::join('hospital_charge_types', 'hospital_charge_types.id', '=', 'hospitalcharge_categories.type_id')
+        ->select('hospitalcharge_categories.name', 'hospital_charge_types.type_name')->where('type_name', 'OPD')->get();
+    }
+
+    public function ChargeCategeoryID($id)
+    {
+        return HospitalCharges::where('charge_category_id', $id)->get();
+    }
+
+    public function ChargeID($id)
+    {
+        return HospitalCharges::find($id);
+    }
+
+    public function SymtomscatId($id)
+    {
+        return Symtomshead::where('id', $id)->get();
+    }
+
+    public function SymtomsHeadID($id)
+    {
+        return Symtomshead::find($id);
     }
 }

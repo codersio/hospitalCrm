@@ -248,6 +248,15 @@ const SlotsBook = ({ admin, shift, doctor }) => {
                                             <th className="px-6 py-3 text-left  tracking-wider">
                                                 Shift
                                             </th>
+                                            <th className="px-6 py-3 text-left  tracking-wider">
+                                                Charges
+                                            </th>
+                                            <th className="px-6 py-3 text-left  tracking-wider">
+                                                Live Consulation
+                                            </th>
+                                            <th className="px-6 py-3 text-left  tracking-wider">
+                                                Amount
+                                            </th>
                                             {/* <th className="px-6 py-3 text-left  tracking-wider">
                                                 Time To
                                             </th>
@@ -265,8 +274,11 @@ const SlotsBook = ({ admin, shift, doctor }) => {
                                         {
                                             datas.map((datas, idx) => (
                                                 <tr>
-                                                    <td className='px-6 py-3 text-left text-xs'>{datas.name}</td>
+                                                    <td className='px-6 py-3 text-left text-xs'>{datas.doctorname}</td>
                                                     <td className='px-6 py-3 text-left text-xs'>{datas.shift_name}</td>
+                                                    <td className='px-6 py-3 text-left text-xs'>{datas.categoriesname}</td>
+                                                    <td className='px-6 py-3 text-left text-xs'>{datas.cl_duration}</td>
+                                                    <td className='px-6 py-3 text-left text-xs'>{datas.amount}</td>
                                                     {/* <td className='px-6 py-3 text-left text-xs'>{datas.shift_time_from}</td> */}
 
 

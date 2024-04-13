@@ -12,6 +12,7 @@ const Medicine = ({ admin, medicineCategories, medicine }) => {
     const [modal, setModal] = useState(true)
     const [Patientsmodal, setPatientsmodal] = useState(true)
     const [Patientsdata, setPatientsdata] = useState([]);
+    const [medicines, setMedidines] = useState([]);
     const [errors, setErrors] = useState({});
     const [formData, setformData] = useState({
         'admin_type': admin.type,
@@ -57,11 +58,20 @@ const Medicine = ({ admin, medicineCategories, medicine }) => {
             console.error('Error fetching data:', error);
         }
     };
+    const Medicinefetch = async () => {
+        try {
+            const response = await axios.post('/api/admin/medicine-fetch');
+            // console.log(data)
+            setMedidines(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
 
     useEffect(() => {
         fetchData();
-        // AppoinmentfetchData();
+        Medicinefetch();
         // DoctorfetchData();
         // DepartmentfetchData();
         // Fet(id);
@@ -276,15 +286,15 @@ const Medicine = ({ admin, medicineCategories, medicine }) => {
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {
-                                    medicine.map(md => (
+                                    medicines.map(md => (
                                         <tr>
-                                            <td>{md.name}</td>
-                                            <td>{md.company}</td>
-                                            <td>{md.composition}</td>
+                                            <td className='px-6 py-3 text-left text-xs font-medium text-gray-500'>{md.name}</td>
+                                            <td className='px-6 py-3 text-left text-xs font-medium text-gray-500'>{md.company}</td>
+                                            <td className='px-6 py-3 text-left text-xs font-medium text-gray-500'>{md.composition}</td>
                                             <td>{md.category_id}</td>
-                                            <td>{md.group}</td>
-                                            <td>{md.unit}</td>
-                                            <td>{md.qty}</td>
+                                            <td className='px-6 py-3 text-left text-xs font-medium text-gray-500'>{md.group}</td>
+                                            <td className='px-6 py-3 text-left text-xs font-medium text-gray-500'>{md.unit}</td>
+                                            <td className='px-6 py-3 text-left text-xs font-medium text-gray-500'>{md.qty}</td>
                                         </tr>
                                     ))
                                 }

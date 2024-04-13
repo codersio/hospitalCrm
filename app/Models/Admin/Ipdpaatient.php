@@ -41,5 +41,6 @@ class Ipdpaatient extends Model
 'bed_number',
 'bed_group',
 'Credit_Limit',
+'ipdno',
 ];
 }

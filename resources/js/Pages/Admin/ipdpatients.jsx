@@ -5,30 +5,43 @@ import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import PatientsModal from '@/components/Admin/patientsmodal';
-import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { sassTrue } from 'sass';
-const Ipdpatients = ({ admin }) => {
+const Ipdpatients = ({ admin, doctor, charge, symtoms, bedgroup }) => {
 
     const [modal, setModal] = useState(true)
     const [Patientsmodal, setPatientsmodal] = useState(true)
     const [Patientsdata, setPatientsdata] = useState([]);
     const [errors, setErrors] = useState({});
     const [ipddata, setIpdData] = useState([])
+    const [Charge_Category, setCharge_Category] = useState('')
+    const [Charge, setCharge] = useState('')
+    const [Tax, setTax] = useState('')
+    const [Standard_Charge, setStandard_Charge] = useState('')
+    const [Applied_Charge, setApplied_Charge] = useState('')
+    const [admin_id, setAddminid] = useState(admin.id)
+    const [admin_type, setAdminType] = useState(admin.type)
+    const [chargeId, setchargeID] = useState([])
+    const [Symptoms_Type, setSymptoms_Type] = useState('')
+    const [symId, setSymtom] = useState([])
+    const [Symptoms_Title, setSymptoms_Title] = useState('')
+    const [Symptoms_Description, setSymptoms_Description] = useState('')
+    const [bed_group, setbed_group] = useState('')
+    const [bed_number, setbed_number] = useState('')
+    const [bedid, setbed_groupid] = useState([])
 
     const [formData, setformData] = useState(
         {
             Height: '',
             Weight: '',
-            admin_type: admin.type,
-            admin_id: admin.id,
+
             patient_id: '',
             BP: '',
             Pulse: '',
             Temperature: '',
             Respiration: '',
-            Symptoms_Type: '',
-            Symptoms_Title: '',
-            Symptoms_Description: '',
+
             Note: '',
             Allergies: '',
             Previous_Medical_Issue: '',
@@ -39,22 +52,107 @@ const Ipdpatients = ({ admin }) => {
             TPA: '',
             Reference: '',
             Doctor: '',
-            Charge_Category: '',
-            Charge: '',
-            Tax: '',
-            Standard_Charge: '',
-            Applied_Charge: '',
-            Amount: '',
+
             Payment_Mode: '',
             Paid_Amount: '',
             Live_Consultation: '',
-            bed_number: '',
+            // bed_number: '',
             Credit_Limit: '',
-            bed_group: '',
+            // bed_group: '',
 
 
         }
     )
+
+    const HandelChargeCategory = (event) => {
+        const TypesID = event.target.value;
+        setCharge_Category(TypesID);
+        // console.log(TypesID)
+        // Fetch product types based on the selected category
+        axios.post(`/api/admin/chargecategeoryidfetch/${TypesID}`)
+            // .then(response => response.json())
+            .then(res => { setchargeID(res.data); console.log(res) })
+            .catch(error => console.error('Error fetching product types:', error));
+
+    }
+
+    const handelCharge = (event) => {
+        const chargeTid = event.target.value
+        setCharge(chargeTid)
+        axios.post(`/api/admin/chargeid/${chargeTid}`)
+            // .then(response => response.json())
+            .then(res => {
+
+                setTax(res.data.tax); // Set the tax value
+                setStandard_Charge(res.data.stander_charge)
+                setApplied_Charge(res.data.stander_charge)
+                console.log(res && res.data.tax); // Log the tax value
+            })
+            .catch(error => console.error('Error fetching product types:', error));
+    }
+    const handelTaxInput = (event) => {
+        setTax(event.target.value)
+    }
+    const handelPriceInput = (event) => {
+        setStandard_Charge(event.target.value)
+    }
+    const handelApplyInput = (event) => {
+        setApplied_Charge(event.target.value)
+    }
+
+    const handelSymtoms = (event) => {
+
+        const chargeTid = event.target.value
+        setSymptoms_Type(chargeTid)
+        axios.post(`/api/admin/symtomsid/${chargeTid}`)
+            // .then(response => response.json())
+            .then(res => {
+
+                setSymtom(res.data); // Set the tax value
+
+                console.log(res.data); // Log the tax value
+            })
+            .catch(error => console.error('Error fetching product types:', error));
+    }
+    const handlesymtomtitle = (event) => {
+        // setSymptoms_Title(event.target.value)
+        const chargeTid = event.target.value
+        setSymptoms_Title(chargeTid)
+        axios.post(`/api/admin/symtomsheadid/${chargeTid}`)
+            // .then(response => response.json())
+            .then(res => {
+
+                setSymptoms_Description(res.data.description); // Set the tax value
+
+                console.log(res.data); // Log the tax value
+            })
+            .catch(error => console.error('Error fetching product types:', error));
+    }
+
+    const handelSymtomHeaddes = (event) => {
+
+        setSymptoms_Description(event.target.value)
+
+    }
+
+
+    const HandelBedgroup = (event) => {
+        const chargeTid = event.target.value
+        setbed_group(chargeTid)
+        axios.post(`/api/admin/bedgroup-bed/${chargeTid}`)
+            // .then(response => response.json())
+            .then(res => {
+
+                setbed_groupid(res.data); // Set the tax value
+
+                console.log(res.data); // Log the tax value
+            })
+            .catch(error => console.error('Error fetching product types:', error));
+    }
+
+    const Hndelbedno = (event) => {
+        setbed_number(event.target.value)
+    }
 
     const fetchData = async () => {
         try {
@@ -103,61 +201,70 @@ const Ipdpatients = ({ admin }) => {
             validationErrors.appoint_Date = 'Appointment Datee is required';
             setErrors(validationErrors);
         }
-        else if (!formData.bed_number.trim()) {
-            validationErrors.bed_number = 'Bed Number is required';
-            // setErrors('Bed Number is required');
-            setErrors(validationErrors);
-        }
+        // else if (!formData.bed_number.trim()) {
+        //     validationErrors.bed_number = 'Bed Number is required';
+        //     // setErrors('Bed Number is required');
+        //     setErrors(validationErrors);
+        // }
         else {
+
+            let formSave = new FormData()
+            formSave.append('patient_id', formData.patient_id)
+            formSave.append('appoint_Date', formData.appoint_Date)
+            // formSave.append('bed_number', formData.bed_number)
+            // formSave.append('bed_group', formData.bed_group)
+            formSave.append('Height', formData.Height)
+            formSave.append('Weight', formData.Weight)
+            formSave.append('BP', formData.BP)
+            formSave.append('Pulse', formData.Pulse)
+            formSave.append('Temperature', formData.Temperature)
+            formSave.append('Respiration', formData.Respiration)
+            formSave.append('Note', formData.Note)
+            formSave.append('Allergies', formData.Allergies)
+            formSave.append('Previous_Medical_Issue', formData.Previous_Medical_Issue)
+            formSave.append('Case', formData.Case)
+            formSave.append('Casualty', formData.Casualty)
+            formSave.append('Old_Patient', formData.Old_Patient)
+            formSave.append('TPA', formData.TPA)
+            formSave.append('Reference', formData.Reference)
+            formSave.append('Doctor', formData.Doctor)
+            formSave.append('Payment_Mode', formData.Payment_Mode)
+            formSave.append('Paid_Amount', formData.Paid_Amount)
+            formSave.append('Live_Consultation', formData.Live_Consultation)
+            formSave.append('bed_number', formData.bed_number)
+            formSave.append('Credit_Limit', formData.Credit_Limit)
+            formSave.append('admin_id', admin_id)
+            formSave.append('admin_type', admin_type)
+            formSave.append('Symptoms_Type', Symptoms_Type)
+            formSave.append('Symptoms_Title', Symptoms_Title)
+            formSave.append('Symptoms_Description', Symptoms_Description)
+            formSave.append('bed_group', bed_group)
+            formSave.append('bed_number', bed_number)
+            formSave.append('Charge_Category', Charge_Category)
+            formSave.append('Charge', Charge)
+            formSave.append('Tax', Tax)
+            formSave.append('Standard_Charge', Standard_Charge)
+            formSave.append('Applied_Charge', Applied_Charge)
+            // formSave.append('Symtom', Symtom)
+            // formSave.append('Symtom_Title', Symtom_Title)
+            // formSave.append('Symtom_Description', Symtom_Description)
+            // formSave.append('Symtom_Head', Symtom_Head)
+            // formSave.append('Symtom_Head_Description', Symtom_Head_Description)
+
 
             try {
 
 
-                await axios.post('/api/admin/ipd-store', formData);
+                await axios.post('/api/admin/ipd-store', formSave);
 
-                setformData({
-                    Height: '',
-                    Weight: '',
-                    admin_type: admin.type,
-                    admin_id: admin.id,
-                    patient_id: '',
-                    BP: '',
-                    Pulse: '',
-                    Temperature: '',
-                    Respiration: '',
-                    Symptoms_Type: '',
-                    Symptoms_Title: '',
-                    Symptoms_Description: '',
-                    Note: '',
-                    Allergies: '',
-                    Previous_Medical_Issue: '',
-                    appoint_Date: '',
-                    Case: '',
-                    Casualty: '',
-                    Old_Patient: '',
-                    TPA: '',
-                    Reference: '',
-                    Doctor: '',
-                    Charge_Category: '',
-                    Charge: '',
-                    Tax: '',
-                    Standard_Charge: '',
-                    Applied_Charge: '',
-                    Amount: '',
-                    Payment_Mode: '',
-                    Paid_Amount: '',
-                    Live_Consultation: '',
-                    bed_number: '',
-                    Credit_Limit: '',
-                    bed_group: '',
 
-                });
                 opdfetchData();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: 'Form submitted successfully!',
-                });
+                toast('Form submitted successfully!')
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Success!',
+                //     text: 'Form submitted successfully!',
+                // });
             } catch (error) {
                 console.log(error)
 
@@ -183,7 +290,7 @@ const Ipdpatients = ({ admin }) => {
         <div className="flex h-screen">
 
             <div className="bg-gray-800 text-white w-[11%] flex-shrink-0">
-
+                <ToastContainer />
                 <Sidebar />
             </div>
 
@@ -243,13 +350,13 @@ const Ipdpatients = ({ admin }) => {
                                 {
                                     ipddata.map(ipd => (
                                         <tr className='px-6 py-3 '>
-                                            <td className='px-6 py-3 text-left'> {ipd.id}</td>
+                                            <td className='px-6 py-3 text-left'> {ipd.ipdno}</td>
                                             <td className='px-6 py-3 text-left'> {ipd.Case}</td>
                                             <td className='px-6 py-3 text-left'> {ipd.name}</td>
                                             <td className='px-6 py-3 text-left'> {ipd.gender}</td>
                                             <td className='px-6 py-3 text-left'> {ipd.phone}</td>
-                                            <td className='px-6 py-3 text-left'> {ipd.Doctor}</td>
-                                            <td className='px-6 py-3 text-left'> {ipd.bed_number}</td>
+                                            <td className='px-6 py-3 text-left'> {ipd.doctor_name}</td>
+                                            <td className='px-6 py-3 text-left'> {ipd.bed_name}</td>
                                             <td className='px-6 py-3 text-left'> {ipd.Previous_Medical_Issue}</td>
                                             <td className='px-6 py-3 text-left'> {ipd.Credit_Limit}</td>
 
@@ -350,16 +457,30 @@ const Ipdpatients = ({ admin }) => {
 
                                             <div className='grid grid-cols-3 gap-3'>
                                                 <div className="form-group">
-                                                    <label htmlFor>Symptoms Type</label> <br />
-                                                    <input name='Symptoms_Type' onChange={handleChange} value={formData.Symptoms_Type} type="text" className=" border-gray-300 w-full" />
+                                                    <select name='Symptoms_Type' onChange={handelSymtoms} value={Symptoms_Type} type="text" className=" border-gray-300 w-full">
+                                                        <option value="">Select symtoms</option>
+                                                        {
+                                                            symtoms.map(systyp => (
+                                                                <option value={systyp.id} >{systyp.symptom_name}</option>
+                                                            ))
+                                                        }
+                                                    </select>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor>Symptoms Title</label> <br />
-                                                    <input name='Symptoms_Title' onChange={handleChange} value={formData.Symptoms_Title} type="text" className=" border-gray-300 w-full" />
+                                                    <select name='Symptoms_Title' onChange={handlesymtomtitle} value={Symptoms_Title} type="text" className=" border-gray-300 w-full">
+                                                        <option value="">Select </option>
+                                                        {
+                                                            symId.map(sm => (
+                                                                <option value={sm.id} >{sm.symptom_head}</option>
+
+                                                            ))
+                                                        }
+                                                    </select>
                                                 </div>
                                                 <div className="form-group   w-full  ">
                                                     <label htmlFor="">Symptoms Description</label>
-                                                    <textarea name='Symptoms_Description' onChange={handleChange} value={formData.Symptoms_Description} id rows={3} className="px-6 w-full border-gray-300" defaultValue={""} />
+                                                    <textarea name='Symptoms_Description' onChange={handelSymtomHeaddes} value={Symptoms_Description} id rows={3} className="px-6 w-full border-gray-300" defaultValue={""} />
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-2 gap-3">
@@ -369,7 +490,7 @@ const Ipdpatients = ({ admin }) => {
                                                 </div>
                                                 <div className="form-group   w-full  ">
                                                     <label htmlFor="">Any Known Allergies</label>
-                                                    <textarea name='Allergies' onChange={handleChange} value={formData.Allergies} id rows={3}  className="px-6 w-full border-gray-300" defaultValue={""} />
+                                                    <textarea name='Allergies' onChange={handleChange} value={formData.Allergies} id rows={3} className="px-6 w-full border-gray-300" defaultValue={""} />
                                                 </div>
                                             </div>
 
@@ -408,36 +529,63 @@ const Ipdpatients = ({ admin }) => {
                                             <div className="form-group w-full">
                                                 <label htmlFor>Consultant Doctor *</label> <br />
                                                 <select name='Doctor' onChange={handleChange} value={formData.Doctor} className=" border-gray-300 w-full">
-                                                    <option disabled>Select doctor</option>
-                                                    <option value="Amit Singh (9009)">	Amit Singh (9009)</option>
-                                                    <option value="Amit Singh (9009)">	Reyan Jain (9011)</option>
+                                                    <option value="">Select doctor</option>
+                                                    {
+                                                        doctor.map((doctor) => {
+                                                            return (
+                                                                <option key={doctor.id} value={doctor.id}>{doctor.name}</option>
+                                                            )
+                                                        })
+
+                                                    }
                                                     {/* <option value="Debit Card">Debit Card</option> */}
                                                 </select>
                                                 {/* <input name='Doctor' onChange={(e) => setDoctor({ ...formData, [e.target.name]: e.target.value })} value={Doctor} type="text" className=" border-gray-300 w-full" /> */}
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Charge Category</label> <br />
-                                                <input name='Charge_Category' onChange={handleChange} value={formData.Charge_Category} type="text" className=" border-gray-300 w-full" />
+                                                <select
+                                                    name='Charge_Category'
+                                                    onChange={HandelChargeCategory}
+                                                    value={Charge_Category}
+                                                    type="text"
+                                                    className="border-gray-300 w-full"
+                                                >
+                                                    <option value="">Select Charge Category</option>
+                                                    {charge.map(cg => (
+                                                        <option value={cg.id}>
+                                                            {cg.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Charge *</label> <br />
-                                                <input name='Charge' onChange={handleChange} value={formData.Charge} type="text" className=" border-gray-300 w-full" />
+                                                <select name='Charge' onChange={handelCharge} value={Charge} type="text" className=" border-gray-300 w-full">
+                                                    <option value="">Select charge</option>
+                                                    {
+                                                        chargeId.length > 0 && chargeId.map(charges => (
+                                                            <option key={charges.id} value={charges.id}>{charges.charge_name}</option>
+                                                        ))
+                                                    }
+
+                                                </select>
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Tax</label> <br />
-                                                <input name='Tax' onChange={handleChange} value={formData.Tax} type="text" className=" border-gray-300 w-full" />
+                                                <input name='Tax' disabled onChange={handelTaxInput} value={Tax} type="text" className=" border-gray-300 w-full" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Standard Charge (IDR)</label> <br />
-                                                <input name='Standard_Charge' onChange={handleChange} value={formData.Standard_Charge} type="text" className=" border-gray-300 w-full" />
+                                                <input name='Standard_Charge' onChange={handelPriceInput} value={Standard_Charge} type="text" className=" border-gray-300 w-full" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Applied Charge (IDR) *</label> <br />
-                                                <input name='Applied_Charge' onChange={handleChange} value={formData.Applied_Charge} type="text" className=" border-gray-300 w-full" />
+                                                <input name='Applied_Charge' onChange={handelApplyInput} value={Applied_Charge} type="text" className=" border-gray-300 w-full" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Amount (IDR) *</label> <br />
-                                                <input name='Amount' onChange={handleChange} value={formData.Amount} type="text" className=" border-gray-300 w-full" />
+                                                <input disabled name='Amount' onChange={handleChange} value={Applied_Charge} type="text" className=" border-gray-300 w-full" />
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Payment Mode</label> <br />
@@ -458,14 +606,30 @@ const Ipdpatients = ({ admin }) => {
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Bed Group</label> <br />
-                                                <input name='bed_group' onChange={handleChange} value={formData.bed_group} type="text" className=" border-gray-300 w-full" />
+
+                                                <select name='bed_group' onChange={HandelBedgroup} value={bed_group} type="text" className=" border-gray-300 w-full" >
+                                                    <option value="">Select</option>
+                                                    {
+                                                        bedgroup.map(beggroup => (
+                                                            <option key={beggroup.id} value={beggroup.id}>{beggroup.group_name}</option>
+                                                        ))
+                                                    }
+                                                </select>
+                                                {/* <input /> */}
 
 
 
                                             </div>
                                             <div className="form-group w-full">
                                                 <label htmlFor>Bed No</label> <br />
-                                                <input name='bed_number' onChange={handleChange} value={formData.bed_number} type="text" className=" border-gray-300 w-full" />
+
+                                                <select name='bed_number' onChange={Hndelbedno} value={bed_number} type="text" className=" border-gray-300 w-full" >
+                                                    <option value="">Select</option>
+                                                    {bedid.map(beds =>
+                                                        <option key={beds.id} value={beds.id}>{beds.bed_name}</option>
+                                                    )}
+                                                </select>
+                                                {/* <input /> */}
                                                 {errors.bed_number && <span className='text-red-500'>{errors.bed_number}</span>}
 
 

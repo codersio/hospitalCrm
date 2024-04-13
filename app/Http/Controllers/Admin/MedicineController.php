@@ -29,6 +29,11 @@ class MedicineController extends Controller
         ]);
     }
 
+    public function medicineFetch()
+    {
+        return Medicine::all();
+    }
+
     public function medicineStore(Request $request)
     {
         if ($request->hasFile('photo')) {
@@ -164,6 +169,7 @@ class MedicineController extends Controller
             'medicines' => Medicine::all(),
          'medicineCategories' => MedicineCategory::all(),
          'medicinebill' => MedicineBill::all(),
+         'suppliers' => Supplier::all(),
         ]);
     }
 
@@ -395,5 +401,17 @@ class MedicineController extends Controller
     public function medicineDurationFetch()
     {
         return MedicineDoseDuration::all();
+    }
+
+    public function medicinecategoryId($id)
+    {
+        return Medicine::where('category_id', $id)->get();
+    }
+
+    public function medicineBillidfetch()
+    {
+        return MedicineBill::join('suppliers', 'suppliers.id', '=', 'medicine_bills.supplier_id')
+        ->select('suppliers.supp_name', 'medicine_bills.bill_no',
+            'medicine_bills.Expiry_Date', 'medicine_bills.paid_amount', 'medicine_bills.Tax', 'medicine_bills.Discount', 'medicine_bills.Payment_Amount')->get();
     }
 }

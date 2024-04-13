@@ -11,7 +11,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 // // import Sidebar from './sidebar';
 import Sidebarsetup from './sidebar';
 
-const hopitalCharge = ({ admin, chargetype }) => {
+const hopitalCharge = ({ admin, chargetype, taxcat }) => {
 
     const [modal, setModal] = useState(true)
     const [admin_type, setAdmin_type] = useState(admin.type);
@@ -20,6 +20,7 @@ const hopitalCharge = ({ admin, chargetype }) => {
     const [Hstype, setHstype] = useState([])
     const [updateModal, setupdateModal] = useState(null)
     const [charge_type_id, setcharge_type_id] = useState('')
+    const [charge_tax_id, setcharge_tax_id] = useState('')
     const [charge_category_id, setcharge_category_id] = useState('')
     const [categoryId, setCategory] = useState([])
     const [formData, setFormData] = useState({
@@ -27,11 +28,20 @@ const hopitalCharge = ({ admin, chargetype }) => {
         // 'charge_category_id': '',
         'unit_id': '',
         'charge_name': '',
-        'charge_tax_id': '',
+        // 'charge_tax_id': '',
         'tax': '',
         'stander_charge': '',
         'description': '',
     });
+
+    const hanelTaxFind = (event) => {
+
+        const Taxid = event.target.value
+        setcharge_type_id(Taxid)
+
+
+
+    }
 
 
     const fetchData = () => {
@@ -290,8 +300,8 @@ const hopitalCharge = ({ admin, chargetype }) => {
                                                                                 <select onChange={handleChange} name='charge_tax_id' value={formData.charge_tax_id} className="w-full border-gray-300" >
                                                                                     <option value="">Select</option>
                                                                                     {
-                                                                                        chargetype.map(ty => (
-                                                                                            <option key={ty.id} value={ty.id}>{ty.type_name}</option>
+                                                                                        taxcat.map(ty => (
+                                                                                            <option key={ty.id} value={ty.id}>{ty.name}</option>
                                                                                         ))
                                                                                     }
                                                                                 </select>
@@ -410,8 +420,8 @@ const hopitalCharge = ({ admin, chargetype }) => {
                                                         <select onChange={handleChange} name='charge_tax_id' value={formData.charge_tax_id} className="w-full border-gray-300" >
                                                             <option value="">Select</option>
                                                             {
-                                                                chargetype.map(ty => (
-                                                                    <option key={ty.id} value={ty.id}>{ty.type_name}</option>
+                                                                taxcat.map(ty => (
+                                                                    <option key={ty.id} value={ty.id}>{ty.name}</option>
                                                                 ))
                                                             }
                                                         </select>
